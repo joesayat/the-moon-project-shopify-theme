@@ -1,0 +1,43 @@
+{% assign nav_linklists = linklists[section.settings.nav_list] %}
+
+<header class="header tmp-header bold-uc">
+  <div class="header-logo">The Moon Project</div>
+
+  <nav class="header-nav">
+    <ul class="header-list tmp-list">
+      {% for link in nav_linklists.links %}
+        <li class="header-item">
+          <a
+            class="tmp-link__header {% if link.active %} active {% endif %}"
+            href="{{ link.url }}"
+          >
+            {{- link.title -}}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+
+  <div class="header-icons">
+    <a
+      class="tmp-icon__header {% if canonical_url contains routes.cart_url %} active {% endif %}"
+      href="{{ routes.cart_url }}"
+    >
+      {%- render 'icon-shopping-bag' -%}
+    </a>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "nav_list",
+      "label": "Navigation Menu",
+      "default": "main-menu"
+    }
+  ]
+}
+{% endschema %}

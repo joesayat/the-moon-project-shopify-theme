@@ -1,12 +1,82 @@
+@import 'https://fonts.googleapis.com/css2?family=Barlow:wght@200;400;600;700&family=Roboto+Condensed:wght@200;400;600;700&display=swap';
+
+/* RESETS */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
 body {
-    background-color: rgb(251, 251, 232);
+  font-family: 'Barlow', serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: #212529;
+  background-color: #f8f9fa;
 }
 
-.homepage {
-    text-align: center;
-    padding-top: 10em;
+a {
+  /* display: inline-block; */
+  color: inherit;
+  text-decoration: none;
 }
 
-.logo {
-    width: 25%;
+ul {
+  list-style-type: none;
+}
+
+/* FONT STYLES */
+.bold-uc {
+  font-weight: 600;
+  letter-spacing: 0.1rem;
+  text-transform: uppercase;
+}
+
+/* LINKS */
+.tmp-link__header:link,
+.tmp-link__header:visited {
+  color: #212529;
+  transition: all 0.3s ease-out;
+}
+
+.tmp-link__header.active,
+.tmp-link__header:hover,
+.tmp-link__header:active {
+  color: #afa4ce;
+}
+
+/* ICONS */
+.tmp-icon__header {
+  fill: #212529;
+  transition: all 0.3s ease-out;
+}
+
+.tmp-icon__header.active,
+.tmp-icon__header:hover {
+  fill: #afa4ce;
+}
+
+/* HEADER */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.tmp-header {
+  height: 12rem;
+  padding: 0 4.8rem;
+  border-bottom: 1px solid #f1f3f5;
+}
+
+.header-list {
+  display: flex;
+}
+
+.tmp-list {
+  gap: 4.8rem;
 }

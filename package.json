@@ -1,0 +1,13 @@
+{
+  "name": "the_moon_project_development_store",
+  "version": "1.0.0",
+  "description": "This is the official website of The Moon Project",
+  "main": "index.js",
+  "scripts": {
+    "start": "shopify theme dev --open",
+    "start:store": "shopify theme dev --store the-moon-project-development-store.myshopify.com --open"
+  },
+  "keywords": [],
+  "author": "Jonas Renfred Sayat",
+  "license": "ISC"
+}

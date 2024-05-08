@@ -1,0 +1,13 @@
+/***********************************/
+/* BELOW 1024px (Laptops/ Tablets) */
+/***********************************/
+@media (max-width: 64em) {
+  .tmp-header {
+    height: 7rem;
+    padding: 0 4rem;
+  }
+
+  .header-nav {
+    display: none;
+  }
+}
