@@ -16,17 +16,28 @@ body {
   font-size: 1.6rem;
   font-weight: 400;
   color: #212529;
-  background-color: #f8f9fa;
+  background-color: #212529;
 }
 
 a {
-  /* display: inline-block; */
+  display: inline-block;
   color: inherit;
   text-decoration: none;
 }
 
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
 ul {
   list-style-type: none;
+}
+
+/* UTILITY STYLES */
+.relative {
+  position: relative;
 }
 
 /* FONT STYLES */
@@ -36,20 +47,35 @@ ul {
   text-transform: uppercase;
 }
 
-/* LINKS */
+/* LINK STYLES */
 .tmp-link__header:link,
 .tmp-link__header:visited {
   color: #212529;
   transition: all 0.3s ease-out;
 }
 
-.tmp-link__header.active,
+.tmp-link__header:link.active,
+.tmp-link__header:visited.active,
 .tmp-link__header:hover,
 .tmp-link__header:active {
   color: #afa4ce;
 }
 
-/* ICONS */
+.tmp-link__header__md:link,
+.tmp-link__header__md:visited {
+  color: #212529;
+  transition: all 0.3s ease-out;
+}
+
+.tmp-link__header__md:link.active,
+.tmp-link__header__md:visited.active,
+.tmp-link__header__md:hover,
+.tmp-link__header__md:active {
+  color: #afa4ce;
+  background-color: #f1f3f5;
+}
+
+/* ICON STYLES */
 .tmp-icon__header {
   fill: #212529;
   transition: all 0.3s ease-out;
@@ -62,21 +88,32 @@ ul {
 
 /* HEADER */
 .header {
+  height: 12rem;
+  padding: 0 4.8rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
 .tmp-header {
-  height: 12rem;
-  padding: 0 4.8rem;
+  background-color: #f8f9fa;
   border-bottom: 1px solid #f1f3f5;
 }
 
 .header-list {
   display: flex;
+  gap: 4.8rem;
 }
 
-.tmp-list {
-  gap: 4.8rem;
+.header-nav__md {
+  display: none;
+}
+
+.header-icons {
+  display: flex;
+  gap: 3.2rem;
+}
+
+.header-icon:last-child {
+  display: none;
 }
