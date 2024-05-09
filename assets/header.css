@@ -51,6 +51,14 @@
     position: absolute;
     top: 7rem;
     right: 0;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all 0.3s ease-out;
+  }
+
+  .header-nav__md.active {
+    opacity: 1;
+    transform: translateX(0);
   }
 
   .tmp-nav__md {
