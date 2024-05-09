@@ -1,10 +1,18 @@
 @import 'https://fonts.googleapis.com/css2?family=Barlow:wght@200;400;600;700&family=Roboto+Condensed:wght@200;400;600;700&display=swap';
 
+/* ROOT VARIABLES */
+:root {
+  --main: #afa4ce;
+  --black: #212529;
+  --gray: #f1f3f5;
+  --white: #f8f9fa;
+}
+
 /* RESETS */
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 html {
@@ -12,21 +20,33 @@ html {
 }
 
 body {
-  font-family: 'Barlow', serif;
+  background: var(--gray);
+  color: var(--black);
+  font-family: 'Barlow', sans-serif;
   font-size: 1.6rem;
   font-weight: 400;
-  color: #212529;
-  background-color: #f8f9fa;
+  overflow-x: hidden;
 }
 
 a {
-  /* display: inline-block; */
   color: inherit;
+  display: inline-block;
   text-decoration: none;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 
 ul {
   list-style-type: none;
+}
+
+/* UTILITY STYLES */
+.relative {
+  position: relative;
 }
 
 /* FONT STYLES */
@@ -36,47 +56,41 @@ ul {
   text-transform: uppercase;
 }
 
-/* LINKS */
+/* LINK STYLES */
 .tmp-link__header:link,
 .tmp-link__header:visited {
-  color: #212529;
+  color: var(--black);
   transition: all 0.3s ease-out;
 }
 
-.tmp-link__header.active,
+.tmp-link__header:link.active,
+.tmp-link__header:visited.active,
 .tmp-link__header:hover,
 .tmp-link__header:active {
-  color: #afa4ce;
+  color: var(--main);
 }
 
-/* ICONS */
+.tmp-link__header__md:link,
+.tmp-link__header__md:visited {
+  color: var(--black);
+  transition: all 0.3s ease-out;
+}
+
+.tmp-link__header__md:link.active,
+.tmp-link__header__md:visited.active,
+.tmp-link__header__md:hover,
+.tmp-link__header__md:active {
+  background: var(--gray);
+  color: var(--main);
+}
+
+/* ICON STYLES */
 .tmp-icon__header {
-  fill: #212529;
+  fill: var(--black);
   transition: all 0.3s ease-out;
 }
 
 .tmp-icon__header.active,
 .tmp-icon__header:hover {
-  fill: #afa4ce;
-}
-
-/* HEADER */
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.tmp-header {
-  height: 12rem;
-  padding: 0 4.8rem;
-  border-bottom: 1px solid #f1f3f5;
-}
-
-.header-list {
-  display: flex;
-}
-
-.tmp-list {
-  gap: 4.8rem;
+  fill: var(--main);
 }
