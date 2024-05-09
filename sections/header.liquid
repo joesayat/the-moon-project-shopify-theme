@@ -1,5 +1,7 @@
 <!-- HEADER STYLES -->
 {{ 'header.css' | asset_url | stylesheet_tag }}
+<!-- HEADER SCRIPT -->
+<script src="{{ 'header.js' | asset_url }}" defer="defer"></script>
 
 <!-- VARIABLES -->
 {% assign nav_linklists = linklists[section.settings.nav_list] %}
@@ -52,7 +54,7 @@
       </a>
     </div>
     <div class="header-icon">
-      <button class="tmp-icon__header">
+      <button class="tmp-icon__header" name="header-menu">
         {% render 'icon-menu' %}
       </button>
     </div>
