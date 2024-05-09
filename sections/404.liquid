@@ -1,0 +1,47 @@
+<!-- Getting store_url variable -->
+{% if section.settings.btn_url == blank %}
+  {% assign store_url = routes.root_url %}
+{% else %}
+  {% assign store_url = section.settings.btn_url %}
+{% endif %}
+
+<!-- SECTION 404 -->
+<section class="section-404">
+  <h1 class="title-404 font-40 bold">{{ section.settings.title }}</h1>
+  <p class="description-404">{{ section.settings.description }}</p>
+  <div class="btn-container-404">
+    <a class="tmp-btn tmp-btn_main tmp-btn_404 bold" href="{{ store_url }}">{{ section.settings.btn_text }}</a>
+  </div>
+</section>
+
+<!-- SCHEMA -->
+{% schema %}
+{
+  "name": "404",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Error title",
+      "default": "Not found"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Error description",
+      "default": "The page you were looking for does not exist"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Button text content",
+      "default": "Return home"
+    },
+    {
+      "type": "url",
+      "id": "btn_url",
+      "label": "Button URL"
+    }
+  ]
+}
+{% endschema %}

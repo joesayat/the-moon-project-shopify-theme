@@ -8,6 +8,10 @@
 /* BELOW 1024px (Laptops/ Tablets) */
 /***********************************/
 @media (max-width: 64em) {
+  /* SECTION 404 */
+  .section-404 {
+    height: calc(100vh - 7rem);
+  }
 }
 
 /*******************************/
@@ -30,6 +34,15 @@
 /* BELOW 656px (Phones) */
 /************************/
 @media (max-width: 41em) {
+  /* BUTTON STYLES */
+  .tmp-btn {
+    width: 100%;
+  }
+
+  /* SECTION 404 */
+  .section-404 {
+    padding: 0 3.2rem;
+  }
 }
 
 /************************/
