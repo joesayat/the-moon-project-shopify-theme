@@ -14,7 +14,7 @@
 
 .header-list {
   display: flex;
-  gap: 4.8rem;
+  gap: 3.2rem;
 }
 
 .header-nav__md {
@@ -23,7 +23,7 @@
 
 .header-icons {
   display: flex;
-  gap: 3.2rem;
+  gap: 2.4rem;
 }
 
 .header-icon:last-child {
