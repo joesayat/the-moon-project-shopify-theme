@@ -1,10 +1,18 @@
 @import 'https://fonts.googleapis.com/css2?family=Barlow:wght@200;400;600;700&family=Roboto+Condensed:wght@200;400;600;700&display=swap';
 
+/* ROOT VARIABLES */
+:root {
+  --main: #afa4ce;
+  --black: #212529;
+  --gray: #f1f3f5;
+  --white: #f8f9fa;
+}
+
 /* RESETS */
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 html {
@@ -12,16 +20,16 @@ html {
 }
 
 body {
-  font-family: 'Barlow', serif;
+  background: var(--gray);
+  color: var(--black);
+  font-family: 'Barlow', sans-serif;
   font-size: 1.6rem;
   font-weight: 400;
-  color: #212529;
-  background-color: #212529;
 }
 
 a {
-  display: inline-block;
   color: inherit;
+  display: inline-block;
   text-decoration: none;
 }
 
@@ -50,7 +58,7 @@ ul {
 /* LINK STYLES */
 .tmp-link__header:link,
 .tmp-link__header:visited {
-  color: #212529;
+  color: var(--black);
   transition: all 0.3s ease-out;
 }
 
@@ -58,12 +66,12 @@ ul {
 .tmp-link__header:visited.active,
 .tmp-link__header:hover,
 .tmp-link__header:active {
-  color: #afa4ce;
+  color: var(--main);
 }
 
 .tmp-link__header__md:link,
 .tmp-link__header__md:visited {
-  color: #212529;
+  color: var(--black);
   transition: all 0.3s ease-out;
 }
 
@@ -71,49 +79,17 @@ ul {
 .tmp-link__header__md:visited.active,
 .tmp-link__header__md:hover,
 .tmp-link__header__md:active {
-  color: #afa4ce;
-  background-color: #f1f3f5;
+  background: var(--gray);
+  color: var(--main);
 }
 
 /* ICON STYLES */
 .tmp-icon__header {
-  fill: #212529;
+  fill: var(--black);
   transition: all 0.3s ease-out;
 }
 
 .tmp-icon__header.active,
 .tmp-icon__header:hover {
-  fill: #afa4ce;
-}
-
-/* HEADER */
-.header {
-  height: 12rem;
-  padding: 0 4.8rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.tmp-header {
-  background-color: #f8f9fa;
-  border-bottom: 1px solid #f1f3f5;
-}
-
-.header-list {
-  display: flex;
-  gap: 4.8rem;
-}
-
-.header-nav__md {
-  display: none;
-}
-
-.header-icons {
-  display: flex;
-  gap: 3.2rem;
-}
-
-.header-icon:last-child {
-  display: none;
+  fill: var(--main);
 }

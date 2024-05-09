@@ -1,5 +1,10 @@
+<!-- HEADER STYLES -->
+{{ 'header.css' | asset_url | stylesheet_tag }}
+
+<!-- VARIABLES -->
 {% assign nav_linklists = linklists[section.settings.nav_list] %}
 
+<!-- HEADER -->
 <header class="header tmp-header bold-uc relative">
   <!-- LOGO -->
   <div class="header-logo">The Moon Project</div>
@@ -54,6 +59,7 @@
   </div>
 </header>
 
+<!-- SCHEMA -->
 {% schema %}
 {
   "name": "Header",

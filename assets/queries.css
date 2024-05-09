@@ -1,46 +1,19 @@
 /***********************************/
+/* BELOW 1200px (Smaller Desktops) */
+/***********************************/
+@media (max-width: 75em) {
+}
+
+/***********************************/
 /* BELOW 1024px (Laptops/ Tablets) */
 /***********************************/
 @media (max-width: 64em) {
-  /* HEADER */
-  .header {
-    height: 7rem;
-    padding: 0 4rem;
-  }
+}
 
-  .header-nav {
-    display: none;
-  }
-
-  .header-icon:last-child {
-    display: block;
-  }
-
-  .header-nav__md {
-    height: calc(100vh - 7rem);
-    width: 40%;
-    display: block;
-    position: absolute;
-    top: 7rem;
-    right: 0;
-  }
-
-  .tmp-nav__md {
-    background-color: #f8f9fa;
-  }
-
-  .header-list__md {
-    padding-top: 4rem;
-    text-align: end;
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-  }
-
-  .header-link__md {
-    width: 100%;
-    padding: 1.4rem 4rem;
-  }
+/*******************************/
+/* BELOW 896px (Small Tablets) */
+/*******************************/
+@media (max-width: 56em) {
 }
 
 /*******************************/
@@ -57,18 +30,6 @@
 /* BELOW 656px (Phones) */
 /************************/
 @media (max-width: 41em) {
-  /* HEADER */
-  .header {
-    padding: 0 3.2rem;
-  }
-
-  .header-nav__md {
-    width: 80%;
-  }
-
-  .header-link__md {
-    padding: 1.4rem 3.2rem;
-  }
 }
 
 /************************/
