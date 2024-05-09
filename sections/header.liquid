@@ -1,33 +1,65 @@
+<!-- HEADER STYLES -->
+{{ 'header.css' | asset_url | stylesheet_tag }}
+
+<!-- VARIABLES -->
 {% assign nav_linklists = linklists[section.settings.nav_list] %}
 
-<header class="header tmp-header bold-uc">
+<!-- HEADER -->
+<header class="header tmp-header bold-uc relative">
+  <!-- LOGO -->
   <div class="header-logo">The Moon Project</div>
 
+  <!-- DESKTOP NAV -->
   <nav class="header-nav">
-    <ul class="header-list tmp-list">
+    <ul class="header-list">
       {% for link in nav_linklists.links %}
         <li class="header-item">
           <a
-            class="tmp-link__header {% if link.active %} active {% endif %}"
+            class="header-link tmp-link__header {% if link.active %} active {% endif %}"
             href="{{ link.url }}"
           >
-            {{- link.title -}}
+            {{ link.title }}
           </a>
         </li>
       {% endfor %}
     </ul>
   </nav>
 
+  <!-- MOBILE NAV -->
+  <nav class="header-nav__md tmp-nav__md">
+    <ul class="header-list__md">
+      {% for link in nav_linklists.links %}
+        <li class="header-item__md">
+          <a
+            class="header-link__md tmp-link__header__md {% if link.active %} active {% endif %}"
+            href="{{ link.url }}"
+          >
+            {{ link.title }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  </nav>
+
+  <!-- ICONS -->
   <div class="header-icons">
-    <a
-      class="tmp-icon__header {% if canonical_url contains routes.cart_url %} active {% endif %}"
-      href="{{ routes.cart_url }}"
-    >
-      {%- render 'icon-shopping-bag' -%}
-    </a>
+    <div class="header-icon">
+      <a
+        class="tmp-icon__header {% if canonical_url contains routes.cart_url %} active {% endif %}"
+        href="{{ routes.cart_url }}"
+      >
+        {% render 'icon-shopping-bag' %}
+      </a>
+    </div>
+    <div class="header-icon">
+      <button class="tmp-icon__header">
+        {% render 'icon-menu' %}
+      </button>
+    </div>
   </div>
 </header>
 
+<!-- SCHEMA -->
 {% schema %}
 {
   "name": "Header",

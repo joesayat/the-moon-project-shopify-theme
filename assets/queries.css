@@ -1,13 +1,43 @@
 /***********************************/
+/* BELOW 1200px (Smaller Desktops) */
+/***********************************/
+@media (max-width: 75em) {
+}
+
+/***********************************/
 /* BELOW 1024px (Laptops/ Tablets) */
 /***********************************/
 @media (max-width: 64em) {
-  .tmp-header {
-    height: 7rem;
-    padding: 0 4rem;
-  }
+}
 
-  .header-nav {
-    display: none;
+/*******************************/
+/* BELOW 896px (Small Tablets) */
+/*******************************/
+@media (max-width: 56em) {
+}
+
+/*******************************/
+/* BELOW 768px (Small Tablets) */
+/*******************************/
+@media (max-width: 48em) {
+  /* RESET */
+  html {
+    font-size: 56.25%;
+  }
+}
+
+/************************/
+/* BELOW 656px (Phones) */
+/************************/
+@media (max-width: 41em) {
+}
+
+/************************/
+/* BELOW 432px (Phones) */
+/************************/
+@media (max-width: 27em) {
+  /* RESET */
+  html {
+    font-size: 50%;
   }
 }
