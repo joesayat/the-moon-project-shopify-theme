@@ -7,7 +7,7 @@
 
 <!-- SECTION 404 -->
 <section class="section-404">
-  <div class="img-container-404">{% render 'icon-error' %}</div>
+  <div class="img-container-404">{{ section.settings.render_icon }}</div>
   <h1 class="title-404 font-40 bold">{{ section.settings.title }}</h1>
   <p class="description-404">{{ section.settings.description }}</p>
   <div class="btn-container-404">
@@ -42,6 +42,12 @@
       "type": "url",
       "id": "btn_url",
       "label": "Button URL"
+    },
+    {
+      "type": "liquid",
+      "id": "render_icon",
+      "label": "Icon",
+      "default": "{% render 'icon-error', size: '24rem' %}"
     }
   ]
 }
