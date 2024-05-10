@@ -3,6 +3,7 @@
 /* ROOT VARIABLES */
 :root {
   --main: #afa4ce;
+  --main-dark: #8c83a5;
   --black: #212529;
   --gray: #f1f3f5;
   --white: #f8f9fa;
@@ -25,11 +26,13 @@ body {
   font-family: 'Barlow', sans-serif;
   font-size: 1.6rem;
   font-weight: 400;
+  letter-spacing: 0.04rem;
   overflow-x: hidden;
 }
 
 a {
   color: inherit;
+  cursor: pointer;
   display: inline-block;
   text-decoration: none;
 }
@@ -50,10 +53,14 @@ ul {
 }
 
 /* FONT STYLES */
-.bold-uc {
+.bold {
   font-weight: 600;
   letter-spacing: 0.1rem;
   text-transform: uppercase;
+}
+
+.font-40 {
+  font-size: 4rem;
 }
 
 /* LINK STYLES */
@@ -93,4 +100,39 @@ ul {
 .tmp-icon__header.active,
 .tmp-icon__header:hover {
   fill: var(--main);
+}
+
+/* BUTTON STYLES */
+.tmp-btn {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 1.6rem;
+  letter-spacing: 0.16rem;
+}
+
+.tmp-btn_main {
+  background-color: var(--main);
+  color: var(--white);
+  transition: all 0.3s ease-out;
+}
+
+.tmp-btn_main:hover {
+  background-color: var(--main-dark);
+}
+
+.tmp-btn_404 {
+  padding: 1.6rem 6.4rem;
+}
+
+/* SECTION 404 */
+.section-404 {
+  height: calc(100vh - 12rem);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.2rem;
+}
+
+.img-container-404 {
+  margin-bottom: 2rem;
 }
