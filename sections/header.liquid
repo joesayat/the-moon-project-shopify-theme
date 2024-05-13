@@ -7,59 +7,60 @@
 {% assign nav_linklists = linklists[section.settings.nav_list] %}
 
 <!-- HEADER -->
-<header class="header tmp-header bold relative">
-  <!-- LOGO -->
-  <div class="header-logo">The Moon Project</div>
+<header-nav>
+  <header class="header tmp-header bold relative">
+    <!-- LOGO -->
+    <div class="header-logo">The Moon Project</div>
 
-  <!-- DESKTOP NAV -->
-  <nav class="header-nav">
-    <ul class="header-list">
-      {% for link in nav_linklists.links %}
-        <li class="header-item">
-          <a
-            class="header-link tmp-link__header {% if link.active %} active {% endif %}"
-            href="{{ link.url }}"
-          >
-            {{ link.title }}
-          </a>
-        </li>
-      {% endfor %}
-    </ul>
-  </nav>
+    <!-- DESKTOP NAV -->
+    <nav class="header-nav">
+      <ul class="header-list">
+        {% for link in nav_linklists.links %}
+          <li class="header-item">
+            <a class="header-link tmp-link__header {% if link.active %} active {% endif %}" href="{{ link.url }}">
+              {{ link.title }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
 
-  <!-- MOBILE NAV -->
-  <nav class="header-nav__md tmp-nav__md">
-    <ul class="header-list__md">
-      {% for link in nav_linklists.links %}
-        <li class="header-item__md">
-          <a
-            class="header-link__md tmp-link__header__md {% if link.active %} active {% endif %}"
-            href="{{ link.url }}"
-          >
-            {{ link.title }}
-          </a>
-        </li>
-      {% endfor %}
-    </ul>
-  </nav>
+    <!-- MOBILE NAV -->
+    <nav class="header-nav__md tmp-nav__md">
+      <ul class="header-list__md">
+        {% for link in nav_linklists.links %}
+          <li class="header-item__md">
+            <a
+              class="header-link__md tmp-link__header__md {% if link.active %} active {% endif %}"
+              href="{{ link.url }}"
+            >
+              {{ link.title }}
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
 
-  <!-- ICONS -->
-  <div class="header-icons">
-    <div class="header-icon">
-      <a
-        class="tmp-icon__header {% if canonical_url contains routes.cart_url %} active {% endif %}"
-        href="{{ routes.cart_url }}"
-      >
-        {% render 'icon-shopping-bag' %}
-      </a>
+    <!-- ICONS -->
+    <div class="header-icons">
+      <div class="header-icon">
+        <a
+          class="tmp-icon__header {% if canonical_url contains routes.cart_url %} active {% endif %}"
+          href="{{ routes.cart_url }}"
+        >
+          {% render 'icon-shopping-bag' %}
+        </a>
+      </div>
+      <div class="header-icon">
+        <button class="tmp-icon__header" name="header-menu">
+          {% render 'icon-menu' %}
+        </button>
+      </div>
     </div>
-    <div class="header-icon">
-      <button class="tmp-icon__header" name="header-menu">
-        {% render 'icon-menu' %}
-      </button>
-    </div>
-  </div>
-</header>
+  </header>
+
+  <div class="overlay"></div>
+</header-nav>
 
 <!-- SCHEMA -->
 {% schema %}

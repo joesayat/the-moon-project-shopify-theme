@@ -21,7 +21,7 @@ html {
 }
 
 body {
-  background: var(--gray);
+  background: var(--white);
   color: var(--black);
   font-family: 'Barlow', sans-serif;
   font-size: 1.6rem;
@@ -48,14 +48,32 @@ ul {
 }
 
 /* UTILITY STYLES */
+.container {
+  max-width: 120rem;
+  margin: 0 auto;
+  padding: 0 4.8rem;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
 .relative {
   position: relative;
+}
+
+/* CSSGRID */
+.grid {
+  display: grid;
+}
+
+.grid-3-col {
+  grid-template-columns: repeat(3, 1fr);
 }
 
 /* FONT STYLES */
 .bold {
   font-weight: 600;
-  letter-spacing: 0.1rem;
   text-transform: uppercase;
 }
 
@@ -67,6 +85,7 @@ ul {
 .tmp-link__header:link,
 .tmp-link__header:visited {
   color: var(--black);
+  letter-spacing: 0.1rem;
   transition: all 0.3s ease-out;
 }
 
@@ -123,7 +142,7 @@ ul {
   padding: 1.6rem 6.4rem;
 }
 
-/* SECTION 404 */
+/* SECTION - 404 */
 .section-404 {
   height: calc(100vh - 12rem);
   text-align: center;

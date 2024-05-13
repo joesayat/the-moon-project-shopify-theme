@@ -1,18 +1,24 @@
-class navHeaderMd {
+class navHeader extends HTMLElement {
   constructor() {
-    this._parentElement = document.querySelector('.header-nav__md');
-    this._headerIcons = document.querySelector('.header-icons');
+    super();
 
-    this._headerIcons.addEventListener('click', this._handleNavHeaderMd.bind(this));
+    this._body = document.querySelector('body');
+    this._iconHeader = document.querySelector('.header-icons');
+    this._navHeaderMd = document.querySelector('.header-nav__md');
+    this._overlay = document.querySelector('.overlay');
+
+    this._iconHeader.addEventListener('click', this._onMenuIconClick.bind(this));
   }
 
-  _handleNavHeaderMd(e) {
-    const btnHeaderMenu = e.target.closest('button[name="header-menu"]');
-    
-    if (!btnHeaderMenu) return;
+  _onMenuIconClick(e) {
+    const menuIcon = e.target.closest('button[name="header-menu"]');
 
-    this._parentElement.classList.toggle('active');
+    if (!menuIcon) return;
+
+    this._body.classList.toggle('overflow-hidden');
+    this._navHeaderMd.classList.toggle('active');
+    this._overlay.classList.toggle('active');
   }
 }
 
-new navHeaderMd();
+customElements.define('header-nav', navHeader);
