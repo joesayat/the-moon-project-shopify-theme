@@ -129,9 +129,21 @@ ul {
   transition: all 0.3s ease-out;
 }
 
-.tmp-icon__header.active,
-.tmp-icon__header:hover {
+.tmp-icon__header.active .icon-shopping-bag,
+.tmp-icon__header:hover .icon-shopping-bag {
   fill: var(--main);
+}
+
+.icon-close {
+  display: none;
+}
+
+.tmp-icon__header.active .icon-close {
+  display: block;
+}
+
+.tmp-icon__header.active .icon-menu {
+  display: none;
 }
 
 /* BUTTON STYLES */

@@ -18,6 +18,7 @@ class navHeader extends HTMLElement {
     this._body.classList.toggle('overflow-hidden');
     this._navHeaderMd.classList.toggle('active');
     this._overlay.classList.toggle('active');
+    menuIcon.classList.toggle('active');
   }
 }
 
