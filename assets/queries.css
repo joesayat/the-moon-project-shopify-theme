@@ -13,8 +13,8 @@
     padding: 0 4rem;
   }
 
-  /* SECTION 404 */
-  .section-404 {
+  /* SECTION ERROR */
+  .section-error {
     height: calc(100vh - 7rem);
   }
 }
@@ -59,8 +59,8 @@
     width: 100%;
   }
 
-  /* SECTION 404 */
-  .section-404 {
+  /* SECTION ERROR */
+  .section-error {
     padding: 0 3.2rem;
   }
 }

@@ -62,6 +62,19 @@ ul {
   position: relative;
 }
 
+.overlay {
+  background-color: var(--white);
+  width: 100%;
+  height: calc(100vh - 7rem);
+  position: absolute;
+  top: 7rem;
+  left: 0;
+  transition: all 0.3s ease-out;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 998;
+}
+
 /* CSSGRID */
 .grid {
   display: grid;
@@ -85,7 +98,7 @@ ul {
 .tmp-link__header:link,
 .tmp-link__header:visited {
   color: var(--black);
-  letter-spacing: 0.1rem;
+  letter-spacing: 0.12rem;
   transition: all 0.3s ease-out;
 }
 
@@ -138,12 +151,12 @@ ul {
   background-color: var(--main-dark);
 }
 
-.tmp-btn_404 {
+.tmp-btn_error {
   padding: 1.6rem 6.4rem;
 }
 
-/* SECTION - 404 */
-.section-404 {
+/* SECTION - ERROR */
+.section-error {
   height: calc(100vh - 12rem);
   text-align: center;
   display: flex;
@@ -152,6 +165,6 @@ ul {
   gap: 1.2rem;
 }
 
-.img-container-404 {
+.error-img-container {
   margin-bottom: 2rem;
 }

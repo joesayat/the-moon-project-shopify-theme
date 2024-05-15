@@ -83,19 +83,6 @@
     display: block;
   }
 
-  .overlay {
-    background-color: var(--white);
-    width: 100%;
-    height: calc(100vh - 7rem);
-    position: absolute;
-    top: 7rem;
-    left: 0;
-    transition: all 0.3s ease-out;
-    opacity: 0;
-    visibility: hidden;
-    z-index: 998;
-  }
-
   .overlay.active {
     opacity: 0.5;
     visibility: visible;
