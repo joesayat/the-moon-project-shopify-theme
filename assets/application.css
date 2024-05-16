@@ -21,7 +21,7 @@ html {
 }
 
 body {
-  background: var(--gray);
+  background: var(--white);
   color: var(--black);
   font-family: 'Barlow', sans-serif;
   font-size: 1.6rem;
@@ -43,19 +43,54 @@ button {
   cursor: pointer;
 }
 
+span {
+  display: inline-block;
+}
+
 ul {
   list-style-type: none;
 }
 
 /* UTILITY STYLES */
+.container {
+  max-width: 120rem;
+  margin: 0 auto;
+  padding: 0 4.8rem;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
 .relative {
   position: relative;
+}
+
+.overlay {
+  background-color: var(--white);
+  width: 100%;
+  height: calc(100vh - 7rem);
+  position: absolute;
+  top: 7rem;
+  left: 0;
+  transition: all 0.3s ease-out;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 998;
+}
+
+/* CSSGRID */
+.grid {
+  display: grid;
+}
+
+.grid-3-col {
+  grid-template-columns: repeat(3, 1fr);
 }
 
 /* FONT STYLES */
 .bold {
   font-weight: 600;
-  letter-spacing: 0.1rem;
   text-transform: uppercase;
 }
 
@@ -67,6 +102,7 @@ ul {
 .tmp-link__header:link,
 .tmp-link__header:visited {
   color: var(--black);
+  letter-spacing: 0.12rem;
   transition: all 0.3s ease-out;
 }
 
@@ -91,15 +127,42 @@ ul {
   color: var(--main);
 }
 
+.tmp-link__pagination {
+  transition: all 0.3s ease-out;
+}
+
+.tmp-link__pagination.active,
+.tmp-link__pagination:hover,
+.tmp-link__pagination:active {
+  background-color: var(--main);
+  color: var(--white);
+}
+
+.tmp-link__pagination.active {
+  cursor: default;
+}
+
 /* ICON STYLES */
 .tmp-icon__header {
   fill: var(--black);
   transition: all 0.3s ease-out;
 }
 
-.tmp-icon__header.active,
-.tmp-icon__header:hover {
+.tmp-icon__header.active .icon-shopping-bag,
+.tmp-icon__header:hover .icon-shopping-bag {
   fill: var(--main);
+}
+
+.icon-close {
+  display: none;
+}
+
+.tmp-icon__header.active .icon-close {
+  display: block;
+}
+
+.tmp-icon__header.active .icon-menu {
+  display: none;
 }
 
 /* BUTTON STYLES */
@@ -119,12 +182,12 @@ ul {
   background-color: var(--main-dark);
 }
 
-.tmp-btn_404 {
+.tmp-btn_error {
   padding: 1.6rem 6.4rem;
 }
 
-/* SECTION 404 */
-.section-404 {
+/* SECTION - ERROR */
+.section-error {
   height: calc(100vh - 12rem);
   text-align: center;
   display: flex;
@@ -133,6 +196,6 @@ ul {
   gap: 1.2rem;
 }
 
-.img-container-404 {
+.error-img-container {
   margin-bottom: 2rem;
 }

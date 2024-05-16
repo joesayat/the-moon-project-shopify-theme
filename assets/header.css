@@ -9,7 +9,7 @@
 
 .tmp-header {
   background: var(--white);
-  border-bottom: 1px solid var(--gray);
+  border-bottom: 2px solid var(--gray);
 }
 
 .header-list {
@@ -51,9 +51,10 @@
     position: absolute;
     top: 7rem;
     right: 0;
-    opacity: 0;
     transform: translateX(100%);
+    opacity: 0;
     transition: all 0.3s ease-out;
+    z-index: 999;
   }
 
   .header-nav__md.active {
@@ -80,6 +81,11 @@
 
   .header-icon:last-child {
     display: block;
+  }
+
+  .overlay.active {
+    opacity: 0.5;
+    visibility: visible;
   }
 }
 

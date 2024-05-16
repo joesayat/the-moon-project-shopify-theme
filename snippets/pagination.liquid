@@ -1,0 +1,36 @@
+<!-- PAGINATION STYLES -->
+{{ 'pagination.css' | asset_url | stylesheet_tag }}
+
+<!-- PAGINATION -->
+{% if pagination.pages > 1 %}
+  <nav class="pagination-nav tmp-pagination bold" role="navigation">
+    <ul class="pagination-list">
+      <!-- PREVIOUS -->
+      {% if pagination.previous.is_link  %}
+        <li class="pagination-item">
+          <a class="pagination-link tmp-link__pagination" href="{{ pagination.previous.url }}">&lt;&lt;</a>
+        </li>
+      {% endif %}
+
+      <!-- PAGES -->
+      {% for part in pagination.parts %}
+        {% if part.is_link %}
+          <li class="pagination-item">
+            <a class="pagination-link tmp-link__pagination" href="{{ part.url }}">{{ part.title }}</a>
+          </li>
+        {% else %}
+          <li class="pagination-item">
+            <span class="pagination-link tmp-link__pagination active">{{ part.title }}</span>
+          </li>
+        {% endif %}
+      {% endfor %}
+      
+      <!-- NEXT -->
+      {% if pagination.next.is_link  %}
+        <li class="pagination-item">
+          <a class="pagination-link tmp-link__pagination" href="{{ pagination.next.url }}">&gt;&gt;</a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
+{% endif %}

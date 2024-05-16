@@ -1,0 +1,27 @@
+<li class="product-item relative">
+  {% if product.images[1] %}
+    <div class="product-img-container">
+      <img 
+        class="product-img" 
+        name="img-back" 
+        src="{{ product.images[1] | image_url }}" 
+        width="120" 
+        height="150" 
+        alt="Back side of a shirt" 
+      />
+    </div>
+    <img 
+      class="product-img" 
+      name="img-front" 
+      src="{{ product.featured_image | image_url }}" 
+      width="120"
+      height="150" 
+      alt="{{ product.featured_image.alt}}" 
+    />
+  {% else %}
+      {{ 'image' | placeholder_svg_tag }}
+  {% endif %}
+  <h3 class="product-name bold">{{ product.title }}</h3>
+  <p class="product-price">{{ product.price | money }}</p>
+  <a class="product-link" href="{{ product.url }}"></a>
+</li>

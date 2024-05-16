@@ -1,0 +1,30 @@
+<!-- COLLECTION STYLES -->
+{{ 'collection.css' | asset_url | stylesheet_tag }}
+
+<!-- VARIABLES -->
+{% assign products_size = collection.products | size %}
+
+<!-- SECTION COLLECTION -->
+{% if products_size > 0 %}
+  <section class="section-collection">
+    <div class="container">
+
+        <!-- PRODUCT GRID -->
+        {% paginate collection.products by 6 %}
+          <div class="product-grid">
+            <ul class="product-list grid grid-3-col">
+
+              <!-- PRODUCT CARD -->
+            {% for product in collection.products %}
+              {% render 'product-card', product: product %}
+            {% endfor %}
+            </ul>
+          </div>
+
+          {% render 'pagination', pagination: paginate %}
+        {% endpaginate %} 
+    </div>
+  </section>
+{% else %}
+  {% render 'error-no-products' %}
+{% endif %}
