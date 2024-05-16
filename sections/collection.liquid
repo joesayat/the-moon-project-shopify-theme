@@ -2,20 +2,20 @@
 {{ 'collection.css' | asset_url | stylesheet_tag }}
 
 <!-- VARIABLES -->
-{% assign products_size = collection.products | size %}
+{% assign products_size = collections['frontpage'].products | size %}
 
-<!-- SECTION COLLECTION -->
+<!-- SECTION SHOP -->
 {% if products_size > 0 %}
   <section class="section-collection">
     <div class="container">
 
         <!-- PRODUCT GRID -->
-        {% paginate collection.products by 6 %}
+        {% paginate collections['frontpage'].products by 6 %}
           <div class="product-grid">
-            <ul class="product-list grid grid-3-col">
+            <ul class="product-list grid grid-{{section.settings.column_count}}-col">
 
               <!-- PRODUCT CARD -->
-            {% for product in collection.products %}
+            {% for product in collections['frontpage'].products limit:  section.settings.product_count %}
               {% render 'product-card', product: product %}
             {% endfor %}
             </ul>
@@ -28,3 +28,29 @@
 {% else %}
   {% render 'error-no-products' %}
 {% endif %}
+
+{% schema %}
+{
+  "name": "Shop Grid",
+  "settings": [
+      {
+        "type": "range",
+        "id": "product_count",
+        "min": 3,
+        "max": 10,
+        "step": 1,
+        "default": 6,
+        "label": "Product Count"
+      },
+      {
+        "type": "range",
+        "id": "column_count",
+        "min": 3,
+        "max": 5,
+        "step": 1,
+        "default": 3,
+        "label": "Column Count"
+      }
+    ]
+}
+{% endschema %}
