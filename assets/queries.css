@@ -8,8 +8,13 @@
 /* BELOW 1024px (Laptops/ Tablets) */
 /***********************************/
 @media (max-width: 64em) {
-  /* SECTION 404 */
-  .section-404 {
+  /* UTILITY STYLES */
+  .container {
+    padding: 0 4rem;
+  }
+
+  /* SECTION ERROR */
+  .section-error {
     height: calc(100vh - 7rem);
   }
 }
@@ -28,19 +33,34 @@
   html {
     font-size: 56.25%;
   }
+
+  /* CSSGRID */
+  .grid-3-col {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /************************/
 /* BELOW 656px (Phones) */
 /************************/
 @media (max-width: 41em) {
+  /* UTILITY STYLES */
+  .container {
+    padding: 0 3.2rem;
+  }
+
+  /* CSSGRID */
+  .grid-3-col {
+    grid-template-columns: repeat(1, 1fr);
+  }
+
   /* BUTTON STYLES */
   .tmp-btn {
     width: 100%;
   }
 
-  /* SECTION 404 */
-  .section-404 {
+  /* SECTION ERROR */
+  .section-error {
     padding: 0 3.2rem;
   }
 }
