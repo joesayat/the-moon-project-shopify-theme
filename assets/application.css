@@ -43,6 +43,10 @@ button {
   cursor: pointer;
 }
 
+span {
+  display: inline-block;
+}
+
 ul {
   list-style-type: none;
 }
@@ -121,6 +125,21 @@ ul {
 .tmp-link__header__md:active {
   background: var(--gray);
   color: var(--main);
+}
+
+.tmp-link__pagination {
+  transition: all 0.3s ease-out;
+}
+
+.tmp-link__pagination.active,
+.tmp-link__pagination:hover,
+.tmp-link__pagination:active {
+  background-color: var(--main);
+  color: var(--white);
+}
+
+.tmp-link__pagination.active {
+  cursor: default;
 }
 
 /* ICON STYLES */

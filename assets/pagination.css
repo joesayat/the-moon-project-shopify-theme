@@ -1,0 +1,23 @@
+/* PAGINATION */
+.pagination-nav {
+  margin: 4.8rem 0;
+}
+
+.tmp-pagination {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 1.4rem;
+}
+
+.pagination-list {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.pagination-link {
+  width: 2.4rem;
+  height: 2.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
