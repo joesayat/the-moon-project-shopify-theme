@@ -3,6 +3,11 @@
     "featured-collection": {
       "type": "featured-collection",
       "settings": {
+        "title": "Featured Selections",
+        "subtitle": "",
+        "featured_collection": "frontpage",
+        "product_count": 4,
+        "column_count": 4
       }
     }
   },
