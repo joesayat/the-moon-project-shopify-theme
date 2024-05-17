@@ -2,6 +2,7 @@ class navHeader extends HTMLElement {
   constructor() {
     super();
 
+    this._html = document.querySelector('html');
     this._body = document.querySelector('body');
     this._iconHeader = document.querySelector('.header-icons');
     this._navHeaderMd = document.querySelector('.header-nav__md');
@@ -15,6 +16,7 @@ class navHeader extends HTMLElement {
 
     if (!menuIcon) return;
 
+    this._html.classList.toggle('overflow-hidden');
     this._body.classList.toggle('overflow-hidden');
     this._navHeaderMd.classList.toggle('active');
     this._overlay.classList.toggle('active');

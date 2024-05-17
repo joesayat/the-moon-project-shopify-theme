@@ -10,12 +10,13 @@
 
 .product-item {
   display: flex;
-  align-items: center;
   flex-direction: column;
   gap: 1.2rem;
+  text-align: center;
 }
 
 .product-img {
+  display: block;
   width: 100%;
   height: auto;
   transition: all 0.3s ease-out;
@@ -30,6 +31,10 @@
 .product-img[name='img-front']:has(~ .product-link:hover) {
   opacity: 0;
   visibility: hidden;
+}
+
+.product-img-container:has(~ .product-link:hover) > .product-img[name='img-featured'] {
+  transform: scale(1.05);
 }
 
 .product-name {

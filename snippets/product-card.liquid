@@ -1,5 +1,16 @@
 <li class="product-item relative">
-  {% if product.images[1] %}
+  {% if product.type == 'Socks' %}
+    <div class="product-img-container overflow-hidden">
+      <img 
+        class="product-img" 
+        name="img-featured" 
+        src="{{ product.featured_image | image_url }}" 
+        width="120"
+        height="150" 
+        alt="{{ product.featured_image.alt}}" 
+      />
+    </div>
+  {% else %}
     <div class="product-img-container">
       <img 
         class="product-img" 
@@ -7,19 +18,17 @@
         src="{{ product.images[1] | image_url }}" 
         width="120" 
         height="150" 
-        alt="Back side of a shirt" 
+        alt="{{ product.images[1].alt}}" 
       />
     </div>
     <img 
       class="product-img" 
       name="img-front" 
-      src="{{ product.featured_image | image_url }}" 
+      src="{{ product.images[0] | image_url }}" 
       width="120"
       height="150" 
-      alt="{{ product.featured_image.alt}}" 
+      alt="{{ product.images[0].alt}}" 
     />
-  {% else %}
-      {{ 'image' | placeholder_svg_tag }}
   {% endif %}
   <h3 class="product-name bold">{{ product.title }}</h3>
   <p class="product-price">{{ product.price | money }}</p>
