@@ -45,6 +45,7 @@ button {
 }
 
 span {
+  cursor: default;
   display: inline-block;
 }
 

@@ -9,26 +9,27 @@
   <section class="section-collection">
     <div class="container">
 
-        <!-- PRODUCT GRID -->
-        {% paginate collections['frontpage'].products by 6 %}
-          <div class="product-grid">
-            <ul class="product-list grid grid-{{section.settings.column_count}}-col">
+      <!-- PRODUCT GRID -->
+      {% paginate collections['frontpage'].products by section.settings.product_count %}
+        <div class="product-grid">
+          <ul class="product-list grid grid-{{section.settings.column_count}}-col">
 
-              <!-- PRODUCT CARD -->
-            {% for product in collections['frontpage'].products limit:  section.settings.product_count %}
-              {% render 'product-card', product: product %}
-            {% endfor %}
-            </ul>
-          </div>
+            <!-- PRODUCT CARD -->
+          {% for product in collections['frontpage'].products %}
+            {% render 'product-card', product: product %}
+          {% endfor %}
+          </ul>
+        </div>
 
-          {% render 'pagination', pagination: paginate %}
-        {% endpaginate %} 
+        {% render 'pagination', pagination: paginate %}
+      {% endpaginate %} 
     </div>
   </section>
 {% else %}
   {% render 'error-no-products' %}
 {% endif %}
 
+<!-- SCHEMA -->
 {% schema %}
 {
   "name": "Shop Grid",
