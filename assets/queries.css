@@ -35,7 +35,9 @@
   }
 
   /* CSSGRID */
-  .grid-3-col {
+  .grid-3-col,
+  .grid-4-col,
+  .grid-5-col {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -50,7 +52,9 @@
   }
 
   /* CSSGRID */
-  .grid-3-col {
+  .grid-3-col,
+  .grid-4-col,
+  .grid-5-col {
     grid-template-columns: repeat(1, 1fr);
   }
 

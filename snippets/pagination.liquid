@@ -19,10 +19,14 @@
             <a class="pagination-link tmp-link__pagination" href="{{ part.url }}">{{ part.title }}</a>
           </li>
         {% else %}
-          <li class="pagination-item">
-            <span class="pagination-link tmp-link__pagination active">{{ part.title }}</span>
-          </li>
-        {% endif %}
+        <!-- VARIABLES -->
+        {% assign string_size = part.title | split: '' | size  %}
+
+        <li class="pagination-item">
+            <span
+          class="pagination-link tmp-link__pagination {% if string_size <= 3%} active {% endif %}">{{ part.title }}</span>
+            </li>
+          {% endif %}
       {% endfor %}
       
       <!-- NEXT -->
