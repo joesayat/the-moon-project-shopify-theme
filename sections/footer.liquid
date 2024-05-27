@@ -1,0 +1,96 @@
+<!-- FOOTER STYLES -->
+{{ 'footer.css' | asset_url | stylesheet_tag }}
+
+<!-- VARIABLES -->
+{% assign shopping_linklists = linklists[section.settings.footer_shopping_list] %}
+{% assign company_linklists = linklists[section.settings.footer_company_list] %}
+
+<!-- FOOTER -->
+<footer class="footer tmp-footer">
+  <div class="footer-container container grid grid-4-col">
+    <!-- FOOTER LOGO ICON -->
+    <div class="footer-col">
+      <div class="footer-logo-icon">
+        {% render 'icon-rocket' %}
+      </div>
+    </div>
+
+    <!-- FOOTER SHOPPING NAV -->
+    <div class="footer-col">
+      <p class="heading-footer">Shopping</p>
+      <nav class="footer-nav" role="navigation">
+        <ul class="footer-list">
+          {% for link in shopping_linklists.links %}
+            <li class="footer-item">
+              <a class="footer-link" href="{{ link.url }}">{{ link.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+
+    <!-- FOOTER COMPANY NAV -->
+    <div class="footer-col">
+      <p class="heading-footer">Company</p>
+      <nav class="footer-nav" role="navigation">
+        <ul class="footer-list">
+          {% for link in company_linklists.links %}
+            <li class="footer-item">
+              <a class="footer-link" href="{{ link.url }}">{{ link.title }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+      </nav>
+    </div>
+
+    <!-- FOOTER FOLLOW NAV -->
+    <div class="footer-col">
+      <p class="heading-footer">Follow us</p>
+      <nav class="footer-nav" role="navigation">
+        <ul class="footer-icon-list">
+          <li class="footer-item">
+            <a class="footer-link__icon" href="#">
+              {% render 'icon-instagram' %}
+            </a>
+          </li>
+          <li class="footer-item">
+            <a class="footer-link__icon" href="#">
+              {% render 'icon-facebook' %}
+            </a>
+          </li>
+          <li class="footer-item">
+            <a class="footer-link__icon" href="#">
+              {% render 'icon-spotify' %}
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+  <div class="footer-container container">
+    <p class="footer-copyright">
+      &copy; 2024, 
+        <span class="footer-logo-text">The Moon Project Ph</span> 
+      Powered by Shopify
+    </p>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "footer_shopping_list",
+      "label": "Footer Shopping Menu"
+    }, 
+    {
+      "type": "link_list",
+      "id": "footer_company_list",
+      "label": "Footer Company Menu"
+    }
+  ]
+}
+{% endschema %}
