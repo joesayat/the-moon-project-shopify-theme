@@ -21,12 +21,17 @@
         {% else %}
         <!-- VARIABLES -->
         {% assign string_size = part.title | split: '' | size  %}
-
-        <li class="pagination-item">
-            <span
-          class="pagination-link tmp-link__pagination {% if string_size <= 3%} active {% endif %}">{{ part.title }}</span>
+          {% if string_size >= 3%} 
+            <li class="pagination-item">
+                <span class="pagination-link">{{ part.title }}</span>
+            </li>
+            {% else %}
+            <li class="pagination-item">
+                <span
+              class="pagination-link tmp-link__pagination active">{{ part.title }}</span>
             </li>
           {% endif %}
+        {% endif %}
       {% endfor %}
       
       <!-- NEXT -->

@@ -1,7 +1,14 @@
 {
   "sections": {
-    "featured-collection" : {
-      "type": "featured-collection"
+    "featured-collection": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Unknown Collection",
+        "subtitle": "New Collection",
+        "featured_collection": "unknown-collection",
+        "product_count": 3,
+        "column_count": 3
+      }
     }
   },
   "order": [
