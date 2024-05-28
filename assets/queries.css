@@ -23,6 +23,10 @@
 /* BELOW 896px (Small Tablets) */
 /*******************************/
 @media (max-width: 56em) {
+  /* SECTION */
+  .section-collection {
+    padding: 6.4rem 0;
+  }
 }
 
 /*******************************/
@@ -58,9 +62,18 @@
     grid-template-columns: repeat(1, 1fr);
   }
 
+  .grid-footer {
+    justify-items: start;
+  }
+
   /* BUTTON STYLES */
   .tmp-btn {
     width: 100%;
+  }
+
+  /* SECTION */
+  .section-collection {
+    padding: 4.8rem 0;
   }
 
   /* SECTION ERROR */
