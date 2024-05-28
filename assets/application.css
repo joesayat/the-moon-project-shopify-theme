@@ -98,6 +98,12 @@ ul {
   grid-template-columns: repeat(5, 1fr);
 }
 
+.grid-footer {
+  column-gap: 2.4rem;
+  row-gap: 4.8rem;
+  justify-items: center;
+}
+
 /* FONT STYLES */
 .bold {
   font-weight: 600;
@@ -180,6 +186,7 @@ ul {
 
 .footer-link:link,
 .footer-link:visited {
+  color: var(--white);
   transition: all 0.3s ease-out;
 } 
  

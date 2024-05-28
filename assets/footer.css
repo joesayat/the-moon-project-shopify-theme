@@ -5,12 +5,6 @@
   color: var(--white);
 }
 
-.footer-container {
-  column-gap: 2.4rem;
-  row-gap: 4.8rem;
-  justify-items: center;
-}
-
 .footer-nav {
   margin-top: 2.4rem;
   font-weight: 200;
@@ -57,11 +51,7 @@
 /************************/
 @media (max-width: 41em) {
   /* FOOTER */
-  .footer-container {
-    justify-items: start;
-  }
-
-  .footer-container .footer-col {
+  .footer .footer-col {
     grid-column: 1;
   }
 

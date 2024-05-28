@@ -62,6 +62,10 @@
     grid-template-columns: repeat(1, 1fr);
   }
 
+  .grid-footer {
+    justify-items: start;
+  }
+
   /* BUTTON STYLES */
   .tmp-btn {
     width: 100%;
