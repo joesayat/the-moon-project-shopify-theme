@@ -1,0 +1,11 @@
+{% if cart.item_count > 2 %}
+  <!-- SECTION CART -->
+  <section class="section-cart">
+    <div class="container">
+      Hello
+    </div>
+  </section>
+  {% else %}
+  {% render 'error-empty-cart' %}
+{% endif %}
+ 

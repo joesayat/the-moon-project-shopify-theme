@@ -15,7 +15,7 @@
 
   /* SECTION ERROR */
   .section-error {
-    height: calc(100vh - 7rem);
+    height: calc(60vh - 7rem);
   }
 }
 
@@ -77,7 +77,8 @@
   }
 
   /* SECTION ERROR */
-  .section-error {
+  .section-error,
+  .section-error-cart {
     padding: 0 3.2rem;
   }
 }

@@ -124,6 +124,14 @@ ul {
   margin-bottom: 3.2rem;
 }
 
+.heading-error {
+  color: var(--black);
+  font-size: 3.2rem;
+  font-weight: 600;
+  letter-spacing: 0.16rem;
+  text-transform: uppercase;
+}
+
 .heading-footer {
   font-family: 'Roboto Condensed', sans-serif;
   font-size: 1.8rem;
@@ -260,9 +268,9 @@ ul {
   padding: 8rem 0;
 }
 
-/* SECTION - ERROR */
-.section-error {
-  height: calc(100vh - 12rem);
+/* SECTION - ERRORS */
+.section-error,
+.section-error-cart {
   text-align: center;
   display: flex;
   flex-direction: column;
@@ -270,6 +278,10 @@ ul {
   gap: 1.2rem;
 }
 
-.error-img-container {
-  margin-bottom: 2rem;
+.section-error {
+  height: calc(80vh - 12rem);
+}
+
+.section-error-cart {
+  height: 60vh;
 }
