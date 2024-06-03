@@ -1,0 +1,74 @@
+<!-- CART TABLE ROW -->
+<tr class="tr-body">
+    <!-- CART PRODUCT -->
+  <td class="td td-product">
+    <img 
+      class="product-img" 
+      src="{{ item.image | img_url }}"
+      alt="{{ item.title }}" 
+      width="auto" 
+      height="auto" 
+    />
+    <div>
+      <a class="product-title link__cart-product-title" href="{{ item.url }}">
+        {{ item.product.title }}
+      </a>
+      <p class="product-variant">
+      {% case item.variant.title %}
+        {% when 'XS' %}
+          Size: Extra small
+        {% when 'S' %}
+          Size: Small
+        {% when 'M' %}
+          Size: Medium
+        {% when 'L' %}
+          Size: Large
+        {% when 'XL' %}
+          Size: Large
+        {% else %}
+          Size: Free size
+      {% endcase %}
+      </p>
+      <p class="product-price">
+        {{ item.price | money }}
+      </p>
+      <div class="input-container__sm">
+        <input 
+          class="input-quantity"
+          type="number" 
+          name="updates[]"
+          value="{{ item.quantity }}"
+          min="1" 
+          max="{{ item.variant.inventory_quantity }}"
+        />
+        <a class="btn-trash" href="{{ item.url_to_remove }}">
+          {% render 'icon-trash' %}
+        </a>
+      </div>
+    </div>
+  </td>
+
+  <!-- CART INPUT QUANTITY -->
+  <td class="td td-quantity">
+    <div class="input-container">
+      <input 
+        class="input-quantity"
+        type="number" 
+        name="updates[]"
+        value="{{ item.quantity }}"
+        min="1" 
+        max="{{ item.variant.inventory_quantity }}"
+      />
+      <a class="btn-trash" href="{{ item.url_to_remove }}">
+        {% render 'icon-trash' %}
+      </a>
+    </div>
+  </td>
+
+  <!-- CART PRODUCT TOTAL -->
+  <td class="td td-total">
+    <p class="product-total">
+      {{ item.final_line_price | money }}
+    </p>  
+  </td>
+</tr>
