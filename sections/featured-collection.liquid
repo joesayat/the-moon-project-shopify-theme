@@ -4,13 +4,15 @@
 <!-- SECTION FEATURED COLLECTION -->
 <section class="section-collection">
   <div class="container">
-    {% if section.settings.subtitle != blank %}
-      <p class="subheading">{{ section.settings.subtitle }}</p>
-    {% endif %}
-
-    {% if section.settings.title != blank %}
-      <h2 class="heading-2">{{ section.settings.title }}</h2>
-    {% endif %}
+    <div class="heading-container">
+      {% if section.settings.subtitle != blank %}
+        <p class="subheading">{{ section.settings.subtitle }}</p>
+      {% endif %}
+  
+      {% if section.settings.title != blank %}
+        <h2 class="heading-2">{{ section.settings.title }}</h2>
+      {% endif %}
+    </div>
 
     <!-- PRODUCT GRID -->
     <div class="product-grid">

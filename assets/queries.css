@@ -15,7 +15,7 @@
 
   /* SECTION ERROR */
   .section-error {
-    height: calc(100vh - 7rem);
+    height: calc(60vh - 7rem);
   }
 }
 
@@ -23,10 +23,6 @@
 /* BELOW 896px (Small Tablets) */
 /*******************************/
 @media (max-width: 56em) {
-  /* SECTION */
-  .section-collection {
-    padding: 6.4rem 0;
-  }
 }
 
 /*******************************/
@@ -71,13 +67,9 @@
     width: 100%;
   }
 
-  /* SECTION */
-  .section-collection {
-    padding: 4.8rem 0;
-  }
-
   /* SECTION ERROR */
-  .section-error {
+  .section-error,
+  .section-error-cart {
     padding: 0 3.2rem;
   }
 }

@@ -1,0 +1,139 @@
+/* SECTION CART */
+.cart-heading-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4.8rem;
+}
+
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 4.8rem;
+}
+
+.thead,
+.tbody {
+  border-bottom: 1px solid #ced4da;
+}
+
+.th {
+  padding-bottom: 2rem;
+}
+
+.td {
+  padding: 2.4rem 0;
+}
+
+.td-product {
+  display: flex;
+  align-items: center;
+  gap: 3.6rem;
+}
+
+.th-total,
+.td-total {
+  text-align: end;
+}
+
+.td .product-img {
+  width: auto;
+  max-height: 16rem;
+}
+
+.td .product-title {
+  margin-bottom: 0.4rem;
+}
+
+.td .product-variant,
+.td .product-price {
+  font-size: 1.4rem;
+}
+
+.td .input-container {
+  display: flex;
+  align-items: center;
+}
+
+.td .input-container__sm {
+  display: none;
+  visibility: hidden;
+}
+
+.td .input-quantity {
+  width: 5rem;
+  padding: 0.8rem;
+  margin-right: 1.6rem;
+}
+
+.cart-cta {
+  width: 32%;
+  margin-left: auto;
+}
+
+.total-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+  font-size: 1.8rem;
+}
+
+.td .product-total,
+.total-container {
+  font-weight: 600;
+  letter-spacing: 0.12rem;
+  text-transform: uppercase;
+}
+
+.subtotal {
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
+.cart-cta-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.helper-text {
+  font-size: 1rem;
+  letter-spacing: 1px;
+  margin-bottom: 0.4rem;
+}
+
+/*******************************/
+/* BELOW 896px (Small Tablets) */
+/*******************************/
+@media (max-width: 56em) {
+  /* CART */
+  .cart-cta {
+    width: 48%;
+  }
+}
+
+/************************/
+/* BELOW 656px (Phones) */
+/************************/
+@media (max-width: 41em) {
+  /* CART */
+  .th-quantity, 
+  .td-quantity {
+    display: none;
+    visibility: hidden;
+  }
+  .td .input-container__sm {
+    display: flex;
+    align-items: center;
+    margin-top: 0.8rem;
+    visibility: visible;
+  }
+
+
+  .input-quantity {
+    margin-right: 1.2rem;
+  } 
+
+  .cart-cta {
+    width: 100%;
+  }
+}

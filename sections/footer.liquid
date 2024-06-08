@@ -2,8 +2,36 @@
 {{ 'footer.css' | asset_url | stylesheet_tag }}
 
 <!-- VARIABLES -->
-{% assign shopping_linklists = linklists[section.settings.footer_shopping_list] %}
-{% assign company_linklists = linklists[section.settings.footer_company_list] %}
+{% if section.settings.footer_shopping_list == blank %}
+  {% assign shopping_linklists = linklists['footer-shopping-menu'] %}
+{% else %}
+  {% assign shopping_linklists = linklists[section.settings.footer_shopping_list] %}
+{% endif %}
+
+{% if section.settings.footer_company_list == blank %}
+  {% assign company_linklists = linklists['footer-company-menu'] %}
+{% else %}
+  {% assign company_linklists = linklists[section.settings.footer_company_list] %}
+{% endif %}
+
+{% if section.settings.instagram_url == blank %}
+  {% assign instagram_url = "https://www.instagram.com" %}
+{% else %}
+  {% assign instagram_url = section.settings.instagram_url %}
+{% endif %}
+
+{% if section.settings.facebook_url == blank %}
+  {% assign facebook_url = "https://www.facebook.com" %}
+{% else %}
+  {% assign facebook_url = section.settings.facebook_url %}
+{% endif %}
+
+{% if section.settings.spotify_url == blank %}
+  {% assign spotify_url = "https://www.spotify.com" %}
+{% else %}
+  {% assign spotify_url = section.settings.spotify_url %}
+{% endif %}
+
 
 <!-- FOOTER -->
 <footer class="footer tmp-footer">
@@ -22,7 +50,7 @@
         <ul class="footer-list">
           {% for link in shopping_linklists.links %}
             <li class="footer-item">
-              <a class="footer-link" href="{{ link.url }}">{{ link.title }}</a>
+              <a class="link__footer" href="{{ link.url }}">{{ link.title }}</a>
             </li>
           {% endfor %}
         </ul>
@@ -36,7 +64,7 @@
         <ul class="footer-list">
           {% for link in company_linklists.links %}
             <li class="footer-item">
-              <a class="footer-link" href="{{ link.url }}">{{ link.title }}</a>
+              <a class="link__footer" href="{{ link.url }}">{{ link.title }}</a>
             </li>
           {% endfor %}
         </ul>
@@ -49,17 +77,17 @@
       <nav class="footer-nav" role="navigation">
         <ul class="footer-icon-list">
           <li class="footer-item">
-            <a class="footer-link__icon" href="#">
+            <a class="link__footer-icon" href="{{ instagram_url }}" target="_blank">
               {% render 'icon-instagram' %}
             </a>
           </li>
           <li class="footer-item">
-            <a class="footer-link__icon" href="#">
+            <a class="link__footer-icon" href="{{ facebook_url }}" target="_blank">
               {% render 'icon-facebook' %}
             </a>
           </li>
           <li class="footer-item">
-            <a class="footer-link__icon" href="#">
+            <a class="link__footer-icon" href="{{ spotify_url }}" target="_blank">
               {% render 'icon-spotify' %}
             </a>
           </li>
@@ -91,6 +119,21 @@
       "type": "link_list",
       "id": "footer_company_list",
       "label": "Footer Company Menu"
+    },
+    {
+      "type":"url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type":"url",
+      "id": "facebook_url",
+      "label": "Facebook URL"
+    },
+    {
+      "type":"url",
+      "id": "spotify_url",
+      "label": "Spotify URL"
     }
   ]
 }
