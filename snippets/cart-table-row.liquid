@@ -1,19 +1,19 @@
 <!-- CART TABLE ROW -->
 <tr class="tr-body">
     <!-- CART PRODUCT -->
-  <td class="td td-product">
+  <td class="td product-data__cart">
     <img 
-      class="product-img" 
-      src="{{ item.image | img_url }}"
+      class="product-img__cart" 
+      src="{{ item.image | image_url }}"
       alt="{{ item.title }}" 
       width="auto" 
       height="auto" 
     />
     <div>
-      <a class="product-title link__cart-product-title" href="{{ item.url }}">
+      <a class="product-title__cart link__cart--product-title" href="{{ item.url }}">
         {{ item.product.title }}
       </a>
-      <p class="product-variant">
+      <p class="product-variant__cart">
       {% case item.variant.title %}
         {% when 'XS' %}
           Size: Extra small
@@ -24,17 +24,17 @@
         {% when 'L' %}
           Size: Large
         {% when 'XL' %}
-          Size: Large
+          Size: Extra large
         {% else %}
           Size: Free size
       {% endcase %}
       </p>
-      <p class="product-price">
+      <p class="product-price__cart">
         {{ item.price | money }}
       </p>
-      <div class="input-container__sm">
+      <div class="input-container__cart--sm">
         <input 
-          class="input-quantity"
+          class="input-quantity__cart"
           type="number" 
           name="updates[]"
           value="{{ item.quantity }}"
@@ -49,10 +49,10 @@
   </td>
 
   <!-- CART INPUT QUANTITY -->
-  <td class="td td-quantity">
-    <div class="input-container">
+  <td class="td quantity-data__cart">
+    <div class="input-container__cart">
       <input 
-        class="input-quantity"
+        class="input-quantity__cart"
         type="number" 
         name="updates[]"
         value="{{ item.quantity }}"
@@ -66,8 +66,8 @@
   </td>
 
   <!-- CART PRODUCT TOTAL -->
-  <td class="td td-total">
-    <p class="product-total">
+  <td class="td total-data__cart">
+    <p class="product-total__cart">
       {{ item.final_line_price | money }}
     </p>  
   </td>
