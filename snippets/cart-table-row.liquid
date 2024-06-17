@@ -4,7 +4,7 @@
   <td class="td td-product">
     <img 
       class="product-img" 
-      src="{{ item.image | img_url }}"
+      src="{{ item.image | image_url }}"
       alt="{{ item.title }}" 
       width="auto" 
       height="auto" 
@@ -24,7 +24,7 @@
         {% when 'L' %}
           Size: Large
         {% when 'XL' %}
-          Size: Large
+          Size: Extra large
         {% else %}
           Size: Free size
       {% endcase %}

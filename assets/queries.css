@@ -23,6 +23,10 @@
 /* BELOW 896px (Small Tablets) */
 /*******************************/
 @media (max-width: 56em) {
+  /* CSSGRID */
+  .grid-2-col {
+    grid-template-columns: 1fr;
+  }
 }
 
 /*******************************/
