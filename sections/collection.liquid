@@ -6,13 +6,13 @@
 
 <!-- SECTION SHOP -->
 {% if products_size > 0 %}
-  <section class="section-collection">
+  <section class="section__collection">
     <div class="container">
 
       <!-- PRODUCT GRID -->
       {% paginate collections['frontpage'].products by section.settings.product_count %}
         <div class="product-grid">
-          <ul class="product-list grid grid-{{section.settings.column_count}}-col">
+          <ul class="product-list__collection grid grid-{{section.settings.column_count}}-col">
 
             <!-- PRODUCT CARD -->
           {% for product in collections['frontpage'].products %}

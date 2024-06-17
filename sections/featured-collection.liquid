@@ -2,7 +2,7 @@
 {{ 'collection.css' | asset_url | stylesheet_tag }}
 
 <!-- SECTION FEATURED COLLECTION -->
-<section class="section-collection">
+<section class="section__collection">
   <div class="container">
     <div class="heading-container">
       {% if section.settings.subtitle != blank %}
@@ -16,7 +16,7 @@
 
     <!-- PRODUCT GRID -->
     <div class="product-grid">
-      <ul class="product-list grid grid-{{section.settings.column_count}}-col">
+      <ul class="product-list__collection grid grid-{{section.settings.column_count}}-col">
 
         <!-- PRODUCT CARD -->
       {% for product in section.settings.featured_collection.products limit:  section.settings.product_count %}
