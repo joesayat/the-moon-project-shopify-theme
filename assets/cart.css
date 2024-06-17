@@ -1,12 +1,12 @@
 /* SECTION CART */
-.cart-heading-container {
+.heading-container__cart {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 4.8rem;
 }
 
-.cart-table {
+.table__cart {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 4.8rem;
@@ -25,77 +25,77 @@
   padding: 2.4rem 0;
 }
 
-.td-product {
+.product-data__cart {
   display: flex;
   align-items: center;
   gap: 3.6rem;
 }
 
-.th-total,
-.td-total {
+.total-heading__cart,
+.total-data__cart {
   text-align: end;
 }
 
-.td .product-img {
+.product-img__cart {
   width: auto;
   max-height: 12rem;
 }
 
-.td .product-title {
+.product-title__cart {
   margin-bottom: 0.4rem;
 }
 
-.td .product-variant,
-.td .product-price {
+.product-variant__cart,
+.product-price__cart {
   font-size: 1.4rem;
 }
 
-.td .input-container {
+.input-container__cart {
   display: flex;
   align-items: center;
 }
 
-.td .input-container__sm {
+.input-container__cart--sm {
   display: none;
   visibility: hidden;
 }
 
-.td .input-quantity {
+.input-quantity__cart {
   width: 5rem;
   padding: 0.8rem;
   margin-right: 1.6rem;
 }
 
-.cart-cta {
+.cta__cart {
   width: 32%;
   margin-left: auto;
 }
 
-.total-container {
+.total-container__cart {
   display: flex;
   justify-content: space-between;
   margin-bottom: 1.2rem;
   font-size: 1.8rem;
 }
 
-.td .product-total,
-.total-container {
+.product-total__cart,
+.total-container__cart {
   font-weight: 600;
   letter-spacing: 0.12rem;
   text-transform: uppercase;
 }
 
-.subtotal {
+.subtotal__cart {
   font-family: 'Roboto Condensed', sans-serif;
 }
 
-.cart-cta-container {
+.cta-container__cart {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
 }
 
-.helper-text {
+.helper-text__cart {
   font-size: 1rem;
   letter-spacing: 1px;
   margin-bottom: 0.4rem;
@@ -106,7 +106,7 @@
 /*******************************/
 @media (max-width: 56em) {
   /* CART */
-  .cart-cta {
+  .cta__cart {
     width: 48%;
   }
 }
@@ -116,24 +116,20 @@
 /************************/
 @media (max-width: 41em) {
   /* CART */
-  .th-quantity, 
-  .td-quantity {
+  .quantity-heading__cart, 
+  .quantity-data__cart {
     display: none;
     visibility: hidden;
   }
-  .td .input-container__sm {
+  
+  .input-container__cart--sm {
     display: flex;
     align-items: center;
     margin-top: 0.8rem;
     visibility: visible;
   }
 
-
-  .input-quantity {
-    margin-right: 1.2rem;
-  } 
-
-  .cart-cta {
+  .cta__cart {
     width: 100%;
   }
 }
