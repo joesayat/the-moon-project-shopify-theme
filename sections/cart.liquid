@@ -6,32 +6,32 @@
   <section class="section-cart">
     <div class="container">
       <!-- CART HEADING -->
-      <div class="cart-heading-container">
+      <div class="heading-container__cart">
         <h1 class="heading-2">Your cart</h1>
-        <div class="heading-cta-container">
+        <div class="cta-container--link">
           {% render 'icon-right-chevron' %}
-          <a class="link_cart-cta" href="{{ collections['frontpage'].url }}">
+          <a class="link__cart--cta" href="{{ collections['frontpage'].url }}">
             Continue shopping
           </a>
         </div>
       </div>
 
       <!-- CART FORM -->
-      <div class="cart-form-container">
+      <div class="form-container__cart">
         <form 
-          class="cart-form" 
+          class="form__cart" 
           action="{{ routes.cart_url }}" 
           method="POST" 
           novalidate
         >
            <!-- CART TABLE -->
-          <table class="cart-table">
+          <table class="table__cart">
              <!-- CART HEAD -->
             <thead class="thead heading-table">
               <tr class="tr-head">
-                <th class="th th-product">Product</th>
-                <th class="th th-quantity">Quantiy</th>
-                <th class="th th-total">Total</th>
+                <th class="th product-heading__cart">Product</th>
+                <th class="th quantity-heading__cart">Quantiy</th>
+                <th class="th total-heading__cart">Total</th>
               </tr>
             </thead>
             <!-- CART BODY -->
@@ -43,15 +43,15 @@
           </table>
 
           <!-- CART CALL TO ACTION -->
-          <div class="cart-cta">
+          <div class="cta__cart">
             <!-- CART TOTAL -->
-            <div class="total-container">
-              <p class="subtotal">Subtotal:</p>
-              <p class="price">{{ cart.total_price | money }}</p>
+            <div class="total-container__cart">
+              <p class="subtotal__cart">Subtotal:</p>
+              <p class="price__cart">{{ cart.total_price | money }}</p>
             </div>
             
             <!-- CART BUTTONS -->
-            <div class="cart-cta-container">
+            <div class="cta-container__cart">
               <button 
                 class="btn btn_outline" 
                 type="submit" 
@@ -60,7 +60,7 @@
                 Update
               </button>
               <div>
-                <div class="helper-text">*Taxes and shipping calculated at checkout</div>
+                <div class="helper-text__cart">*Taxes and shipping calculated at checkout</div>
                 <button 
                   class="btn btn_main" 
                   type="submit" 

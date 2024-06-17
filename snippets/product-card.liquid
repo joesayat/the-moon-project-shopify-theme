@@ -1,8 +1,8 @@
-<li class="product-item relative">
+<li class="product-description__collection relative">
   {% if product.type == 'Socks' %}
-    <div class="product-img-container overflow-hidden">
+    <div class="img-container__collection overflow-hidden">
       <img 
-        class="product-img" 
+        class="product-img__collection" 
         name="img-featured" 
         src="{{ product.featured_image | image_url }}" 
         width="120"
@@ -11,9 +11,9 @@
       />
     </div>
   {% else %}
-    <div class="product-img-container">
+    <div class="img-container__collection">
       <img 
-        class="product-img" 
+        class="product-img__collection" 
         name="img-back" 
         src="{{ product.images[1] | image_url }}" 
         width="120" 
@@ -22,7 +22,7 @@
       />
     </div>
     <img 
-      class="product-img" 
+      class="product-img__collection" 
       name="img-front" 
       src="{{ product.images[0] | image_url }}" 
       width="120"
@@ -30,7 +30,7 @@
       alt="{{ product.images[0].alt}}" 
     />
   {% endif %}
-  <h3 class="product-name bold">{{ product.title }}</h3>
-  <p class="product-price">{{ product.price | money }}</p>
-  <a class="product-link" href="{{ product.url }}"></a>
+  <h3 class="product-name__collection bold">{{ product.title }}</h3>
+  <p class="product-price__collection">{{ product.price | money }}</p>
+  <a class="product-link__collection" href="{{ product.url }}"></a>
 </li>

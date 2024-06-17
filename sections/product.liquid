@@ -5,12 +5,12 @@
 {% assign product_item = product.selected_or_first_available_variant %}
 
 <!-- SECTION PRODUCT ITEM -->
-<div class="section-product-item">
+<div class="section__product">
   <div class="container grid grid-2-col">
-    <div class="product-item-gallery">
+    <div class="product-gallery__product">
       {% for media in product.media %}
         <img 
-          class="product-item-img" 
+          class="product-img__product" 
           src="{{ media | image_url }}" 
           alt="{{ media.alt }}" 
           width="auto" 
@@ -18,16 +18,16 @@
         />
       {% endfor %}
     </div>
-    <div class="product-item-description">
-      {% form 'product', product, id: 'form-product', class: 'form_product':, novalidate: 'novalidate' %}
+    <div class="product-description__product">
+      {% form 'product', product, id: 'form-product', class: 'form__product':, novalidate: 'novalidate' %}
         <input type="hidden" name="id" value="{{ product_item.id }}">
         <h1 class="heading-product-item">{{ product.title }}</h1>
-        <div class="product-item-price-container">
+        <div class="product-price-container__product">
           {% if product_item.price < product_item.compare_at_price %}
-            <p class="product-item-price__sale">{{ product_item.compare_at_price | money }}</p>
-            <p class="product-item-price">{{ product_item.price | money }}</p>
+            <p class="product-price__product--sale">{{ product_item.compare_at_price | money }}</p>
+            <p class="product-price__product">{{ product_item.price | money }}</p>
           {% else %}
-            <p class="product-item-price">{{ product_item.price | money }}</p>
+            <p class="product-price__product">{{ product_item.price | money }}</p>
           {% endif %}
         </div>
 
@@ -80,7 +80,7 @@
         {% endunless %}
 
         <!-- INPUT QUANTITY -->
-        <div class="input-container_product-item">
+        <div class="input-container__product">
           <label class="label" for="quantity-{{ section.id }}">Quantity</label>
           <input 
               type="number" 
@@ -92,7 +92,7 @@
         </div>
           
          <!-- ADD TO CART BUTTON -->
-          <div class="btn-container_product-item">
+          <div class="btn-container__product">
             <button class="btn btn_main" type="submit" name="add">Add to cart</button>
           </div>
       {% endform %}
