@@ -158,8 +158,8 @@
         .then(res => res.text())
         .then(resText => {
           const html = new DOMParser().parseFromString(resText, 'text/html');
-          const oldPrice =  document.querySelector('.product-item-price-container');
-          const newPrice =  html.querySelector('.product-item-price-container');
+          const oldPrice =  document.querySelector('.product-price-container__product');
+          const newPrice =  html.querySelector('.product-price-container__product');
 
           if (oldPrice && newPrice) oldPrice.innerHTML = newPrice.innerHTML;
         })

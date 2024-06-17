@@ -19,7 +19,7 @@
 
 html {
   font-size: 62.5%;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 body {
@@ -29,7 +29,7 @@ body {
   font-size: 1.6rem;
   font-weight: 400;
   letter-spacing: 0.04rem;
-  /* overflow-x: hidden; */
+  overflow-x: clip;
 }
 
 a {
