@@ -32,7 +32,7 @@
       <p class="product-price__cart">
         {{ item.price | money }}
       </p>
-      <div class="input-container__cart--sm">
+      {% comment %} <div class="input-container__cart--sm">
         <input 
           class="input-quantity__cart"
           type="number" 
@@ -44,7 +44,7 @@
         <a class="btn-trash" href="{{ item.url_to_remove }}">
           {% render 'icon-trash' %}
         </a>
-      </div>
+      </div> {% endcomment %}
     </div>
   </td>
 
@@ -57,7 +57,6 @@
         name="updates[]"
         value="{{ item.quantity }}"
         min="1" 
-        max="{{ item.variant.inventory_quantity }}"
       />
       <a class="btn-trash" href="{{ item.url_to_remove }}">
         {% render 'icon-trash' %}

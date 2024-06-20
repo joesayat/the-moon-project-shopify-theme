@@ -19,7 +19,7 @@
       {% endfor %}
     </div>
     <div class="product-description__product">
-      {% form 'product', product, id: 'form-product', class: 'form__product':, novalidate: 'novalidate' %}
+      {% form 'product', product, id: 'form-product', class: 'form__product' %}
         <input type="hidden" name="id" value="{{ product_item.id }}">
         <h1 class="heading-product-item">{{ product.title }}</h1>
         <div class="product-price-container__product">
@@ -89,7 +89,22 @@
               value="1" 
               min="1"
           />
-        </div>
+        </div> 
+
+        {% comment %} <div>
+          <quantity-input>
+            <button class="minus">minus</button>
+            <input 
+              type="number"
+              name="quantity" 
+              id="quantity-{{ section.id }}" 
+              value="1"
+              min="1"
+            >
+            <button class="plus">plus</button>
+            <div class="validation">text</div>
+          </quantity-input>
+        </div> {% endcomment %}
           
          <!-- ADD TO CART BUTTON -->
           <div class="btn-container__product">
@@ -101,6 +116,43 @@
 </div>
 
 <script>
+  class QuantityInput extends HTMLElement {
+    constructor() {
+      super();
+
+      this.input = this.querySelector('input[type="number"]');
+      this.addEventListener('click', this.onClick);
+    }
+
+    onClick(e) {
+      e.preventDefault();
+
+      const btns = [...this.querySelectorAll('button')];
+
+      if (!btns.includes(e.target)) return;
+
+      this.handleCalculation(e.target);
+    }
+
+    handleCalculation(btn) {
+      btn.className === 'plus' 
+        ? this.handleIncrement() 
+        : this.handleDecrement();
+    }
+
+    handleDecrement() {
+      if (Number(this.input.value) === 1) return;
+
+      this.input.value--;
+    }
+
+    handleIncrement() {
+      this.input.value++;
+    }
+  }
+
+  customElements.define('quantity-input', QuantityInput);
+
   class VariantSelector extends HTMLElement {
       constructor() {
         super();
@@ -120,9 +172,10 @@
       }
 
       getOptionValue() {
-        const radioGroup = this.querySelectorAll('[type="radio"]');
+        const radioGroup = [...this.querySelectorAll('[type="radio"]')];
 
-        return Array.from(radioGroup, input => input.checked ? input.value : null)
+        return radioGroup
+          .map(input => input.checked ? input.value : null)
           .filter(value => value !== null)
           .join();
       }
