@@ -3,6 +3,13 @@
 
 <!-- VARIABLES -->
 {% assign product_item = product.selected_or_first_available_variant %}
+{% assign cart_count_for_variant = cart | item_count_for_variant: product_item.id %}
+{% assign max_quantity = product_item.inventory_quantity | minus: cart_count_for_variant %}
+
+<!-- Checks if max_quantity is equal 0 -->
+{% if max_quantity == 0 %}
+  {% assign max_quantity = 1 %}
+{% endif %}
 
 <!-- SECTION PRODUCT ITEM -->
 <div class="section__product">
@@ -19,152 +26,169 @@
       {% endfor %}
     </div>
     <div class="product-description__product">
-      {% form 'product', product, id: 'form-product', class: 'form__product':, novalidate: 'novalidate' %}
-        <input type="hidden" name="id" value="{{ product_item.id }}">
-        <h1 class="heading-product-item">{{ product.title }}</h1>
-        <div class="product-price-container__product">
-          {% if product_item.price < product_item.compare_at_price %}
-            <p class="product-price__product--sale">{{ product_item.compare_at_price | money }}</p>
-            <p class="product-price__product">{{ product_item.price | money }}</p>
+      <h2>{{ product.title }}</h2>
+      <div class="price-container">
+        <p>{{ product_item.compare_at_price | money }}</p>
+        <p>{{ product_item.price | money }}</p>
+      </div>
+      
+      {% form 'product', product %}
+        <label for="size">Size</label>
+        <select id="size" name="id" data-url="{{ product.url }}" data-section="{{ section.id }}">
+          {% for variant in product.variants %}
+            <option 
+              value="{{ variant.id }}"
+              {% if product_item.id == variant.id %}
+                selected
+              {% endif %}
+            >
+              {{ variant.title }}
+            </option>
+          {% endfor %}
+        </select>
+
+        <div class="quantity-input">
+          <label for="quantity">Quantiy</label>
+          <button name="decrement">minus</button>
+          <input 
+            type="number" 
+            id="quantity"
+            name="quantity"
+            value="1"
+            min="1"
+            max="{{ max_quantity }}"
+            readonly
+          />
+          <button name="increment">plus</button>
+        </div>
+
+        <div class="btn-container">
+          {% if product_item.inventory_quantity == 0 %}
+            <button type="submit" disabled>Sold out</button>
           {% else %}
-            <p class="product-price__product">{{ product_item.price | money }}</p>
+            <button type="submit">Add to cart</button>
           {% endif %}
         </div>
-
-        <!-- SIZE SELECTOR -->
-        {% unless product.has_only_default_variant %}
-          <variant-selector 
-            class="variant-selector" 
-            data-url="{{ product.url }}" 
-            data-section="{{ section.id }}"
-          >
-            {% for option in product.options_with_values %}
-              <label class="label" for="option-{{ section.id }}-{{ forloop.index0 }}">{{ option.name }}</label>
-              <div>
-                <!-- RADIO GROUP -->
-                {% for value in option.values %}
-                  <input 
-                    class="input_radio"
-                    type="radio" 
-                    name="option[{{ option.name }}]"
-                    id="{{ value }}"
-                    value="{{ value }}"
-                  {% if option.selected_value == value %}
-                    checked
-                  {% endif %}
-                  />
-                  <label class="input-label_radio" for="{{ value }}">{{ value }}</label>
-                {% endfor %}
-              </div>
-
-              <script type="application/json">
-                {{ product.variants | json }}
-              </script>
-            {% endfor %}
-          </variant-selector>
-        {% else %}
-          <div class="variant-selector">
-            <label class="label" for="option-{{ section.id }}">Size</label>
-            <div>
-              <input 
-                class="input_radio"
-                type="radio" 
-                name="option"
-                id="Free size"
-                value="Free size"
-                checked
-              />
-              <label class="input-label_radio" for="Free size">Free size</label>
-            </div>
-          </div>
-        {% endunless %}
-
-        <!-- INPUT QUANTITY -->
-        <div class="input-container__product">
-          <label class="label" for="quantity-{{ section.id }}">Quantity</label>
-          <input 
-              type="number" 
-              name="quantity" 
-              id="quantity-{{ section.id }}" 
-              value="1" 
-              min="1"
-          />
-        </div>
-          
-         <!-- ADD TO CART BUTTON -->
-          <div class="btn-container__product">
-            <button class="btn btn_main" type="submit" name="add">Add to cart</button>
-          </div>
       {% endform %}
     </div>
   </div>
 </div>
 
 <script>
-  class VariantSelector extends HTMLElement {
-      constructor() {
-        super();
+  const addToCart = document.querySelector('form[action="/cart/add"]');
 
-        this.addEventListener('change', this.onVariantChange)
+  addToCart.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const id = document.querySelector('select[name="id"]').value;
+    const quantity = Number(document.querySelector('input[name="quantity"]').value);
+
+    const formData = {
+      'items': [{
+        id,
+        quantity
+      }]
+    }
+
+    // add to cart
+    const res = await fetch('/cart/add.js', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+    const data = await res.json();
+    const errorMessage = document.querySelector('.error-message');
+
+    // Error
+    if (res.status === 422 && !errorMessage) {
+      // Render error message
+      const btnContainer = document.querySelector('.btn-container');
+      const html = `
+        <div class="error-message">${data.description}</div>
+      `;
+
+      btnContainer.insertAdjacentHTML('beforeend', html);
+    } 
+    
+    // Success
+    if (res.status === 200) {
+      // Update quantity input and render success message
+      // const variant = document.querySelector('select[name="id"]');
+      // const res = await fetch(`${variant.dataset.url}?variant=${variant.value}&section_id=${variant.dataset.section}`);
+      // const data = await res.text();
+      // const html = new DOMParser().parseFromString(data, 'text/html');
+      
+      // const oldQuantity = document.querySelector('.quantity-input');
+      // const newQuantity = html.querySelector('.quantity-input');
+  
+      // if (!document.isEqualNode(html)) {
+      //   oldQuantity.innerHTML = newQuantity.innerHTML;
+      // };
+
+      // const btnContainer = document.querySelector('.btn-container');
+      // const htmlMessage = `
+      //   <div class="success-message">Added to cart!</div>
+      // `;
+
+      // btnContainer.insertAdjacentHTML('beforeend', htmlMessage);
+
+      // Redirect to cart
+      window.location.href = '/cart'
+    }
+
+  })
+
+  const variant = document.querySelector('select[name="id"]');
+
+  variant.addEventListener('change', async e => {
+    // Update Url
+    window.history.replaceState({}, "", `${e.target.dataset.url}?variant=${e.target.value}`);
+
+    // Update quantity input and button container
+    const res = await fetch(`${e.target.dataset.url}?variant=${e.target.value}&section_id=${e.target.dataset.section}`);
+    const data = await res.text();
+    const html = new DOMParser().parseFromString(data, 'text/html');
+    
+    const oldQuantity = document.querySelector('.quantity-input');
+    const newQuantity = html.querySelector('.quantity-input');
+
+    const oldBtn = document.querySelector('.btn-container');
+    const newBtn = html.querySelector('.btn-container');
+
+    if (!document.isEqualNode(html)) {
+      oldQuantity.innerHTML = newQuantity.innerHTML;
+      oldBtn.innerHTML = newBtn.innerHTML;
+    };
+  })
+
+  const quantiyInput = document.querySelector('.quantity-input');
+
+  quantiyInput.addEventListener('click', async e => {
+    e.preventDefault();
+
+    const btn = e.target.closest('button');
+
+    if (!btn) return;
+
+    // Resmoves success message
+    const successMsg = document.querySelector('.success-message');
+    successMsg?.remove()
+
+    const input  = document.querySelector('input[name="quantity"]');
+    const quantity = Number(input.value);
+    const max = Number(input.max);
+    const min = Number(input.min);
+    
+    if (btn.name === 'increment') {
+      if (quantity < max) {
+        input.value++;
+      } 
+    } else {
+      if (quantity > min) {
+        input.value--;
       }
-
-      onVariantChange() {
-        this.getSelectedOption();
-        this.getSelectedVariant();
-
-        if (this.currentVariant) {
-          this.updateUrl();
-          this.updateFormId();
-          this.updatePrice();
-        }
-      }
-
-      getOptionValue() {
-        const radioGroup = this.querySelectorAll('[type="radio"]');
-
-        return Array.from(radioGroup, input => input.checked ? input.value : null)
-          .filter(value => value !== null)
-          .join();
-      }
-
-      getSelectedOption() {
-        this.option = this.getOptionValue();
-      }
-
-      getVariantJSON() {
-        const json = this.querySelector('[type="application/json"]');
-
-        this.variantData = this.variantData || JSON.parse(json.textContent);
-        return this.variantData.find(variant => variant.title === this.option);
-      }
-
-      getSelectedVariant() {
-        this.currentVariant = this.getVariantJSON();
-      }
-
-      updateUrl() {
-        window.history.replaceState({}, "", `${this.dataset.url}?variant=${this.currentVariant.id}`);
-      }
-
-      updateFormId() {
-        const form = document.querySelector('#form-product');
-        const input = form.querySelector('input[name="id"]');
-
-        input.value = this.currentVariant.id;
-      }
-
-      updatePrice(){
-        fetch(`${this.dataset.url}?variant=${this.currentVariant.id}&section_id=${this.dataset.section}`)
-        .then(res => res.text())
-        .then(resText => {
-          const html = new DOMParser().parseFromString(resText, 'text/html');
-          const oldPrice =  document.querySelector('.product-price-container__product');
-          const newPrice =  html.querySelector('.product-price-container__product');
-
-          if (oldPrice && newPrice) oldPrice.innerHTML = newPrice.innerHTML;
-        })
-      }
-  }
-
-  customElements.define('variant-selector', VariantSelector);
+    }
+  })
 </script>
