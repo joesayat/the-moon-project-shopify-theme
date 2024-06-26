@@ -2,28 +2,27 @@
 {{ 'collection.css' | asset_url | stylesheet_tag }}
 
 <!-- VARIABLES -->
-{% assign products_size = collections['frontpage'].products | size %}
+{% assign products_size = collections.frontpage.products | size %}
 
 <!-- SECTION SHOP -->
 {% if products_size > 0 %}
   <section class="section__collection">
     <div class="container">
-
       <!-- PRODUCT GRID -->
-      {% paginate collections['frontpage'].products by section.settings.product_count %}
+      {% paginate collections.frontpage.products by section.settings.product_count %}
         <div class="product-grid">
           <ul class="product-list__collection grid grid-{{section.settings.column_count}}-col">
-
             <!-- PRODUCT CARD -->
-          {% for product in collections['frontpage'].products %}
-            {% render 'product-card', product: product %}
-          {% endfor %}
+            {% for product in collections.frontpage.products %}
+              {% render 'product-card', product: product %}
+            {% endfor %}
           </ul>
         </div>
 
         {% render 'pagination', pagination: paginate %}
-      {% endpaginate %} 
+      {% endpaginate %}
     </div>
+    ƒ
   </section>
 {% else %}
   {% render 'error-no-products' %}
@@ -34,24 +33,24 @@
 {
   "name": "Shop Grid",
   "settings": [
-      {
-        "type": "range",
-        "id": "product_count",
-        "min": 3,
-        "max": 10,
-        "step": 1,
-        "default": 6,
-        "label": "Product Count"
-      },
-      {
-        "type": "range",
-        "id": "column_count",
-        "min": 3,
-        "max": 5,
-        "step": 1,
-        "default": 3,
-        "label": "Column Count"
-      }
-    ]
+    {
+      "type": "range",
+      "id": "product_count",
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "default": 6,
+      "label": "Product Count"
+    },
+    {
+      "type": "range",
+      "id": "column_count",
+      "min": 3,
+      "max": 5,
+      "step": 1,
+      "default": 3,
+      "label": "Column Count"
+    }
+  ]
 }
 {% endschema %}
