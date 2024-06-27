@@ -82,7 +82,12 @@
 
           <div class="cta-container__product">
             <!-- INPUT QUANTITY -->
-            <quantity-input class="quantity-input">
+            <quantity-input
+              class="quantity-input"
+              data-value="1"
+              data-min="1"
+              data-max="{{ max_quantity }}"
+            >
               <button name="decrement">
                 {% render 'icon-minus' %}
               </button>
@@ -90,9 +95,6 @@
                 class="input_number"
                 type="number"
                 name="quantity"
-                value="1"
-                min="1"
-                max="{{ max_quantity }}"
                 readonly
               >
               <button name="increment">
@@ -111,7 +113,7 @@
               </button>
             {% else %}
               <button
-                class="btn btn_main"
+                class="btn btn_outline"
                 type="submit"
                 name="add"
               >
@@ -121,6 +123,13 @@
           </div>
         {% endform %}
       </cart-form>
+      <button
+        class="btn btn_main"
+        type="submit"
+        name="checkout"
+      >
+        Buy now
+      </button>
     </div>
   </div>
 </div>
@@ -137,6 +146,7 @@
       e.preventDefault();
 
       this.getFormData();
+      this.removeErrorMsg();
       this.fetchCartAdd();
     }
 
@@ -156,17 +166,12 @@
       return this.formData;
     }
 
-    renderError(errMsg) {
-      const errorMessage = this.querySelector('.error-message');
+    removeErrorMsg() {
+      const errorMsg = this.querySelector('.error-message');
 
-      if (errorMessage) return;
+      if (!errorMsg) return;
 
-      const btnContainer = this.querySelector('.cta-container__product');
-      const html = `
-        <div class="error-message">${errMsg}</div>
-      `;
-
-      btnContainer.insertAdjacentHTML('afterend', html);
+      errorMsg.remove();
     }
 
     async fetchCartAdd() {
@@ -184,7 +189,7 @@
 
         window.location.href = '/cart';
       } catch (err) {
-        this.renderError(err);
+        this.renderErrorMsg(err);
       }
 
       // Update quantity input and render success message
@@ -204,6 +209,17 @@
         <div class="success-message">Added to cart!</div>
       `;
       btnContainer.insertAdjacentHTML('beforeend', htmlMessage); {% endcomment %}
+    }
+
+    renderErrorMsg(err) {
+      const btnContainer = this.querySelector('.cta-container__product');
+      const html = `
+        <div class="error-message">
+          {% render 'icon-error-alert' %} ${err.message}
+        </div>
+      `;
+
+      btnContainer.insertAdjacentHTML('afterbegin', html);
     }
   }
 
@@ -274,22 +290,40 @@
   customElements.define('variant-selector', VariantSelector);
 
   class QuantityInput extends HTMLElement {
+    static observedAttributes = ["data-value"];
+
     constructor() {
       super();
 
+      this.btnAdd = this.querySelector('[name="increment"]');
+      this.btnMinus = this.querySelector('[name="decrement"]');
       this.input = this.querySelector('input[name="quantity"]');
-      this.setValues();
+      this.setInputValues();
       this.addEventListener('click', this.onBtnClick);
     }
 
-    setValues() {
-      this.quantity = Number(this.input.value);
-      this.max = Number(this.input.max);
-      this.min = Number(this.input.min);
+    attributeChangedCallback(name, oldVal, newVal) {
+      if (name === 'data-value') {
+        if (newVal >= this.input.max) {
+          this.setDisabled(this.btnAdd);
+        }
+        
+        if (newVal <= this.input.min) {
+          this.setDisabled(this.btnMinus);
+        }
+      }
     }
 
     getQuantity() {
-      return this.quantity;
+      return this.dataset.value;
+    }
+
+    setInputValues() {
+      const { value, max, min } = this.dataset;
+
+      this.input.value = Number(value);
+      this.input.max = Number(max);
+      this.input.min = Number(min);
     }
 
     onBtnClick(e) {
@@ -299,22 +333,35 @@
       this.handleCalculation();
     }
 
-    handleCalculation(btn) {
+    handleCalculation() {
       if (!this.btn) return;
 
-      this.btn.name === 'increment' ? this.handleIncrementValue() : this.handleDecrementValue();
+      const btns = [...this.querySelectorAll('button')];
+
+      btns.forEach(btn => this.removeDisabled(btn));
+      this.btn === this.btnAdd 
+        ? this.handleIncrementValue() 
+        : this.handleDecrementValue();
     }
 
     handleDecrementValue() {
-      if (this.quantity <= this.min) return;
+      if (this.input.value <= this.input.min) return;
 
-      this.input.value = --this.quantity;
+      this.dataset.value = --this.input.value;
+    }
+    
+    handleIncrementValue() {
+      if (this.input.value >= this.input.max) return;
+      
+      this.dataset.value = ++this.input.value;
     }
 
-    handleIncrementValue() {
-      if (this.quantity >= this.max) return;
+    setDisabled(el) {
+      el.setAttribute('disabled', '');
+    }
 
-      this.input.value = ++this.quantity;
+    removeDisabled(el) {
+      el.removeAttribute('disabled');
     }
   }
 

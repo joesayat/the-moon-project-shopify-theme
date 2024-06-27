@@ -54,18 +54,19 @@
   display: inline-block;
 }
 
-.quantity-input {
-  padding: 0 1.6rem;
-  display: flex;
-  gap: 1.2rem;
-  border: 1px solid var(--black);
-}
-
 .cta-container__product {
+  margin: 2.8rem 0 1.4rem;
   display: grid;
   grid-template-columns: 1fr 3fr;
   gap: 1.6rem;
-  margin-top: 2.8rem;
+}
+
+.error-message {
+  grid-column: 1 / -1;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
 /*******************************/
