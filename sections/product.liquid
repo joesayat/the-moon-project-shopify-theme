@@ -3,168 +3,367 @@
 
 <!-- VARIABLES -->
 {% assign product_item = product.selected_or_first_available_variant %}
+{% assign cart_count_for_variant = cart | item_count_for_variant: product_item.id %}
+{% assign max_quantity = product_item.inventory_quantity | minus: cart_count_for_variant %}
+
+<!-- Checks if max_quantity is equal 0 -->
+{% if max_quantity == 0 %}
+  {% assign max_quantity = 1 %}
+{% endif %}
 
 <!-- SECTION PRODUCT ITEM -->
 <div class="section__product">
   <div class="container grid grid-2-col">
     <div class="product-gallery__product">
       {% for media in product.media %}
-        <img 
-          class="product-img__product" 
-          src="{{ media | image_url }}" 
-          alt="{{ media.alt }}" 
-          width="auto" 
+        <img
+          class="product-img__product"
+          src="{{ media | image_url }}"
+          alt="{{ media.alt }}"
+          width="auto"
           height="auto"
-        />
+        >
       {% endfor %}
     </div>
     <div class="product-description__product">
-      {% form 'product', product, id: 'form-product', class: 'form__product':, novalidate: 'novalidate' %}
-        <input type="hidden" name="id" value="{{ product_item.id }}">
-        <h1 class="heading-product-item">{{ product.title }}</h1>
-        <div class="product-price-container__product">
-          {% if product_item.price < product_item.compare_at_price %}
-            <p class="product-price__product--sale">{{ product_item.compare_at_price | money }}</p>
-            <p class="product-price__product">{{ product_item.price | money }}</p>
-          {% else %}
-            <p class="product-price__product">{{ product_item.price | money }}</p>
-          {% endif %}
-        </div>
+      <h1 class="heading-product-item">{{ product.title }}</h1>
+      <div class="product-price-container__product">
+        {% if product_item.price < product_item.compare_at_price %}
+          <p class="product-price__product--sale">{{ product_item.compare_at_price | money }}</p>
+          <p class="product-price__product">{{ product_item.price | money }}</p>
+        {% else %}
+          <p class="product-price__product">{{ product_item.price | money }}</p>
+        {% endif %}
+      </div>
 
-        <!-- SIZE SELECTOR -->
-        {% unless product.has_only_default_variant %}
-          <variant-selector 
-            class="variant-selector" 
-            data-url="{{ product.url }}" 
-            data-section="{{ section.id }}"
-          >
-            {% for option in product.options_with_values %}
-              <label class="label" for="option-{{ section.id }}-{{ forloop.index0 }}">{{ option.name }}</label>
+      <!-- SIZE SELECTOR -->
+      <cart-form>
+        {% form 'product', product, id: 'form-product', class: 'form__product' %}
+          {% unless product.has_only_default_variant %}
+            <variant-selector
+              class="variant-selector"
+              data-url="{{ product.url }}"
+              data-section="{{ section.id }}"
+            >
+              <h3 class="label">Size</h3>
+              <!-- RADIO GROUP -->
               <div>
-                <!-- RADIO GROUP -->
-                {% for value in option.values %}
-                  <input 
+                {% for variant in product.variants %}
+                  <input
                     class="input_radio"
-                    type="radio" 
-                    name="option[{{ option.name }}]"
-                    id="{{ value }}"
-                    value="{{ value }}"
-                  {% if option.selected_value == value %}
-                    checked
-                  {% endif %}
-                  />
-                  <label class="input-label_radio" for="{{ value }}">{{ value }}</label>
+                    type="radio"
+                    name="option[Size]"
+                    id="{{ variant.title }}"
+                    value="{{ variant.id }}"
+                    {% if product_item.id == variant.id %}
+                      checked
+                    {% endif %}
+                  >
+                  <label class="input-label_radio" for="{{ variant.title  }}">{{ variant.title }}</label>
                 {% endfor %}
               </div>
+            </variant-selector>
+          {% else %}
+            <variant-selector class="variant-selector">
+              <h3 class="label">Size</h3>
+              <div>
+                <input
+                  class="input_radio"
+                  type="radio"
+                  name="option[Size]"
+                  id="Free size"
+                  value="{{ product_item.id }}"
+                  checked
+                >
+                <label class="input-label_radio" for="Free size">Free size</label>
+              </div>
+            </variant-selector>
+          {% endunless %}
 
-              <script type="application/json">
-                {{ product.variants | json }}
-              </script>
-            {% endfor %}
-          </variant-selector>
-        {% else %}
-          <div class="variant-selector">
-            <label class="label" for="option-{{ section.id }}">Size</label>
-            <div>
-              <input 
-                class="input_radio"
-                type="radio" 
-                name="option"
-                id="Free size"
-                value="Free size"
-                checked
-              />
-              <label class="input-label_radio" for="Free size">Free size</label>
-            </div>
-          </div>
-        {% endunless %}
+          <div class="cta-container__product">
+            <!-- INPUT QUANTITY -->
+            <quantity-input
+              class="quantity-input"
+              data-value="1"
+              data-min="1"
+              data-max="{{ max_quantity }}"
+            >
+              <button name="decrement">
+                {% render 'icon-minus' %}
+              </button>
+              <input
+                class="input_number"
+                type="number"
+                name="quantity"
+                readonly
+              >
+              <button name="increment">
+                {% render 'icon-plus' %}
+              </button>
+            </quantity-input>
 
-        <!-- INPUT QUANTITY -->
-        <div class="input-container__product">
-          <label class="label" for="quantity-{{ section.id }}">Quantity</label>
-          <input 
-              type="number" 
-              name="quantity" 
-              id="quantity-{{ section.id }}" 
-              value="1" 
-              min="1"
-          />
-        </div>
-          
-         <!-- ADD TO CART BUTTON -->
-          <div class="btn-container__product">
-            <button class="btn btn_main" type="submit" name="add">Add to cart</button>
+            <!-- ADD TO CART BUTTON -->
+            {% if product_item.inventory_quantity == 0 %}
+              <button
+                class="btn btn_main"
+                type="submit"
+                disabled
+              >
+                Sold out
+              </button>
+            {% else %}
+              <button
+                class="btn btn_outline"
+                type="submit"
+                name="add"
+              >
+                Add to cart
+              </button>
+            {% endif %}
           </div>
-      {% endform %}
+        {% endform %}
+      </cart-form>
+      <button
+        class="btn btn_main"
+        type="submit"
+        name="checkout"
+      >
+        Buy now
+      </button>
     </div>
   </div>
 </div>
 
 <script>
+  class CartForm extends HTMLElement {
+    constructor() {
+      super();
+
+      this.addEventListener('submit', this.onFormSubmit);
+    }
+
+    onFormSubmit(e) {
+      e.preventDefault();
+
+      this.getFormData();
+      this.removeErrorMsg();
+      this.fetchCartAdd();
+    }
+
+    getFormData() {
+      const id = this.querySelector('variant-selector').getVariantId();
+      const quantity = this.querySelector('quantity-input').getQuantity();
+
+      this.formData = {
+        items: [
+          {
+            id,
+            quantity,
+          },
+        ],
+      };
+
+      return this.formData;
+    }
+
+    removeErrorMsg() {
+      const errorMsg = this.querySelector('.error-message');
+
+      if (!errorMsg) return;
+
+      errorMsg.remove();
+    }
+
+    async fetchCartAdd() {
+      try {
+        const res = await fetch('/cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(this.formData),
+        });
+        const data = await res.json();
+
+        if (res.status === 422) throw new Error(data.description);
+
+        window.location.href = '/cart';
+      } catch (err) {
+        this.renderErrorMsg(err);
+      }
+
+      // Update quantity input and render success message
+      {% comment %} const variant = document.querySelector('select[name="id"]');
+      const res = await fetch(`${variant.dataset.url}?variant=${variant.value}&section_id=${variant.dataset.section}`);
+      const data = await res.text();
+      const html = new DOMParser().parseFromString(data, 'text/html');
+
+      const oldQuantity = document.querySelector('.quantity-input');
+      const newQuantity = html.querySelector('.quantity-input');
+
+      if (!document.isEqualNode(html)) {
+        oldQuantity.innerHTML = newQuantity.innerHTML;
+      }
+      const btnContainer = document.querySelector('.btn-container');
+      const htmlMessage = `
+        <div class="success-message">Added to cart!</div>
+      `;
+      btnContainer.insertAdjacentHTML('beforeend', htmlMessage); {% endcomment %}
+    }
+
+    renderErrorMsg(err) {
+      const btnContainer = this.querySelector('.cta-container__product');
+      const html = `
+        <div class="error-message">
+          {% render 'icon-error-alert' %} ${err.message}
+        </div>
+      `;
+
+      btnContainer.insertAdjacentHTML('afterbegin', html);
+    }
+  }
+
+  customElements.define('cart-form', CartForm);
+
   class VariantSelector extends HTMLElement {
-      constructor() {
-        super();
+    constructor() {
+      super();
 
-        this.addEventListener('change', this.onVariantChange)
-      }
+      this.optionSizes = [...this.querySelectorAll('[name="option[Size]"]')];
+      this.addEventListener('change', this.onVariantChange);
+    }
 
-      onVariantChange() {
-        this.getSelectedOption();
-        this.getSelectedVariant();
+    onVariantChange(e) {
+      this.getVariantId();
+      this.getRequestUrl();
+      this.setUrl();
+      this.fetchHtml();
+    }
 
-        if (this.currentVariant) {
-          this.updateUrl();
-          this.updateFormId();
-          this.updatePrice();
-        }
-      }
+    getVariantId() {
+      this.variantId = this.optionSizes
+        .map((input) => (input.checked ? input.value : null))
+        .filter((value) => value !== null)
+        .join();
 
-      getOptionValue() {
-        const radioGroup = this.querySelectorAll('[type="radio"]');
+      return this.variantId;
+    }
 
-        return Array.from(radioGroup, input => input.checked ? input.value : null)
-          .filter(value => value !== null)
-          .join();
-      }
+    getRequestUrl() {
+      if (!this.variantId) return;
 
-      getSelectedOption() {
-        this.option = this.getOptionValue();
-      }
+      this.requestUrl = `${this.dataset.url}?variant=${this.variantId}`;
 
-      getVariantJSON() {
-        const json = this.querySelector('[type="application/json"]');
+      return this.requestUrl;
+    }
 
-        this.variantData = this.variantData || JSON.parse(json.textContent);
-        return this.variantData.find(variant => variant.title === this.option);
-      }
+    setUrl() {
+      if (!this.requestUrl) return;
 
-      getSelectedVariant() {
-        this.currentVariant = this.getVariantJSON();
-      }
+      window.history.replaceState({}, '', `${this.requestUrl}`);
+    }
 
-      updateUrl() {
-        window.history.replaceState({}, "", `${this.dataset.url}?variant=${this.currentVariant.id}`);
-      }
+    async fetchHtml() {
+      if (!this.requestUrl) return;
 
-      updateFormId() {
-        const form = document.querySelector('#form-product');
-        const input = form.querySelector('input[name="id"]');
+      const res = await fetch(`${this.requestUrl}&section_id=${this.dataset.section}`);
+      const data = await res.text();
+      const html = new DOMParser().parseFromString(data, 'text/html');
 
-        input.value = this.currentVariant.id;
-      }
+      this.renderHtml(html);
+    }
 
-      updatePrice(){
-        fetch(`${this.dataset.url}?variant=${this.currentVariant.id}&section_id=${this.dataset.section}`)
-        .then(res => res.text())
-        .then(resText => {
-          const html = new DOMParser().parseFromString(resText, 'text/html');
-          const oldPrice =  document.querySelector('.product-price-container__product');
-          const newPrice =  html.querySelector('.product-price-container__product');
+    renderHtml(resHtml) {
+      const newHtml = this.formQuerySelector(resHtml);
+      const oldHtml = this.formQuerySelector(document);
 
-          if (oldPrice && newPrice) oldPrice.innerHTML = newPrice.innerHTML;
-        })
-      }
+      if (oldHtml.isEqualNode(newHtml)) return;
+
+      oldHtml.innerHTML = newHtml.innerHTML;
+    }
+
+    formQuerySelector(el) {
+      return el.querySelector('form[action="/cart/add"]');
+    }
   }
 
   customElements.define('variant-selector', VariantSelector);
+
+  class QuantityInput extends HTMLElement {
+    static observedAttributes = ["data-value"];
+
+    constructor() {
+      super();
+
+      this.btnAdd = this.querySelector('[name="increment"]');
+      this.btnMinus = this.querySelector('[name="decrement"]');
+      this.input = this.querySelector('input[name="quantity"]');
+      this.setInputValues();
+      this.addEventListener('click', this.onBtnClick);
+    }
+
+    attributeChangedCallback(name, oldVal, newVal) {
+      if (name === 'data-value') {
+        if (newVal >= this.input.max) {
+          this.setDisabled(this.btnAdd);
+        }
+        
+        if (newVal <= this.input.min) {
+          this.setDisabled(this.btnMinus);
+        }
+      }
+    }
+
+    getQuantity() {
+      return this.dataset.value;
+    }
+
+    setInputValues() {
+      const { value, max, min } = this.dataset;
+
+      this.input.value = Number(value);
+      this.input.max = Number(max);
+      this.input.min = Number(min);
+    }
+
+    onBtnClick(e) {
+      e.preventDefault();
+      this.btn = e.target.closest('button');
+
+      this.handleCalculation();
+    }
+
+    handleCalculation() {
+      if (!this.btn) return;
+
+      const btns = [...this.querySelectorAll('button')];
+
+      btns.forEach(btn => this.removeDisabled(btn));
+      this.btn === this.btnAdd 
+        ? this.handleIncrementValue() 
+        : this.handleDecrementValue();
+    }
+
+    handleDecrementValue() {
+      if (this.input.value <= this.input.min) return;
+
+      this.dataset.value = --this.input.value;
+    }
+    
+    handleIncrementValue() {
+      if (this.input.value >= this.input.max) return;
+      
+      this.dataset.value = ++this.input.value;
+    }
+
+    setDisabled(el) {
+      el.setAttribute('disabled', '');
+    }
+
+    removeDisabled(el) {
+      el.removeAttribute('disabled');
+    }
+  }
+
+  customElements.define('quantity-input', QuantityInput);
 </script>

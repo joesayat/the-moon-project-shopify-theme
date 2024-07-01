@@ -1,46 +1,46 @@
 <!-- CART TABLE ROW -->
 <tr class="tr-body">
-    <!-- CART PRODUCT -->
+  <!-- CART PRODUCT -->
   <td class="td product-data__cart">
-    <img 
-      class="product-img__cart" 
+    <img
+      class="product-img__cart"
       src="{{ item.image | image_url }}"
-      alt="{{ item.title }}" 
-      width="auto" 
-      height="auto" 
-    />
+      alt="{{ item.title }}"
+      width="auto"
+      height="auto"
+    >
     <div>
       <a class="product-title__cart link__cart--product-title" href="{{ item.url }}">
         {{ item.product.title }}
       </a>
       <p class="product-variant__cart">
-      {% case item.variant.title %}
-        {% when 'XS' %}
-          Size: Extra small
-        {% when 'S' %}
-          Size: Small
-        {% when 'M' %}
-          Size: Medium
-        {% when 'L' %}
-          Size: Large
-        {% when 'XL' %}
-          Size: Extra large
-        {% else %}
-          Size: Free size
-      {% endcase %}
+        {% case item.variant.title %}
+          {% when 'XS' %}
+            Size: Extra small
+          {% when 'S' %}
+            Size: Small
+          {% when 'M' %}
+            Size: Medium
+          {% when 'L' %}
+            Size: Large
+          {% when 'XL' %}
+            Size: Extra large
+          {% else %}
+            Size: Free size
+        {% endcase %}
       </p>
       <p class="product-price__cart">
         {{ item.price | money }}
       </p>
       <div class="input-container__cart--sm">
-        <input 
+        <input
           class="input-quantity__cart"
-          type="number" 
+          type="number"
           name="updates[]"
           value="{{ item.quantity }}"
-          min="1" 
+          min="1"
           max="{{ item.variant.inventory_quantity }}"
-        />
+        >
         <a class="btn-trash" href="{{ item.url_to_remove }}">
           {% render 'icon-trash' %}
         </a>
@@ -51,14 +51,14 @@
   <!-- CART INPUT QUANTITY -->
   <td class="td quantity-data__cart">
     <div class="input-container__cart">
-      <input 
+      <input
         class="input-quantity__cart"
-        type="number" 
+        type="number"
         name="updates[]"
         value="{{ item.quantity }}"
-        min="1" 
+        min="1"
         max="{{ item.variant.inventory_quantity }}"
-      />
+      >
       <a class="btn-trash" href="{{ item.url_to_remove }}">
         {% render 'icon-trash' %}
       </a>
@@ -69,6 +69,6 @@
   <td class="td total-data__cart">
     <p class="product-total__cart">
       {{ item.final_line_price | money }}
-    </p>  
+    </p>
   </td>
 </tr>
