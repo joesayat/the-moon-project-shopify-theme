@@ -10,23 +10,21 @@
         <h1 class="heading-2">Your cart</h1>
         <div class="cta-container--link">
           {% render 'icon-right-chevron' %}
-          <a class="link__cart--cta" href="{{ collections['frontpage'].url }}">
-            Continue shopping
-          </a>
+          <a class="link__cart--cta" href="{{ collections['frontpage'].url }}"> Continue shopping </a>
         </div>
       </div>
 
       <!-- CART FORM -->
       <div class="form-container__cart">
-        <form 
-          class="form__cart" 
-          action="{{ routes.cart_url }}" 
-          method="POST" 
+        <form
+          class="form__cart"
+          action="{{ routes.cart_url }}"
+          method="POST"
           novalidate
         >
-           <!-- CART TABLE -->
+          <!-- CART TABLE -->
           <table class="table__cart">
-             <!-- CART HEAD -->
+            <!-- CART HEAD -->
             <thead class="thead heading-table">
               <tr class="tr-head">
                 <th class="th product-heading__cart">Product</th>
@@ -37,7 +35,7 @@
             <!-- CART BODY -->
             <tbody class="tbody">
               {% for item in cart.items %}
-                {% render 'cart-table-row', item:item %}
+                {% render 'cart-table-row', item: item %}
               {% endfor %}
             </tbody>
           </table>
@@ -49,22 +47,22 @@
               <p class="subtotal__cart">Subtotal:</p>
               <p class="price__cart">{{ cart.total_price | money }}</p>
             </div>
-            
+
             <!-- CART BUTTONS -->
             <div class="cta-container__cart">
-              <button 
-                class="btn btn_outline" 
-                type="submit" 
-                name="update" 
+              <button
+                class="btn btn_outline"
+                type="submit"
+                name="update"
               >
                 Update
               </button>
               <div>
                 <div class="helper-text__cart">*Taxes and shipping calculated at checkout</div>
-                <button 
-                  class="btn btn_main" 
-                  type="submit" 
-                  name="checkout" 
+                <button
+                  class="btn btn_main"
+                  type="submit"
+                  name="checkout"
                 >
                   Checkout
                 </button>
@@ -75,7 +73,6 @@
       </div>
     </div>
   </section>
-  {% else %}
+{% else %}
   {% render 'error-empty-cart' %}
 {% endif %}
- 

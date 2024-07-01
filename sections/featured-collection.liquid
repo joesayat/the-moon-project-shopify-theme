@@ -8,7 +8,7 @@
       {% if section.settings.subtitle != blank %}
         <p class="subheading">{{ section.settings.subtitle }}</p>
       {% endif %}
-  
+
       {% if section.settings.title != blank %}
         <h2 class="heading-2">{{ section.settings.title }}</h2>
       {% endif %}
@@ -17,15 +17,15 @@
     <!-- PRODUCT GRID -->
     <div class="product-grid">
       <ul class="product-list__collection grid grid-{{section.settings.column_count}}-col">
-
         <!-- PRODUCT CARD -->
-      {% for product in section.settings.featured_collection.products limit:  section.settings.product_count %}
-        {% render 'product-card', product: product %}
-      {% endfor %}
+        {% for product in section.settings.featured_collection.products limit: section.settings.product_count %}
+          {% render 'product-card', product: product %}
+        {% endfor %}
       </ul>
     </div>
   </div>
 </section>
+{% ßç %}
 
 <!-- SCHEMA -->
 {% schema %}

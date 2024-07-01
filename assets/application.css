@@ -7,7 +7,9 @@
   --black: #212529;
   --gray: #f1f3f5;
   --gray-dark: #ced4da;
+  --gray-darkest: #adb5bd;
   --white: #f8f9fa;
+  --red: #e03131;
 }
 
 /* RESETS */
@@ -43,6 +45,16 @@ button {
   background: none;
   border: none;
   cursor: pointer;
+}
+
+button[disabled] {
+  cursor: not-allowed;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 img {
@@ -329,8 +341,14 @@ table {
   fill: var(--main-dark);
 }
 
+.icon-error-alert,
 .icon-trash {
-  fill: #ff0000;
+  fill: var(--red);
+}
+
+.icon-plus,
+.icon-minus {
+  fill: var(--gray-darkest);
 }
 
 /* BUTTON STYLES */
@@ -363,7 +381,15 @@ table {
   text-transform: uppercase;
 }
 
+.btn[disabled],
+.btn[disabled]:hover {
+  background-color: var(--white);
+  color: var(--gray-dark);
+  border: 2px solid var(--gray-dark);
+}
+
 .btn_main {
+  border: 2px solid var(--main);
   background-color: var(--main);
   color: var(--white);
   padding: 1.6rem 0;
@@ -371,6 +397,7 @@ table {
 }
 
 .btn_main:hover {
+  border: 2px solid var(--main-dark);
   background-color: var(--main-dark);
 }
 
@@ -407,6 +434,23 @@ table {
   border: 1px solid var(--gray-dark);
   padding: 1.2rem 2.4rem;
   cursor: pointer;
+}
+
+.quantity-input {
+  padding: 0 1.2rem;
+  display: flex;
+  gap: 1.2rem;
+  border: 1px solid var(--black);
+}
+
+.input_number {
+  width: 100%;
+  height: auto;
+  background-color: transparent;
+  border: none;
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-align: center;
 }
 
 /* SECTIONS */
