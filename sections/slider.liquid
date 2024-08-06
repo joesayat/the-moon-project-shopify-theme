@@ -1,0 +1,160 @@
+{{ 'slider.css' | asset_url | stylesheet_tag }}
+
+{% assign collection_1 = section.settings.collection_1 %}
+{% assign collection_1_img = collection_1.featured_image | image_url %}
+{% assign collection_2 = section.settings.collection_2 %}
+{% assign collection_2_img = collection_2.featured_image | image_url %}
+{% assign collection_3 = section.settings.collection_3 %}
+{% assign collection_3_img = collection_3.featured_image | image_url %}
+{% assign collection_4 = section.settings.collection_4 %}
+{% assign collection_4_img = collection_4.featured_image | image_url %}
+
+<style>
+  .slider-item[name='slider-left']:nth-child(1) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url({{'https:'|append:collection_1_img}});
+  }
+
+  .slider-item[name='slider-left']:nth-child(2) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url({{'https:'|append:collection_2_img}});
+  }
+
+  .slider-item[name='slider-right']:nth-child(1) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url({{'https:'|append:collection_3_img}});
+  }
+
+  .slider-item[name='slider-right']:nth-child(2) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 1)), url({{'https:'|append:collection_4_img}});
+  }
+</style>
+
+<section class="section-hero">
+  <div class="slider">
+    <ul class="slider-list">
+      <li class="slider-item" name="slider-left">
+        <p class="slider-title">{{ collection_1.title }}</p>
+        <a href="{{ collection_1.url }}" class="btn btn_black">Explore now</a>
+      </li>
+      <li class="slider-item" name="slider-left">
+        <p class="slider-title">{{ collection_2.title }}</p>
+        <a href="{{ collection_2.url }}" class="btn btn_black">Explore now</a>
+      </li>
+      <button class="btn-slider" name="btn-up">
+        {% render 'icon-spotify' %}
+      </button>
+    </ul>
+    <ul class="slider-list">
+      <li class="slider-item" name="slider-right">
+        <p class="slider-title">{{ collection_3.title }}</p>
+        <a href="{{ collection_3.url }}" class="btn btn_black">Explore now</a>
+      </li>
+      <li class="slider-item" name="slider-right">
+        <p class="slider-title">{{ collection_4.title }}</p>
+        <a href="{{ collection_4.url }}" class="btn btn_black">Explore now</a>
+      </li>
+      <button class="btn-slider" name="btn-down">
+        {% render 'icon-spotify' %}
+      </button>
+    </ul>
+  </div>
+</section>
+
+<script>
+  const btnDown = document.querySelector('.btn-slider[name="btn-down"]');
+  const btnUp = document.querySelector('.btn-slider[name="btn-up"]');
+  const slidesLeft = document.querySelectorAll('.slider-item[name="slider-left"]');
+  const slidesRight = document.querySelectorAll('.slider-item[name="slider-right"]');
+  const slideLeftLength = slidesLeft.length - 1;
+  const slideRightLength = slidesRight.length - 1;
+
+  let currLeftSlide = 0;
+  let currRightSlide = 1;
+  let timerInterval, timerTimeout;
+  const sliderTimer = {{ section.settings.slider_timer }}
+
+  function handleClick(e) {
+    if (!e.target.closest('.btn-slider')) return;
+
+    setCurrSlide();
+    renderSlide();
+    handleTimers();
+  }
+
+  function handleTimers() {
+    if (timerInterval) clearInterval(timerInterval);
+    if (timerTimeout) clearTimeout(timerTimeout);
+
+    timerTimeout = setTimeout(() => {
+      setAutoSlider();
+    }, sliderTimer * 1000);
+  }
+
+  function setAutoSlider() {
+    timerInterval = setInterval(() => {
+      setCurrSlide();
+      renderSlide();
+    }, sliderTimer * 1000);
+  }
+
+  function setCurrSlide() {
+    currLeftSlide === slideLeftLength ? (currLeftSlide = 0) : currLeftSlide++;
+    currRightSlide === slideRightLength ? currRightSlide-- : (currRightSlide = 1);
+  }
+
+  function setTranslateY(slides, currSlide) {
+    slides.forEach((slide, i) => {
+      slide.style.transform = `translateY(${100 * (i - currSlide)}%)`;
+    });
+  }
+
+  function renderSlide() {
+    setTranslateY(slidesLeft, currLeftSlide);
+    setTranslateY(slidesRight, currRightSlide);
+  }
+
+  function init() {
+    renderSlide();
+    setAutoSlider();
+  }
+
+  init();
+
+  btnUp.addEventListener('click', handleClick);
+  btnDown.addEventListener('click', handleClick);
+</script>
+
+{% schema %}
+{
+  "name": "Slider",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection_1",
+      "label": "Collection 1"
+    },
+    {
+      "type": "collection",
+      "id": "collection_2",
+      "label": "Collection 2"
+    },
+    {
+      "type": "collection",
+      "id": "collection_3",
+      "label": "Collection 3"
+    },
+    {
+      "type": "collection",
+      "id": "collection_4",
+      "label": "Collection 4"
+    },
+    {
+      "type": "range",
+      "id": "slider_timer",
+      "min": 5,
+      "max": 10,
+      "step": 1,
+      "default": 8,
+      "label": "Slider Timer"
+    }
+  ]
+}
+{% endschema %}

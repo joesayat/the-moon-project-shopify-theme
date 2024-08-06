@@ -1,5 +1,8 @@
 {
   "sections": {
+    "main": {
+      "type": "slider"
+    },
     "featured-collection": {
       "type": "featured-collection",
       "settings": {
@@ -11,7 +14,5 @@
       }
     }
   },
-  "order": [
-    "featured-collection"
-  ]
+  "order": ["main", "featured-collection"]
 }
