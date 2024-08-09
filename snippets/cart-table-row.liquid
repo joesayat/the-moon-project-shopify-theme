@@ -1,5 +1,8 @@
+<!-- SCRIPT -->
+{% comment %} <script src="{{ 'quantity-input.js' | asset_url }}" defer="defer"></script> {% endcomment %}
+
 <!-- CART TABLE ROW -->
-<tr class="tr-body">
+<tr class="tr-body product-cart-item" data-key="{{ item.key }}">
   <!-- CART PRODUCT -->
   <td class="td product-data__cart">
     <img
@@ -32,33 +35,46 @@
       <p class="product-price__cart">
         {{ item.price | money }}
       </p>
-      <div class="input-container__cart--sm">
-        <input
-          class="input-quantity__cart"
-          type="number"
-          name="updates[]"
-          value="{{ item.quantity }}"
-          min="1"
-          max="{{ item.variant.inventory_quantity }}"
-        >
-        <a class="btn-trash" href="{{ item.url_to_remove }}">
-          {% render 'icon-trash' %}
-        </a>
-      </div>
+      {% comment %}
+        <div class="input-container__cart--sm">
+          <input
+            class="input-quantity__cart"
+            type="number"
+            name="updates[]"
+            value="{{ item.quantity }}"
+            min="1"
+            max="{{ item.variant.inventory_quantity }}"
+          >
+          <a class="btn-trash" href="{{ item.url_to_remove }}">
+            {% render 'icon-trash' %}
+          </a>
+        </div>
+      {% endcomment %}
     </div>
   </td>
 
   <!-- CART INPUT QUANTITY -->
   <td class="td quantity-data__cart">
     <div class="input-container__cart">
-      <input
-        class="input-quantity__cart"
-        type="number"
-        name="updates[]"
-        value="{{ item.quantity }}"
-        min="1"
-        max="{{ item.variant.inventory_quantity }}"
+      <quantity-input
+        class="quantity-input"
+        data-value="{{ item.quantity }}"
+        data-min="1"
+        data-max="{{ item.variant.inventory_quantity}}"
       >
+        <button name="decrement">
+          {% render 'icon-minus' %}
+        </button>
+        <input
+          class="input_number"
+          type="number"
+          name="quantity"
+          readonly
+        >
+        <button name="increment">
+          {% render 'icon-plus' %}
+        </button>
+      </quantity-input>
       <a class="btn-trash" href="{{ item.url_to_remove }}">
         {% render 'icon-trash' %}
       </a>

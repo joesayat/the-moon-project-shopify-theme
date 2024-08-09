@@ -1,6 +1,11 @@
 <!-- CART STYLES -->
 {{ 'product.css' | asset_url | stylesheet_tag }}
 
+{% comment %}
+  <!-- SCRIPTS -->
+  <script src="{{ 'quantity-input.js' | asset_url }}" defer="defer"></script>
+{% endcomment %}
+
 <!-- VARIABLES -->
 {% assign product_item = product.selected_or_first_available_variant %}
 {% assign cart_count_for_variant = cart | item_count_for_variant: product_item.id %}
@@ -288,82 +293,4 @@
   }
 
   customElements.define('variant-selector', VariantSelector);
-
-  class QuantityInput extends HTMLElement {
-    static observedAttributes = ["data-value"];
-
-    constructor() {
-      super();
-
-      this.btnAdd = this.querySelector('[name="increment"]');
-      this.btnMinus = this.querySelector('[name="decrement"]');
-      this.input = this.querySelector('input[name="quantity"]');
-      this.setInputValues();
-      this.addEventListener('click', this.onBtnClick);
-    }
-
-    attributeChangedCallback(name, oldVal, newVal) {
-      if (name === 'data-value') {
-        if (newVal >= this.input.max) {
-          this.setDisabled(this.btnAdd);
-        }
-        
-        if (newVal <= this.input.min) {
-          this.setDisabled(this.btnMinus);
-        }
-      }
-    }
-
-    getQuantity() {
-      return this.dataset.value;
-    }
-
-    setInputValues() {
-      const { value, max, min } = this.dataset;
-
-      this.input.value = Number(value);
-      this.input.max = Number(max);
-      this.input.min = Number(min);
-    }
-
-    onBtnClick(e) {
-      e.preventDefault();
-      this.btn = e.target.closest('button');
-
-      this.handleCalculation();
-    }
-
-    handleCalculation() {
-      if (!this.btn) return;
-
-      const btns = [...this.querySelectorAll('button')];
-
-      btns.forEach(btn => this.removeDisabled(btn));
-      this.btn === this.btnAdd 
-        ? this.handleIncrementValue() 
-        : this.handleDecrementValue();
-    }
-
-    handleDecrementValue() {
-      if (this.input.value <= this.input.min) return;
-
-      this.dataset.value = --this.input.value;
-    }
-    
-    handleIncrementValue() {
-      if (this.input.value >= this.input.max) return;
-      
-      this.dataset.value = ++this.input.value;
-    }
-
-    setDisabled(el) {
-      el.setAttribute('disabled', '');
-    }
-
-    removeDisabled(el) {
-      el.removeAttribute('disabled');
-    }
-  }
-
-  customElements.define('quantity-input', QuantityInput);
 </script>
