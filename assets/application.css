@@ -502,3 +502,8 @@ table {
   background-color: var(--main);
   border: 2px solid var(--main);
 }
+
+/* BUTTON SLIDER */
+.btn-slider:hover {
+  transform: scale(1.1);
+}
