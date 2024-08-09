@@ -1,0 +1,51 @@
+<section class="section-hero">
+  {% render 'slider',
+    collection_1: section.settings.collection_1,
+    collection_2: section.settings.collection_2,
+    collection_3: section.settings.collection_3,
+    collection_4: section.settings.collection_4
+  %}
+  {% render 'hero-gallery',
+    collection_1: section.settings.collection_1,
+    collection_2: section.settings.collection_2,
+    collection_3: section.settings.collection_3,
+    collection_4: section.settings.collection_4
+  %}
+</section>
+
+{% schema %}
+{
+  "name": "Slider",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection_1",
+      "label": "Collection 1"
+    },
+    {
+      "type": "collection",
+      "id": "collection_2",
+      "label": "Collection 2"
+    },
+    {
+      "type": "collection",
+      "id": "collection_3",
+      "label": "Collection 3"
+    },
+    {
+      "type": "collection",
+      "id": "collection_4",
+      "label": "Collection 4"
+    },
+    {
+      "type": "range",
+      "id": "slider_timer",
+      "min": 5,
+      "max": 10,
+      "step": 1,
+      "default": 8,
+      "label": "Slider Timer"
+    }
+  ]
+}
+{% endschema %}

@@ -477,3 +477,28 @@ table {
 .section-error-cart {
   height: 60vh;
 }
+
+/* SECTION - HERO */
+.section-hero {
+  overflow: clip;
+}
+
+.hero-gallery {
+  display: none;
+}
+
+/* BUTTON BLACK */
+.btn_black {
+  width: 50%;
+  border: 2px solid var(--black);
+  background-color: var(--black);
+  color: var(--white);
+  padding: 1.6rem 0;
+  text-align: center;
+  transition: all 0.3s ease-out;
+}
+
+.btn_black:hover {
+  background-color: var(--main);
+  border: 2px solid var(--main);
+}

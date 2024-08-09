@@ -1,7 +1,14 @@
 {
   "sections": {
     "main": {
-      "type": "slider"
+      "type": "hero",
+      "settings": {
+        "collection_1": "exploration-division",
+        "collection_2": "sun-and-moon",
+        "collection_3": "unknown-collection",
+        "collection_4": "crew-socks",
+        "slider_timer": 8
+      }
     },
     "featured-collection": {
       "type": "featured-collection",
