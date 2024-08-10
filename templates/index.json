@@ -3,10 +3,10 @@
     "main": {
       "type": "hero",
       "settings": {
-        "collection_1": "exploration-division",
-        "collection_2": "sun-and-moon",
-        "collection_3": "unknown-collection",
-        "collection_4": "crew-socks",
+        "collection_1": "unknown-collection",
+        "collection_2": "crew-socks",
+        "collection_3": "exploration-division",
+        "collection_4": "sun-and-moon",
         "slider_timer": 8
       }
     },

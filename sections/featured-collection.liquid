@@ -10,7 +10,15 @@
       {% endif %}
 
       {% if section.settings.title != blank %}
-        <h2 class="heading-2">{{ section.settings.title }}</h2>
+        <a
+          href="{{ section.settings.featured_collection.url }}"
+          class="heading-2"
+        >
+          {{ section.settings.title }}
+          <span class="heading-2-icon">
+            {% render 'icon-right-arrow' %}
+          </span>
+        </a>
       {% endif %}
     </div>
 

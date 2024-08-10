@@ -2,27 +2,29 @@
 {{ 'collection.css' | asset_url | stylesheet_tag }}
 
 <!-- VARIABLES -->
-{% assign products_size = collections.frontpage.products | size %}
+{% if collection.handle == 'all' %}
+  {% assign collection = collections.frontpage %}
+{% endif %}
+{% assign products_size = collection.products | size %}
 
 <!-- SECTION SHOP -->
 {% if products_size > 0 %}
   <section class="section__collection">
     <div class="container">
       <!-- PRODUCT GRID -->
-      {% paginate collections.frontpage.products by section.settings.product_count %}
+      {% paginate collection.products by section.settings.product_count %}
         <div class="product-grid">
           <ul class="product-list__collection grid grid-{{section.settings.column_count}}-col">
             <!-- PRODUCT CARD -->
-            {% for product in collections.frontpage.products %}
+            {% for product in collection.products %}
               {% render 'product-card', product: product %}
             {% endfor %}
           </ul>
         </div>
-
+        <!-- PAGINATION -->
         {% render 'pagination', pagination: paginate %}
       {% endpaginate %}
     </div>
-    ƒ
   </section>
 {% else %}
   {% render 'error-no-products' %}
