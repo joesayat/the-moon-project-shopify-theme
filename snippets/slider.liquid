@@ -1,0 +1,137 @@
+{{ 'slider.css' | asset_url | stylesheet_tag }}
+
+{% assign collection_image_1 = collection_1.featured_image | image_url %}
+{% assign collection_image_2 = collection_2.featured_image | image_url %}
+{% assign collection_image_3 = collection_3.featured_image | image_url %}
+{% assign collection_image_4 = collection_4.featured_image | image_url %}
+
+<style>
+  .slider-item[name='slider-left']:nth-child(1) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)),
+                      url({{ 'https:' | append: collection_image_1 }});
+  }
+
+  .slider-item[name='slider-left']:nth-child(2) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)),
+                      url({{ 'https:' | append: collection_image_2 }});
+  }
+
+  .slider-item[name='slider-right']:nth-child(1) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)),
+                      url({{ 'https:' | append: collection_image_3 }});
+  }
+
+  .slider-item[name='slider-right']:nth-child(2) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)),
+                      url({{ 'https:' | append: collection_image_4 }});
+  }
+</style>
+
+<div class="slider">
+  <ul class="slider-list">
+    <li class="slider-item" name="slider-left">
+      <p class="slider-title">{{ collection_1.title }}</p>
+      <a
+        href="{{ collection_1.url }}"
+        class="btn btn_black"
+        >Explore now</a
+      >
+    </li>
+    <li class="slider-item" name="slider-left">
+      <p class="slider-title">{{ collection_2.title }}</p>
+      <a
+        href="{{ collection_2.url }}"
+        class="btn btn_black"
+        >Explore now</a
+      >
+    </li>
+    <button class="btn-slider" name="btn-up">
+      {% render 'icon-arrow-up' %}
+    </button>
+  </ul>
+  <ul class="slider-list">
+    <li class="slider-item" name="slider-right">
+      <p class="slider-title">{{ collection_3.title }}</p>
+      <a
+        href="{{ collection_3.url }}"
+        class="btn btn_black"
+        >Explore now</a
+      >
+    </li>
+    <li class="slider-item" name="slider-right">
+      <p class="slider-title">{{ collection_4.title }}</p>
+      <a
+        href="{{ collection_4.url }}"
+        class="btn btn_black"
+        >Explore now</a
+      >
+    </li>
+    <button class="btn-slider" name="btn-down">
+      {% render 'icon-arrow-down' %}
+    </button>
+  </ul>
+</div>
+
+<script>
+  const btnDown = document.querySelector('.btn-slider[name="btn-down"]');
+  const btnUp = document.querySelector('.btn-slider[name="btn-up"]');
+  const slidesLeft = document.querySelectorAll('.slider-item[name="slider-left"]');
+  const slidesRight = document.querySelectorAll('.slider-item[name="slider-right"]');
+  const slideLeftLength = slidesLeft.length - 1;
+  const slideRightLength = slidesRight.length - 1;
+
+  let currLeftSlide = 0;
+  let currRightSlide = 1;
+  let timerInterval, timerTimeout;
+  const sliderTimer = {{ section.settings.slider_timer }}
+
+  function handleClick(e) {
+    if (!e.target.closest('.btn-slider')) return;
+
+    setCurrSlide();
+    renderSlide();
+    handleTimers();
+  }
+
+  function handleTimers() {
+    if (timerInterval) clearInterval(timerInterval);
+    if (timerTimeout) clearTimeout(timerTimeout);
+
+    timerTimeout = setTimeout(() => {
+      setAutoSlider();
+    }, sliderTimer * 1000);
+  }
+
+  function setAutoSlider() {
+    timerInterval = setInterval(() => {
+      setCurrSlide();
+      renderSlide();
+    }, sliderTimer * 1000);
+  }
+
+  function setCurrSlide() {
+    currLeftSlide === slideLeftLength ? (currLeftSlide = 0) : currLeftSlide++;
+    currRightSlide === slideRightLength ? currRightSlide-- : (currRightSlide = 1);
+  }
+
+  function setTranslateY(slides, currSlide) {
+    slides.forEach((slide, i) => {
+      slide.style.transform = `translateY(${100 * (i - currSlide)}%)`;
+    });
+  }
+
+  function renderSlide() {
+    setTranslateY(slidesLeft, currLeftSlide);
+    setTranslateY(slidesRight, currRightSlide);
+  }
+
+  function init() {
+    renderSlide();
+    setAutoSlider();
+  }
+
+  init();
+
+  btnUp.addEventListener('click', handleClick);
+  btnDown.addEventListener('click', handleClick);
+</script>
