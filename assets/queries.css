@@ -86,4 +86,8 @@
   html {
     font-size: 50%;
   }
+
+  .btn_black {
+    width: 100%;
+  }
 }

@@ -1,0 +1,66 @@
+{{ 'hero-gallery.css' | asset_url | stylesheet_tag }}
+
+{% assign collection_image_1 = collection_1.featured_image | image_url %}
+{% assign collection_image_2 = collection_2.featured_image | image_url %}
+{% assign collection_image_3 = collection_3.featured_image | image_url %}
+{% assign collection_image_4 = collection_4.featured_image | image_url %}
+
+<style>
+  .hero-item:nth-child(1) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)),
+                    url({{'https:'|append:collection_image_1}});
+  }
+
+  .hero-item:nth-child(2) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)),
+                    url({{'https:'|append:collection_image_2}});
+  }
+
+  .hero-item:nth-child(3) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)),
+                    url({{'https:'|append:collection_image_3}});
+  }
+
+  .hero-item:nth-child(4) {
+    background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.9)),
+                    url({{'https:'|append:collection_image_4}});
+  }
+</style>
+
+<div class="hero-gallery">
+  <ul class="hero-list">
+    <li class="hero-item">
+      <p class="hero-title">{{ collection_1.title }}</p>
+      <a
+        href="{{ collection_1.url }}"
+        class="btn btn_black"
+      >
+        Explore now
+      </a>
+    </li>
+    <li class="hero-item">
+      <p class="hero-title">{{ collection_2.title }}</p>
+      <a
+        href="{{ collection_2.url }}"
+        class="btn btn_black"
+        >Explore now</a
+      >
+    </li>
+    <li class="hero-item">
+      <p class="hero-title">{{ collection_3.title }}</p>
+      <a
+        href="{{ collection_3.url }}"
+        class="btn btn_black"
+        >Explore now</a
+      >
+    </li>
+    <li class="hero-item">
+      <p class="hero-title">{{ collection_4.title }}</p>
+      <a
+        href="{{ collection_4.url }}"
+        class="btn btn_black"
+        >Explore now</a
+      >
+    </li>
+  </ul>
+</div>
