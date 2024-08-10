@@ -15,13 +15,8 @@
       </div>
 
       <!-- CART FORM -->
-      <div class="form-container__cart">
-        <form
-          class="form__cart"
-          action="{{ routes.cart_url }}"
-          method="POST"
-          novalidate
-        >
+      <div class="form-container__cart" data-money-format="{{ shop.money_format }}" data-section="{{ section.id }}">
+        {% form 'cart', cart %}
           <!-- CART TABLE -->
           <table class="table__cart">
             <!-- CART HEAD -->
@@ -50,29 +45,22 @@
 
             <!-- CART BUTTONS -->
             <div class="cta-container__cart">
+              <div class="helper-text__cart">*Taxes and shipping calculated at checkout</div>
               <button
-                class="btn btn_outline"
+                class="btn btn_main"
                 type="submit"
-                name="update"
+                name="checkout"
               >
-                Update
+                Checkout
               </button>
-              <div>
-                <div class="helper-text__cart">*Taxes and shipping calculated at checkout</div>
-                <button
-                  class="btn btn_main"
-                  type="submit"
-                  name="checkout"
-                >
-                  Checkout
-                </button>
-              </div>
             </div>
           </div>
-        </form>
+        {% endform %}
       </div>
     </div>
   </section>
 {% else %}
   {% render 'error-empty-cart' %}
 {% endif %}
+
+<script></script>
