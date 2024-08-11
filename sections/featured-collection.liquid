@@ -1,6 +1,14 @@
 <!-- COLLECTION STYLES -->
 {{ 'collection.css' | asset_url | stylesheet_tag }}
 
+<!-- VARIABLES -->
+{% assign featured_collection = section.settings.featured_collection %}
+{% if featured_collection.handle == 'frontpage' %}
+  {% assign featured_collection_url = collections.all.url %}
+{% else %}
+  {% assign featured_collection_url = featured_collection.url %}
+{% endif %}
+
 <!-- SECTION FEATURED COLLECTION -->
 <section class="section__collection">
   <div class="container">
@@ -10,7 +18,15 @@
       {% endif %}
 
       {% if section.settings.title != blank %}
-        <h2 class="heading-2">{{ section.settings.title }}</h2>
+        <a
+          href="{{ featured_collection_url }}"
+          class="heading-2"
+        >
+          {{ section.settings.title }}
+          <span class="heading-2-icon">
+            {% render 'icon-right-arrow' %}
+          </span>
+        </a>
       {% endif %}
     </div>
 
@@ -18,7 +34,7 @@
     <div class="product-grid">
       <ul class="product-list__collection grid grid-{{section.settings.column_count}}-col">
         <!-- PRODUCT CARD -->
-        {% for product in section.settings.featured_collection.products limit: section.settings.product_count %}
+        {% for product in featured_collection.products limit: section.settings.product_count %}
           {% render 'product-card', product: product %}
         {% endfor %}
       </ul>
