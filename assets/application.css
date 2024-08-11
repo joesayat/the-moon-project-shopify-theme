@@ -333,7 +333,8 @@ table {
   display: none;
 }
 
-.icon-right-chevron {
+.icon-right-chevron,
+.icon-right-arrow {
   fill: var(--main);
 }
 
@@ -506,4 +507,15 @@ table {
 /* BUTTON SLIDER */
 .btn-slider:hover {
   transform: scale(1.1);
+}
+
+/* NEW COLLECTION - ICON */
+.heading-2-icon {
+  margin-left: -0.4rem;
+  cursor: pointer;
+  transition: all 0.1s ease-out;
+}
+
+a.heading-2:hover > .heading-2-icon {
+  transform: scale(1.1) translateX(0.4rem);
 }
