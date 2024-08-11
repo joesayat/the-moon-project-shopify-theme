@@ -3,20 +3,22 @@
 
 <!-- VARIABLES -->
 {% if collection.handle == 'all' %}
-  {% assign collection = collections.frontpage %}
+  {% assign featured_collection = collections.frontpage %}
+{% else %}
+  {% assign featured_collection = collection %}
 {% endif %}
-{% assign products_size = collection.products | size %}
+{% assign products_size = featured_collection.products | size %}
 
 <!-- SECTION SHOP -->
 {% if products_size > 0 %}
   <section class="section__collection">
     <div class="container">
       <!-- PRODUCT GRID -->
-      {% paginate collection.products by section.settings.product_count %}
+      {% paginate featured_collection.products by section.settings.product_count %}
         <div class="product-grid">
           <ul class="product-list__collection grid grid-{{section.settings.column_count}}-col">
             <!-- PRODUCT CARD -->
-            {% for product in collection.products %}
+            {% for product in featured_collection.products %}
               {% render 'product-card', product: product %}
             {% endfor %}
           </ul>
