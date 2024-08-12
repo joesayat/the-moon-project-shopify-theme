@@ -1,0 +1,89 @@
+/* SECTION - PRODUCT GALLERY */
+.section-product {
+  background-color: var(--gray);
+}
+
+.gallery-list {
+  overflow-x: scroll;
+  scrollbar-width: none;
+  display: flex;
+  gap: 4rem;
+  padding: 0 4.8rem;
+}
+
+.gallery-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  position: relative;
+}
+
+.gallery-img-container {
+  overflow: clip;
+}
+
+.gallery-img {
+  width: auto;
+  height: 36rem;
+  transition: all 0.3s;
+}
+
+.gallery-item:hover .gallery-img,
+.gallery-item:active .gallery-img {
+  transform: scale(1.1);
+}
+
+.gallery-name {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: 3.2px;
+  text-transform: uppercase;
+}
+
+.gallery-cta {
+  font-family: "Barlow", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 400;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: #212529;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 0.4rem;
+  transition: all 0.3s;
+}
+
+.gallery-link {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.gallery-cta:has(+ .gallery-link:hover),
+.gallery-cta:has(+ .gallery-link:active) {
+  color: #afa4ce;
+  border-bottom: 1px solid currentColor;
+}
+
+/***********************************/
+/* BELOW 1024px (Laptops/ Tablets) */
+/***********************************/
+@media (max-width: 64em) {
+  /* UTILITY STYLES */
+  .gallery-list {
+    padding: 0 4rem;
+  }
+}
+
+/************************/
+/* BELOW 656px (Phones) */
+/************************/
+@media (max-width: 41em) {
+  /* UTILITY STYLES */
+  .gallery-list {
+    padding: 0 3.2rem;
+  }
+}
