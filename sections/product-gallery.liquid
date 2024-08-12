@@ -1,0 +1,55 @@
+<!-- STYLES -->
+{{ 'product-gallery.css' | asset_url | stylesheet_tag }}
+
+<!-- VARIABLES -->
+{% if section.settings.gallery_list == blank %}
+  {% assign nav_linklists = linklists['product-gallery'] %}
+{% else %}
+  {% assign nav_linklists = linklists[section.settings.gallery_list] %}
+{% endif %}
+
+<section class="section-product">
+  <div class="container">
+    <div class="heading-container">
+      <p class="subheading">Products</p>
+      <h2 class="heading-2">Cosmic Selections</h2>
+    </div>
+  </div>
+
+  <div class="gallery">
+    <ul class="gallery-list">
+      {% for link in nav_linklists.links %}
+        <!-- VARIABLES -->
+        {% assign img_handle = link.handle | append: '.webp' %}
+        {% assign img_url = images[img_handle] %}
+
+        <li class="gallery-item">
+          <div class="gallery-img-container">
+            <img
+              class="gallery-img"
+              src="{{ img_url  | image_url  }}"
+              width="auto"
+              height="auto"
+            >
+          </div>
+          <p class="gallery-name">{{ link.title }}</p>
+          <p class="gallery-cta">View more</p>
+          <a href="{{ link.url }}" class="gallery-link"></a>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Gallery Navigation",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "gallery_list",
+      "label": "Gallery List"
+    }
+  ]
+}
+{% endschema %}

@@ -19,7 +19,10 @@
         "product_count": 3,
         "column_count": 3
       }
+    },
+    "product-gallery": {
+      "type": "product-gallery"
     }
   },
-  "order": ["main", "featured-collection"]
+  "order": ["main", "featured-collection", "product-gallery"]
 }
