@@ -76,7 +76,6 @@ table {
 
 /* UTILITY STYLES */
 .container {
-  max-width: 120rem;
   margin: 0 auto;
   padding: 0 4.8rem;
 }
@@ -455,6 +454,7 @@ table {
 }
 
 /* SECTIONS */
+.section-product,
 .section__collection,
 .section__product,
 .section-cart {
