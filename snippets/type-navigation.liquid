@@ -1,0 +1,32 @@
+<!-- STYLES -->
+{{ 'type-navigation.css' | asset_url | stylesheet_tag }}
+
+<nav class="type-nav">
+  <ul class="type-list">
+    <li class="type-item">
+      <a
+        class="
+          type-link {% if collection.handle == 'all' %}
+            active
+          {% endif %}
+        "
+        href="{{ collections.all.url }}"
+        >All</a
+      >
+    </li>
+    {% for item in featured_collection.all_types %}
+      <li class="type-item">
+        <a
+          class="
+            type-link {% if collection.current_type == item %}
+              active
+            {% endif %}
+          "
+          href="{{ item | url_for_type }}"
+        >
+          {{ item }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+</nav>
