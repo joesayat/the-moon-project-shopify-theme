@@ -1,0 +1,50 @@
+.type-nav {
+  background-color: var(--black);
+  color: var(--white);
+  padding: 4.8rem;
+}
+
+.type-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.type-item {
+  font-family: "Barlow", sans-serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.2rem;
+  text-transform: uppercase;
+}
+
+.type-link:link,
+.type-link:visited {
+  padding: 0.4rem 0.8rem;
+  transition: all 0.3s ease-out;
+}
+
+.type-link.active,
+.type-link:hover,
+.type-link:active {
+  background-color: var(--main);
+  color: var(--black);
+}
+
+/***********************************/
+/* BELOW 1024px (Laptops/ Tablets) */
+/***********************************/
+@media (max-width: 64em) {
+  .type-nav {
+    padding: 4rem;
+  }
+}
+
+/************************/
+/* BELOW 656px (Phones) */
+/************************/
+@media (max-width: 41em) {
+  .type-nav {
+    padding: 3.2rem;
+  }
+}
