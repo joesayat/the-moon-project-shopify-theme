@@ -11,6 +11,19 @@
 
 <!-- SECTION SHOP -->
 {% if products_size > 0 %}
+  <!-- TYPE NAVIGATION -->
+  {% case featured_collection.handle %}
+    {% when 'frontpage' %}
+      {% render 'type-navigation', featured_collection: featured_collection %}
+    {% when 'types' %}
+      {% render 'type-navigation', featured_collection: collections.all %}
+    {% else %}
+      <div class="heading-container__collection">
+        <p class="subheading">Collection</p>
+        <h2 class="heading-2">{{ featured_collection.title }}</h2>
+      </div>
+  {% endcase %}
+
   <section class="section__collection">
     <div class="container">
       <!-- PRODUCT GRID -->
