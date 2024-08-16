@@ -454,6 +454,8 @@ table {
 }
 
 /* SECTIONS */
+.section-stores,
+.section-pages,
 .section-product,
 .section__collection,
 .section__product,

@@ -1,0 +1,30 @@
+.heading-container__about {
+  background-color: var(--black);
+  padding: 4.8rem;
+}
+
+.heading-container__about > .subheading {
+  color: var(--main);
+}
+
+.heading-container__about > .heading-2 {
+  color: var(--white);
+}
+
+/***********************************/
+/* BELOW 1024px (Laptops/ Tablets) */
+/***********************************/
+@media (max-width: 64em) {
+  .heading-container__about {
+    padding: 4rem;
+  }
+}
+
+/************************/
+/* BELOW 656px (Phones) */
+/************************/
+@media (max-width: 41em) {
+  .heading-container__about {
+    padding: 3.2rem;
+  }
+}
