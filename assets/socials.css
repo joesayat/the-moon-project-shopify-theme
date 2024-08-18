@@ -1,0 +1,36 @@
+.section-socials {
+  background: linear-gradient(var(--main-light), var(--main));
+  padding: 4.8rem 0;
+  margin: 0.8rem;
+}
+
+.socials-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: center;
+}
+
+.socials-link {
+  fill: var(--black);
+  transition: all 0.3s ease-out;
+}
+
+.socials-link:hover,
+.socials-link:active {
+  transform: translateY(-0.4rem);
+  opacity: 1;
+}
+
+.socials-grid:hover .socials-link:not(:hover) {
+  opacity: 0.5;
+}
+
+/************************/
+/* BELOW 656px (Phones) */
+/************************/
+@media (max-width: 41em) {
+  .socials-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4.8rem;
+  }
+}
