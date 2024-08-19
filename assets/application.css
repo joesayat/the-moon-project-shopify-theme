@@ -3,6 +3,7 @@
 /* ROOT VARIABLES */
 :root {
   --main: #afa4ce;
+  --main-light: #dfdbeb;
   --main-dark: #8c83a5;
   --black: #212529;
   --gray: #f1f3f5;
@@ -454,6 +455,8 @@ table {
 }
 
 /* SECTIONS */
+.section-stores,
+.section-pages,
 .section-product,
 .section__collection,
 .section__product,
