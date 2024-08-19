@@ -21,13 +21,13 @@
       {% for link in nav_linklists.links %}
         <!-- VARIABLES -->
         {% assign img_handle = link.handle | append: '.webp' %}
-        {% assign img_url = images[img_handle] %}
+        {% assign img_src = images[img_handle] %}
 
         <li class="gallery-item">
           <div class="gallery-img-container">
             <img
               class="gallery-img"
-              src="{{ img_url  | image_url  }}"
+              src="{{ img_src  | image_url  }}"
               width="auto"
               height="auto"
             >
