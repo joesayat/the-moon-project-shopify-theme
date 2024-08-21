@@ -52,6 +52,10 @@ button[disabled] {
   cursor: not-allowed;
 }
 
+input[type="submit"] {
+  cursor: pointer;
+}
+
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
@@ -407,6 +411,7 @@ table {
   color: var(--main);
   padding: 1.6rem 0;
   transition: all 0.3s ease-out;
+  background-color: transparent;
 }
 
 .btn_outline:hover {
