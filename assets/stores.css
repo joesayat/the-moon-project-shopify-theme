@@ -1,3 +1,7 @@
+.section-stores {
+  background-color: var(--gray);
+}
+
 .stores-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

@@ -528,3 +528,17 @@ table {
 a.heading-2:hover > .heading-2-icon {
   transform: scale(1.1) translateX(0.4rem);
 }
+
+/* HEADER CONTAINER -- PAGES */
+.heading-container__pages {
+  background-color: var(--black);
+  padding: 4.8rem;
+}
+
+.heading-container__pages > .subheading {
+  color: var(--main);
+}
+
+.heading-container__pages > .heading-2 {
+  color: var(--white);
+}

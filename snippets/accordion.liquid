@@ -1,0 +1,23 @@
+{{ 'accordion.css' | asset_url | stylesheet_tag }}
+
+<!-- VARIABLES -->
+{% assign featured_articles = blogs[page.handle].articles | reverse %}
+
+<section class="section-faq">
+  <div class="container">
+    <div class="accordion">
+      {% for article in featured_articles %}
+        <div class="accordion-item">
+          <details name="faq">
+            <summary>
+              <h3 class="accordion-heading">{{ article.title }}</h3>
+            </summary>
+            <div class="accordion-content">
+              {{ article.content }}
+            </div>
+          </details>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>

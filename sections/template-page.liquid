@@ -1,0 +1,19 @@
+<!-- VARIABLES -->
+{% if page.handle == 'about-us' %}
+  {% assign page_heading = 'Greetings, Explorer' %}
+{% elsif page.handle == 'faq' %}
+  {% assign page_heading = 'Customer Care' %}
+{% endif %}
+
+<div class="heading-container__pages">
+  <p class="subheading">{{ page.title }}</p>
+  <h2 class="heading-2">{{ page_heading }}</h2>
+</div>
+
+{% if page.handle == 'about-us' %}
+  {% render 'about' %}
+  {% render 'stores' %}
+  {% render 'socials' %}
+{% elsif page.handle == 'faq' %}
+  {% render 'accordion' %}
+{% endif %}

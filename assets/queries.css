@@ -18,6 +18,11 @@
   .section-error {
     height: calc(60vh - 7rem);
   }
+
+  /* HEADER CONTAINER -- PAGES */
+  .heading-container__pages {
+    padding: 4rem;
+  }
 }
 
 /*******************************/
@@ -76,6 +81,11 @@
   .section-error,
   .section-error-cart {
     padding: 0 3.2rem;
+  }
+
+  /* HEADER CONTAINER -- PAGES */
+  .heading-container__pages {
+    padding: 3.2rem;
   }
 }
 
