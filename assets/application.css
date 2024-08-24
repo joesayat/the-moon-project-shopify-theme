@@ -79,6 +79,10 @@ table {
   table-layout: auto;
 }
 
+summary {
+  display: block;
+}
+
 /* UTILITY STYLES */
 .container {
   margin: 0 auto;
@@ -112,6 +116,11 @@ table {
   opacity: 0;
   visibility: hidden;
   z-index: 998;
+}
+
+/* UTILITY COLOR STYLES */
+.bg-gray {
+  background-color: var(--gray);
 }
 
 /* CSSGRID */
@@ -460,9 +469,7 @@ table {
 }
 
 /* SECTIONS */
-.section-faq,
-.section-stores,
-.section-pages,
+.section-container,
 .section-product,
 .section__collection,
 .section__product,

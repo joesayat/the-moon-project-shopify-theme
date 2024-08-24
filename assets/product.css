@@ -69,6 +69,10 @@
   gap: 0.4rem;
 }
 
+.product-accordion {
+  margin-top: 4rem;
+}
+
 /*******************************/
 /* BELOW 896px (Small Tablets) */
 /*******************************/
