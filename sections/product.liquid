@@ -135,10 +135,15 @@
       >
         Buy now
       </button>
+
+      <div class="product-accordion">
+        {% render 'accordion' %}
+      </div>
     </div>
   </div>
 </div>
 
+<!-- SCRIPTS -->
 <script>
   class CartForm extends HTMLElement {
     constructor() {

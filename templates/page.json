@@ -10,12 +10,8 @@
 {
   "sections": {
     "main": {
-      "type": "about",
-      "settings": {
-      }
+      "type": "template-page"
     }
   },
-  "order": [
-    "main"
-  ]
+  "order": ["main"]
 }

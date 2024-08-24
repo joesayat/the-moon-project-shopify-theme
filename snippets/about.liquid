@@ -1,0 +1,26 @@
+<!-- STYLES -->
+{{ 'about.css' | asset_url | stylesheet_tag }}
+
+<!-- VARIABLES -->
+{% assign img_handle = page.handle | append: '.webp' %}
+{% assign img_src = images[img_handle] %}
+
+<!-- SECTION ABOUT -->
+<section class="section-container">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-container">
+        <img
+          class="about-img"
+          src="{{ img_src | image_url }}"
+          alt=""
+          width="auto"
+          height="auto"
+        >
+      </div>
+      <div class="about-content">
+        <p>{{ page.content }}</p>
+      </div>
+    </div>
+  </div>
+</section>
