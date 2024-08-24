@@ -10,17 +10,8 @@
 {
   "sections": {
     "main": {
-      "type": "about",
-      "settings": {}
-    },
-    "stores_9xkWgB": {
-      "type": "stores",
-      "settings": {}
-    },
-    "socials_6x4cmw": {
-      "type": "socials",
-      "settings": {}
+      "type": "template-page"
     }
   },
-  "order": ["main", "stores_9xkWgB", "socials_6x4cmw"]
+  "order": ["main"]
 }

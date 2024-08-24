@@ -1,17 +1,4 @@
 /* SECTION - COLLECTION */
-.heading-container__collection {
-  background-color: var(--black);
-  padding: 4.8rem;
-}
-
-.heading-container__collection > .subheading {
-  color: var(--main);
-}
-
-.heading-container__collection > .heading-2 {
-  color: var(--white);
-}
-
 .product-list__collection {
   column-gap: 2.4rem;
   row-gap: 4.8rem;
@@ -66,22 +53,4 @@
   position: absolute;
   top: 0;
   left: 0;
-}
-
-/***********************************/
-/* BELOW 1024px (Laptops/ Tablets) */
-/***********************************/
-@media (max-width: 64em) {
-  .heading-container__collection {
-    padding: 4rem;
-  }
-}
-
-/************************/
-/* BELOW 656px (Phones) */
-/************************/
-@media (max-width: 41em) {
-  .heading-container__collection {
-    padding: 3.2rem;
-  }
 }
