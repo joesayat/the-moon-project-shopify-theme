@@ -83,6 +83,10 @@ summary {
   display: block;
 }
 
+summary::-webkit-details-marker {
+  display: none;
+}
+
 /* UTILITY STYLES */
 .container {
   margin: 0 auto;
