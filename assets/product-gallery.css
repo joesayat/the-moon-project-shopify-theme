@@ -11,6 +11,10 @@
   padding: 0 4.8rem;
 }
 
+.gallery-list::-webkit-scrollbar {
+  display: none;
+}
+
 .gallery-item {
   display: flex;
   flex-direction: column;
