@@ -1,6 +1,9 @@
 <!-- CART STYLES -->
 {{ 'product.css' | asset_url | stylesheet_tag }}
 
+<!-- SCRIPT -->
+<script src="{{ 'mobile-carousel.js' | asset_url }}" defer></script>
+
 {% comment %}
   <!-- SCRIPTS -->
   <script src="{{ 'quantity-input.js' | asset_url }}" defer="defer"></script>
@@ -29,6 +32,34 @@
           height="auto"
         >
       {% endfor %}
+    </div>
+    <div class="product-gallery__carousel">
+      <div class="product-carousel-list">
+        {% for media in product.media %}
+          <img
+            class="product-carousel-img"
+            src="{{ media | image_url }}"
+            alt="{{ media.alt }}"
+            width="auto"
+            height="auto"
+          >
+        {% endfor %}
+      </div>
+      <div class="product-carousel-btns">
+        <button
+          class="product-carousel-btn"
+          name="left"
+        >
+          {% render 'icon-left-chevron', size: '2rem' %}
+        </button>
+        <div class="product-carousel-indicators"></div>
+        <button
+          class="product-carousel-btn"
+          name="right"
+        >
+          {% render 'icon-right-chevron', size: '2rem' %}
+        </button>
+      </div>
     </div>
     <div class="product-description__product">
       <h1 class="heading-product-item">{{ product.title }}</h1>
