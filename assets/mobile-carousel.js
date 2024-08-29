@@ -7,7 +7,7 @@ const indicatorsContainer = document.querySelector(
 let timeout;
 
 function calculateImageIndex() {
-  return Math.ceil(carousel.scrollLeft / carousel.offsetWidth);
+  return Math.round(carousel.scrollLeft / carousel.offsetWidth);
 }
 
 function scrollLeft() {
