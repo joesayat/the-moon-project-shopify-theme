@@ -1,25 +1,25 @@
 const carousel = document.querySelector(".product-carousel-list");
-const img = document.querySelector(".product-carousel-img");
 const imgs = [...document.querySelectorAll(".product-carousel-img")];
 const btnsContainer = document.querySelector(".product-carousel-btns");
 const indicatorsContainer = document.querySelector(
   ".product-carousel-indicators"
 );
+let timeout;
 
 function calculateImageIndex() {
-  return Math.ceil(carousel.scrollLeft / img.clientWidth);
+  return Math.ceil(carousel.scrollLeft / carousel.offsetWidth);
 }
 
 function scrollLeft() {
-  carousel.scrollLeft -= img.clientWidth;
+  carousel.scrollLeft -= carousel.offsetWidth;
 }
 
 function scrollRight() {
-  carousel.scrollLeft += img.clientWidth;
+  carousel.scrollLeft += carousel.offsetWidth;
 }
 
 function scrollToImg(index) {
-  carousel.scrollLeft = img.clientWidth * index;
+  carousel.scrollLeft = carousel.offsetWidth * index;
 }
 
 function renderActiveIndicator(ind) {
@@ -63,8 +63,15 @@ function handleIndicatorClick(e) {
 }
 
 function handleScrollEnd() {
-  const index = calculateImageIndex();
-  renderActiveIndicator(index);
+  let atSnappingPoint = carousel.scrollLeft % carousel.offsetWidth === 0;
+  let timer = atSnappingPoint ? 0 : 150;
+
+  clearTimeout(timeout);
+
+  timeout = setTimeout(() => {
+    const index = calculateImageIndex();
+    renderActiveIndicator(index);
+  }, timer);
 }
 
 function initialize() {
@@ -75,4 +82,4 @@ initialize();
 
 btnsContainer.addEventListener("click", handleBtnClick);
 indicatorsContainer.addEventListener("click", handleIndicatorClick);
-carousel.addEventListener("scrollend", handleScrollEnd);
+carousel.addEventListener("scroll", handleScrollEnd);
