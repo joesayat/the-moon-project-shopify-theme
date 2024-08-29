@@ -49,8 +49,6 @@ function handleBtnClick(e) {
   if (!e.target.closest(".product-carousel-btn")) return;
 
   e.target.closest('[name="left"]') ? scrollLeft() : scrollRight();
-  const index = calculateImageIndex();
-  renderActiveIndicator(index);
 }
 
 function handleIndicatorClick(e) {
@@ -59,7 +57,6 @@ function handleIndicatorClick(e) {
   const index = Number(e.target.dataset.index);
 
   scrollToImg(index);
-  renderActiveIndicator(index);
 }
 
 function handleScrollEnd() {
