@@ -12,6 +12,9 @@
     <!-- Styles -->
     {{ 'application.css' | asset_url | stylesheet_tag }}
     {{ 'queries.css' | asset_url | stylesheet_tag }}
+
+    <!-- Script -->
+    <script src="{{ 'application.js' | asset_url }}" defer></script>
   </head>
   <body>
     {% section 'header' %}

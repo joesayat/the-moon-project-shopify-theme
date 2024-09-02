@@ -553,3 +553,12 @@ a.heading-2:hover > .heading-2-icon {
 .heading-container__pages > .heading-2 {
   color: var(--white);
 }
+
+main > .shopify-section {
+  transition: all 0.3s ease-out;
+}
+
+.section-hidden {
+  opacity: 0;
+  transform: translateY(8rem);
+}
