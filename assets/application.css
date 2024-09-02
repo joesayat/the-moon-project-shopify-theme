@@ -553,3 +553,8 @@ a.heading-2:hover > .heading-2-icon {
 .heading-container__pages > .heading-2 {
   color: var(--white);
 }
+
+.policy-container {
+  max-width: 80rem;
+  margin: 0 auto;
+}
