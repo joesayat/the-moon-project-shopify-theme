@@ -3,6 +3,8 @@
   {% assign page_heading = 'Greetings, Explorer' %}
 {% elsif page.handle == 'faq' %}
   {% assign page_heading = 'Customer Care' %}
+{% elsif page.handle == 'privacy-policy' %}
+  {% assign page_heading = 'Mission Briefing' %}
 {% endif %}
 
 <div class="heading-container__pages">
@@ -16,4 +18,6 @@
   {% render 'socials' %}
 {% elsif page.handle == 'faq' %}
   {% render 'faq' %}
+{% elsif page.handle == 'privacy-policy' %}
+  {% render 'privacy-policy' %}
 {% endif %}
