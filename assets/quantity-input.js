@@ -4,8 +4,6 @@ class QuantityInput extends HTMLElement {
   constructor() {
     super();
 
-    this.btnAdd = this.querySelector('[name="increment"]');
-    this.btnMinus = this.querySelector('[name="decrement"]');
     this.input = this.querySelector('input[name="quantity"]');
     this.setInputValues();
     this.addEventListener('click', this.onBtnClick);
@@ -13,63 +11,119 @@ class QuantityInput extends HTMLElement {
 
   attributeChangedCallback(name, oldVal, newVal) {
     if (name === 'data-value') {
-      if (newVal >= this.input.max) {
-        this.setDisabled(this.btnAdd);
-      }
-
-      if (newVal <= this.input.min) {
-        this.setDisabled(this.btnMinus);
-      }
-
-      if (oldVal) {
-        this.fetchJSON();
-      }
+      console.log(oldVal, newVal);
+      this.fetchJSON();
     }
   }
 
-  getQuantity() {
-    return this.dataset.value;
+  get isProductAvailable() {
+    return this.dataset.available === 'true';
+  }
+
+  get productName() {
+    return `${this.dataset.name} - ${this.dataset.size}`;
+  }
+
+  get productQuantity() {
+    return Number(this.dataset.value);
+  }
+
+  set productQuantity(value) {
+    this.dataset.value = value;
+
+    return value;
+  }
+
+  get productQuantityMax() {
+    return Number(this.dataset.max);
+  }
+
+  get productQuantityMin() {
+    return Number(this.dataset.min);
   }
 
   setInputValues() {
-    const { value, max, min } = this.dataset;
+    this.input.value = this.productQuantity;
+    this.input.max = this.productQuantityMax;
+    this.input.min = this.productQuantityMin;
+  }
 
-    this.input.value = Number(value);
-    this.input.max = Number(max);
-    this.input.min = Number(min);
+  handleDecrementValue() {
+    this.input.value <= this.input.min
+      ? this.renderErrorMsg('remove')
+      : (this.productQuantity = --this.input.value);
+  }
+
+  handleIncrementValue() {
+    this.input.value >= this.input.max
+      ? this.renderErrorMsg('add more')
+      : (this.productQuantity = ++this.input.value);
+  }
+
+  handleCalculation() {
+    this.btn.getAttribute('name') === 'increment'
+      ? this.handleIncrementValue()
+      : this.handleDecrementValue();
   }
 
   onBtnClick(e) {
     e.preventDefault();
+
+    if (!e.target.closest('button')) return;
+
     this.btn = e.target.closest('button');
 
+    this.removeErrorMsg();
     this.handleCalculation();
   }
 
-  handleCalculation() {
-    if (!this.btn) return;
-
-    const btns = [...this.querySelectorAll('button')];
-
-    btns.forEach(btn => this.removeDisabled(btn));
-    this.btn === this.btnAdd ? this.handleIncrementValue() : this.handleDecrementValue();
+  renderErrorIcon() {
+    return `<svg
+      class="icon-error-alert"
+      clip-rule="evenodd"
+      fill-rule="evenodd"
+      stroke-linejoin="round"
+      stroke-miterlimit="2"
+      width="2.4rem"
+      heights="2.4rem"
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="m12.002 21.534c5.518 0 9.998-4.48 9.998-9.998s-4.48-9.997-9.998-9.997c-5.517 0-9.997 4.479-9.997 9.997s4.48 9.998 9.997 9.998zm0-8c-.414 0-.75-.336-.75-.75v-5.5c0-.414.336-.75.75-.75s.75.336.75.75v5.5c0 .414-.336.75-.75.75zm-.002 3c-.552 0-1-.448-1-1s.448-1 1-1 1 .448 1 1-.448 1-1 1z"
+        fill-rule="nonzero"
+      />
+    </svg>`;
   }
 
-  handleDecrementValue() {
-    if (this.input.value <= this.input.min) return;
-
-    this.dataset.value = --this.input.value;
+  getContent(action) {
+    switch (true) {
+      case !this.isProductAvailable:
+        return `${this.productName} is not available`;
+      case this.isProductAvailable && this.productQuantityMax === 0:
+        return `All ${this.productName} is in your cart.`;
+      default:
+        return `You can't ${action} ${this.productName}`;
+    }
   }
 
-  handleIncrementValue() {
-    if (this.input.value >= this.input.max) return;
+  renderErrorMsg(action) {
+    const content = this.getContent(action);
+    const html = `<div class="error-message">
+      ${this.renderErrorIcon()} ${content}
+    </div>`;
 
-    this.dataset.value = ++this.input.value;
+    this.parentElement.insertAdjacentHTML('beforeend', html);
   }
 
+  removeErrorMsg() {
+    document.querySelector('.error-message')?.remove();
+  }
+
+  // USED IN CART
   async fetchJSON() {
     const id = this.closest('.product-cart-item')?.dataset.key;
-    const quantity = this.dataset.value;
+    const quantity = this.productQuantity;
 
     if (!id) return;
 
@@ -89,19 +143,26 @@ class QuantityInput extends HTMLElement {
     });
     const data = await res.json();
 
-    const format = document.querySelector('[data-money-format').getAttribute('data-money-format');
+    const format = document
+      .querySelector('[data-money-format')
+      .getAttribute('data-money-format');
     const subTotal = formatMoney(data.total_price, format);
-    const item = data.items.find(item => item.key === id);
+    const item = data.items.find((item) => item.key === id);
     const itemPrice = formatMoney(item.final_line_price, format);
     const subTotalEl = document.querySelector('.price__cart');
-    const itemPriceEl = document.querySelector(`[data-key="${id}"] .product-total__cart`)
+    const itemPriceEl = document.querySelector(
+      `[data-key="${id}"] .product-total__cart`
+    );
 
     subTotalEl.textContent = subTotal;
     itemPriceEl.textContent = itemPrice;
   }
 
+  // NOT USING AT THE MOMENT
   async fetchHTML() {
-    const sectionId = document.querySelector('[data-section').getAttribute('data-section');
+    const sectionId = document
+      .querySelector('[data-section')
+      .getAttribute('data-section');
 
     console.log(sectionId);
     const res = await fetch(`/cart?section_id=${sectionId}`);
@@ -120,14 +181,6 @@ class QuantityInput extends HTMLElement {
         el.innerHTML = newArr[i].innerHTML;
       }
     });
-  }
-
-  setDisabled(el) {
-    el.setAttribute('disabled', '');
-  }
-
-  removeDisabled(el) {
-    el.removeAttribute('disabled');
   }
 }
 
