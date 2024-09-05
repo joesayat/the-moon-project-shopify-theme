@@ -15,9 +15,11 @@
 {% assign max_quantity = product_item.inventory_quantity | minus: cart_count_for_variant %}
 
 <!-- Checks if max_quantity is equal 0 -->
-{% if max_quantity == 0 %}
-  {% assign max_quantity = 1 %}
-{% endif %}
+{% comment %}
+  {% if max_quantity == 0 %}
+    {% assign max_quantity = 0 %}
+  {% endif %}
+{% endcomment %}
 
 <!-- SECTION PRODUCT ITEM -->
 <div class="section__product">
@@ -123,6 +125,9 @@
               data-value="1"
               data-min="1"
               data-max="{{ max_quantity }}"
+              data-name="{{ product.title }}"
+              data-available="{{ product_item.available }}"
+              data-size="{{ product_item.title }}"
             >
               <button name="decrement">
                 {% render 'icon-minus' %}
@@ -167,6 +172,7 @@
         Buy now
       </button>
 
+      <div class="product-content__product">{{ product.content }}</div>
       <div class="product-accordion">
         {% render 'accordion' %}
       </div>
@@ -193,7 +199,7 @@
 
     getFormData() {
       const id = this.querySelector('variant-selector').getVariantId();
-      const quantity = this.querySelector('quantity-input').getQuantity();
+      const quantity = this.querySelector('quantity-input').productQuantity;
 
       this.formData = {
         items: [
@@ -208,11 +214,7 @@
     }
 
     removeErrorMsg() {
-      const errorMsg = this.querySelector('.error-message');
-
-      if (!errorMsg) return;
-
-      errorMsg.remove();
+     this.querySelector('.error-message')?.remove();
     }
 
     async fetchCartAdd() {
@@ -260,7 +262,7 @@
         </div>
       `;
 
-      btnContainer.insertAdjacentHTML('afterbegin', html);
+      btnContainer.insertAdjacentHTML('beforeend', html);
     }
   }
 
