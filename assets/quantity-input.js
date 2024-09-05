@@ -11,7 +11,6 @@ class QuantityInput extends HTMLElement {
 
   attributeChangedCallback(name, oldVal, newVal) {
     if (name === 'data-value') {
-      console.log(oldVal, newVal);
       this.fetchJSON();
     }
   }
@@ -132,7 +131,7 @@ class QuantityInput extends HTMLElement {
       quantity,
     };
 
-    console.log(formData);
+    // console.log(formData);
 
     const res = await fetch(`/cart/change.js`, {
       method: 'POST',
@@ -164,7 +163,7 @@ class QuantityInput extends HTMLElement {
       .querySelector('[data-section')
       .getAttribute('data-section');
 
-    console.log(sectionId);
+    // console.log(sectionId);
     const res = await fetch(`/cart?section_id=${sectionId}`);
     const data = await res.text();
     const html = new DOMParser().parseFromString(data, 'text/html');
