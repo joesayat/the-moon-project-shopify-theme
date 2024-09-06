@@ -162,15 +162,16 @@
               </button>
             {% endif %}
           </div>
+          <button
+            class="btn btn_main"
+            type="submit"
+            name="checkout"
+          >
+            Buy now
+          </button>
+          {{ form | payment_button }}
         {% endform %}
       </cart-form>
-      <button
-        class="btn btn_main"
-        type="submit"
-        name="checkout"
-      >
-        Buy now
-      </button>
 
       <div class="product-content__product">{{ product.content }}</div>
       <div class="product-accordion">
