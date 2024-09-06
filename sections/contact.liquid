@@ -42,7 +42,20 @@
           </ul>
         </nav>
       </div>
-      {% form 'contact' %}
+      {% form 'contact', return_to: `/pages/contact` %}
+        <!-- TODO update validation -->
+        {% comment %}
+          {% for error in form.errors %}
+          {{ error }}
+        {% endcomment %}
+
+        {% if form.errors %}
+          <h3>failed</h3>
+        {% elsif form.posted_successfully? %}
+          <h3>success</h3>
+        {% endif %}
+
+        {% comment %} {% endfor %} {% endcomment %}
         <div class="contact-input-container">
           <input
             class="contact-input"
@@ -86,12 +99,6 @@
             value="Submit"
           >
         </div>
-        <!-- TODO update validation -->
-        {% if form.errors %}
-          <h3>failed</h3>
-        {% elsif form.posted_successfully? %}
-          <h3>success</h3>
-        {% endif %}
       {% endform %}
     </div>
   </div>
