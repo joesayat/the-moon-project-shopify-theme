@@ -162,13 +162,13 @@
               </button>
             {% endif %}
           </div>
-          <button
+          {% comment %} <button
             class="btn btn_main"
             type="submit"
             name="checkout"
           >
             Buy now
-          </button>
+          </button> {% endcomment %}
           {{ form | payment_button }}
         {% endform %}
       </cart-form>
