@@ -64,6 +64,8 @@
             id="ContactFormName"
             name="contact[name]"
             placeholder="Name"
+            required="required"
+            pattern="[^\d]{2,}"
           >
         </div>
         <div class="contact-input-container">
@@ -73,6 +75,8 @@
             id="ContactFormEmail"
             name="contact[email]"
             placeholder="Email"
+            required="required"
+            pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
           >
         </div>
         <div class="contact-input-container">
@@ -81,7 +85,9 @@
             type="tel"
             id="ContactFormPhone"
             name="contact[phone]"
-            placeholder="Phone"
+            placeholder="Mobile"
+            required="required"
+            pattern="^(632|0)\d{10}"
           >
         </div>
         <div class="contact-input-container">
@@ -91,6 +97,7 @@
             id="ContactFormMessage"
             name="contact[body]"
             placeholder="Message"
+            required="required"
           ></textarea>
         </div>
         <div class="contact-input-container">
