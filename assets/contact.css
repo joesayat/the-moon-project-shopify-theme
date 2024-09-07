@@ -72,13 +72,13 @@ textarea.contact-input {
   transform: scale(1.1);
 }
 
-.contact-error {
+.contact-notification {
   display: flex;
   align-items: center;
 }
 
-.contact-error > span {
-  text-transform: capitalize;
+.contact-notification > span {
+  text-transform: capitalizegit ;
 }
 
 /*******************************/
