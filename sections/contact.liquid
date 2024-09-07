@@ -48,6 +48,7 @@
             <p class="contact-error">
               {% render 'icon-error-alert' %}
               <span>
+                {{ error }}
                 {{ form.errors.messages[error] }}
               </span>
             </p>
