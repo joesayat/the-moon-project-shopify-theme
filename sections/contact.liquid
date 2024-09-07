@@ -45,9 +45,11 @@
       {% form 'contact', return_to: `/pages/contact` %}
         {% if form.errors %}
           {% for error in form.errors %}
-            <p>
-              {% render 'icon-error-alert' -%}
-              {{- form.errors.messages[error] }}
+            <p class="contact-error">
+              {% render 'icon-error-alert' %}
+              <span>
+                {{ form.errors.messages[error] }}
+              </span>
             </p>
           {% endfor %}
         {% elsif form.posted_successfully? %}
