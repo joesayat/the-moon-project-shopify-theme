@@ -77,6 +77,10 @@ textarea.contact-input {
   align-items: center;
 }
 
+.contact-error > span {
+  text-transform: capitalize;
+}
+
 /*******************************/
 /* BELOW 768px (Small Tablets) */
 /*******************************/

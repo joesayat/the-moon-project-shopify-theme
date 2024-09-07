@@ -49,8 +49,8 @@
               {% render 'icon-error-alert' %}
               <span>
                 {{ error }}
-                {{ form.errors.messages[error] }}
               </span>
+              {{ form.errors.messages[error] }}
             </p>
           {% endfor %}
         {% elsif form.posted_successfully? %}
