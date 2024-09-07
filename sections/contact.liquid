@@ -50,7 +50,9 @@
         {% endcomment %}
 
         {% if form.errors %}
-          <h3>failed</h3>
+          {% for error in form.errors %}
+            {{ error }}
+          {% endfor %}
         {% elsif form.posted_successfully? %}
           <h3>success</h3>
         {% endif %}
