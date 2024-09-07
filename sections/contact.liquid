@@ -48,9 +48,8 @@
             <p class="contact-notification">
               {% render 'icon-error-alert' %}
               <span>
-                {{ error }}
+                {{ error | capitalize }} {{ form.errors.messages[error] }}
               </span>
-               {{ form.errors.messages[error] }}
             </p>
           {% endfor %}
         {% elsif form.posted_successfully? %}
