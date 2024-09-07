@@ -52,6 +52,7 @@
         {% if form.errors %}
           {% for error in form.errors %}
             {{ error }}
+            {{ error.messages }}
           {% endfor %}
         {% elsif form.posted_successfully? %}
           <h3>success</h3>
