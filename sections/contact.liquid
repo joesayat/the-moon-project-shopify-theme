@@ -43,22 +43,17 @@
         </nav>
       </div>
       {% form 'contact', return_to: `/pages/contact` %}
-        <!-- TODO update validation -->
-        {% comment %}
-          {% for error in form.errors %}
-          {{ error }}
-        {% endcomment %}
-
         {% if form.errors %}
           {% for error in form.errors %}
-            {{ error }}
-            {{ form.errors.messages[error] }}
+            <p>
+              {% render 'icon-error-alert' -%}
+              {{- form.errors.messages[error] }}
+            </p>
           {% endfor %}
         {% elsif form.posted_successfully? %}
-          <h3>success</h3>
+          <p>Sent successfully</p>
         {% endif %}
 
-        {% comment %} {% endfor %} {% endcomment %}
         <div class="contact-input-container">
           <input
             class="contact-input"
