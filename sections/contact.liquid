@@ -45,15 +45,16 @@
       {% form 'contact', return_to: `/pages/contact` %}
         {% if form.errors %}
           {% for error in form.errors %}
-            <p class="contact-notification">
+            <div class="contact-notification">
               {% render 'icon-error-alert' %}
               <span>
-                {{ error | capitalize }} {{ form.errors.messages[error] }}
+                {{ error | capitalize }}
+                {{ form.errors.messages[error] }}
               </span>
-            </p>
+            </div>
           {% endfor %}
         {% elsif form.posted_successfully? %}
-          <p>Sent successfully</p>
+          <div class="contact-notification">{% render 'icon-error-alert' %} Sent successfully</div>
         {% endif %}
 
         <div class="contact-input-container">
