@@ -1,6 +1,5 @@
 <!-- SCRIPT -->
-{% comment %} commented because already declared on another file {% endcomment %}
-{% comment %} <script src="{{ 'quantity-input.js' | asset_url }}" defer="defer"></script> {% endcomment %}
+<script src="{{ 'cart-quantity-input.js' | asset_url }}" type="module"></script>
 
 <!-- CART TABLE ROW -->
 <tr class="tr-body product-cart-item" data-key="{{ item.key }}">
@@ -13,7 +12,7 @@
       width="auto"
       height="auto"
     >
-    <div>
+    <div class="product-data__description">
       <a class="product-title__cart link__cart--product-title" href="{{ item.url }}">
         {{ item.product.title }}
       </a>
@@ -36,32 +35,45 @@
       <p class="product-price__cart">
         {{ item.price | money }}
       </p>
-      {% comment %}
-        <div class="input-container__cart--sm">
-          <input
-            class="input-quantity__cart"
-            type="number"
-            name="updates[]"
-            value="{{ item.quantity }}"
-            min="1"
-            max="{{ item.variant.inventory_quantity }}"
-          >
-          <a class="btn-trash" href="{{ item.url_to_remove }}">
-            {% render 'icon-trash' %}
-          </a>
-        </div>
-      {% endcomment %}
     </div>
   </td>
 
   <!-- CART INPUT QUANTITY -->
   <td class="td quantity-data__cart">
+    <div class="product-data__description--sm">
+      <a class="product-title__cart link__cart--product-title" href="{{ item.url }}">
+        {{ item.product.title }}
+      </a>
+      <p class="product-variant__cart">
+        {% case item.variant.title %}
+          {% when 'XS' %}
+            Size: Extra small
+          {% when 'S' %}
+            Size: Small
+          {% when 'M' %}
+            Size: Medium
+          {% when 'L' %}
+            Size: Large
+          {% when 'XL' %}
+            Size: Extra large
+          {% else %}
+            Size: Free size
+        {% endcase %}
+      </p>
+      <p class="product-price__cart">
+        {{ item.price | money }}
+      </p>
+    </div>
+
     <div class="input-container__cart">
-      <quantity-input
+      <cart-quantity-input
         class="quantity-input"
         data-value="{{ item.quantity }}"
         data-min="1"
         data-max="{{ item.variant.inventory_quantity}}"
+        data-name="{{ item.product.title }}"
+        data-size="{{ item.variant.title }}"
+        data-available="{{ item.variant.available }}"
       >
         <button name="decrement">
           {% render 'icon-minus' %}
@@ -75,7 +87,7 @@
         <button name="increment">
           {% render 'icon-plus' %}
         </button>
-      </quantity-input>
+      </cart-quantity-input>
       <a class="btn-trash" href="{{ item.url_to_remove }}">
         {% render 'icon-trash' %}
       </a>

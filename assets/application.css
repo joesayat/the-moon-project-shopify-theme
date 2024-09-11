@@ -468,6 +468,11 @@ summary::-webkit-details-marker {
   border: 1px solid var(--black);
 }
 
+.input-container__cart > .quantity-input {
+  padding: 1.6rem;
+  gap: 2rem;
+}
+
 .input_number {
   width: 100%;
   height: auto;

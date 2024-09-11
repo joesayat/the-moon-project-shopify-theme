@@ -1,18 +1,17 @@
-class QuantityInput extends HTMLElement {
+export class QuantityInput extends HTMLElement {
   static observedAttributes = ['data-value'];
 
   constructor() {
     super();
 
+    this.container = this.closest('.cta-container__product');
     this.input = this.querySelector('input[name="quantity"]');
     this.setInputValues();
     this.addEventListener('click', this.onBtnClick);
   }
 
-  attributeChangedCallback(name, oldVal, newVal) {
-    if (name === 'data-value') {
-      this.fetchJSON();
-    }
+  get errorMsg() {
+    return document.querySelector('.error-message');
   }
 
   get isProductAvailable() {
@@ -20,7 +19,11 @@ class QuantityInput extends HTMLElement {
   }
 
   get productName() {
-    return `${this.dataset.name} - ${this.dataset.size}`;
+    const size = this.dataset.size.toLocaleLowerCase().includes('default')
+      ? ''
+      : ` - ${this.dataset.size}`;
+
+    return `${this.dataset.name}${size}`;
   }
 
   get productQuantity() {
@@ -49,7 +52,7 @@ class QuantityInput extends HTMLElement {
 
   handleDecrementValue() {
     this.input.value <= this.input.min
-      ? this.renderErrorMsg('remove')
+      ? ''
       : (this.productQuantity = --this.input.value);
   }
 
@@ -108,78 +111,16 @@ class QuantityInput extends HTMLElement {
 
   renderErrorMsg(action) {
     const content = this.getContent(action);
+    const icon = this.renderErrorIcon();
     const html = `<div class="error-message">
-      ${this.renderErrorIcon()} ${content}
+      ${icon} ${content}
     </div>`;
 
-    this.parentElement.insertAdjacentHTML('beforeend', html);
+    this.container.insertAdjacentHTML('beforeend', html);
   }
 
   removeErrorMsg() {
-    document.querySelector('.error-message')?.remove();
-  }
-
-  // USED IN CART
-  async fetchJSON() {
-    const id = this.closest('.product-cart-item')?.dataset.key;
-    const quantity = this.productQuantity;
-
-    if (!id) return;
-
-    const formData = {
-      id,
-      quantity,
-    };
-
-    // console.log(formData);
-
-    const res = await fetch(`/cart/change.js`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
-    const data = await res.json();
-
-    const format = document
-      .querySelector('[data-money-format')
-      .getAttribute('data-money-format');
-    const subTotal = formatMoney(data.total_price, format);
-    const item = data.items.find((item) => item.key === id);
-    const itemPrice = formatMoney(item.final_line_price, format);
-    const subTotalEl = document.querySelector('.price__cart');
-    const itemPriceEl = document.querySelector(
-      `[data-key="${id}"] .product-total__cart`
-    );
-
-    subTotalEl.textContent = subTotal;
-    itemPriceEl.textContent = itemPrice;
-  }
-
-  // NOT USING AT THE MOMENT
-  async fetchHTML() {
-    const sectionId = document
-      .querySelector('[data-section')
-      .getAttribute('data-section');
-
-    // console.log(sectionId);
-    const res = await fetch(`/cart?section_id=${sectionId}`);
-    const data = await res.text();
-    const html = new DOMParser().parseFromString(data, 'text/html');
-    const cartNew = html.querySelector('#cart_form');
-    const cartOld = document.querySelector('#cart_form');
-
-    const newArr = [...cartNew.getElementsByTagName('*')];
-    const oldArr = [...cartOld.getElementsByTagName('*')];
-
-    oldArr.forEach((el, i) => {
-      if (el.childNodes.length === 1) {
-        if (el.isEqualNode(newArr[i])) return;
-
-        el.innerHTML = newArr[i].innerHTML;
-      }
-    });
+    this.errorMsg?.remove();
   }
 }
 

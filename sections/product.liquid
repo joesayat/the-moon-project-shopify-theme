@@ -3,23 +3,12 @@
 
 <!-- SCRIPT -->
 <script src="{{ 'mobile-carousel.js' | asset_url }}" defer></script>
-
-{% comment %}
-  <!-- SCRIPTS -->
-  <script src="{{ 'quantity-input.js' | asset_url }}" defer="defer"></script>
-{% endcomment %}
+<script src="{{ 'quantity-input.js' | asset_url }}" type="module"></script>
 
 <!-- VARIABLES -->
 {% assign product_item = product.selected_or_first_available_variant %}
 {% assign cart_count_for_variant = cart | item_count_for_variant: product_item.id %}
 {% assign max_quantity = product_item.inventory_quantity | minus: cart_count_for_variant %}
-
-<!-- Checks if max_quantity is equal 0 -->
-{% comment %}
-  {% if max_quantity == 0 %}
-    {% assign max_quantity = 0 %}
-  {% endif %}
-{% endcomment %}
 
 <!-- SECTION PRODUCT ITEM -->
 <div class="section__product">
@@ -207,7 +196,7 @@
     }
 
     removeErrorMsg() {
-     this.querySelector('.error-message')?.remove();
+      this.querySelector('.error-message')?.remove();
     }
 
     async fetchCartAdd() {
@@ -227,24 +216,6 @@
       } catch (err) {
         this.renderErrorMsg(err);
       }
-
-      // Update quantity input and render success message
-      {% comment %} const variant = document.querySelector('select[name="id"]');
-      const res = await fetch(`${variant.dataset.url}?variant=${variant.value}&section_id=${variant.dataset.section}`);
-      const data = await res.text();
-      const html = new DOMParser().parseFromString(data, 'text/html');
-
-      const oldQuantity = document.querySelector('.quantity-input');
-      const newQuantity = html.querySelector('.quantity-input');
-
-      if (!document.isEqualNode(html)) {
-        oldQuantity.innerHTML = newQuantity.innerHTML;
-      }
-      const btnContainer = document.querySelector('.btn-container');
-      const htmlMessage = `
-        <div class="success-message">Added to cart!</div>
-      `;
-      btnContainer.insertAdjacentHTML('beforeend', htmlMessage); {% endcomment %}
     }
 
     renderErrorMsg(err) {
