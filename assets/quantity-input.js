@@ -64,7 +64,7 @@ export class QuantityInput extends HTMLElement {
   }
 
   updateCart() {
-    // cart-quantity-input
+    // this is called in cart-quantity-input
   }
 
   renderErrorIcon() {
