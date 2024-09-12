@@ -87,6 +87,12 @@
   .heading-container__pages {
     padding: 3.2rem;
   }
+
+  /* QUANTITY INPUT */
+  .input-container__cart > .quantity-input {
+    padding: 1.2rem;
+    gap: 2rem;
+  }
 }
 
 /************************/
