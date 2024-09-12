@@ -111,9 +111,6 @@
             <!-- INPUT QUANTITY -->
             <quantity-input
               class="quantity-input"
-              data-value="1"
-              data-min="1"
-              data-max="{{ max_quantity }}"
               data-name="{{ product.title }}"
               data-available="{{ product_item.available }}"
               data-size="{{ product_item.title }}"
@@ -125,6 +122,9 @@
                 class="input_number"
                 type="number"
                 name="quantity"
+                value="1"
+                min="1"
+                max="{{ max_quantity }}"
                 readonly
               >
               <button name="increment">
@@ -181,7 +181,7 @@
 
     getFormData() {
       const id = this.querySelector('variant-selector').getVariantId();
-      const quantity = this.querySelector('quantity-input').productQuantity;
+      const quantity = this.querySelector('quantity-input').inputQuantity.value;
 
       this.formData = {
         items: [

@@ -2,10 +2,15 @@ export class QuantityInput extends HTMLElement {
   constructor() {
     super();
 
-    this.container = this.closest('.cta-container__product');
-    this.input = this.querySelector('input[name="quantity"]');
-    this.setInputValues();
     this.addEventListener('click', this.onBtnClick);
+  }
+
+  connectedCallback() {
+    this.container = this.closest('.cta-container__product');
+  }
+
+  get inputQuantity() {
+    return this.querySelector('input[name="quantity"]');
   }
 
   get errorMsg() {
@@ -24,46 +29,26 @@ export class QuantityInput extends HTMLElement {
     return `${this.dataset.name}${size}`;
   }
 
-  get productQuantity() {
-    return Number(this.dataset.value);
+  setInputQuantityValue(newValue) {
+    this.inputQuantity.value = newValue;
   }
 
-  set productQuantity(value) {
-    this.dataset.value = value;
-
-    return value;
+  handleDecrementValue(value, minValue) {
+    value <= minValue ? '' : this.setInputQuantityValue(--value);
   }
 
-  get productQuantityMax() {
-    return Number(this.dataset.max);
-  }
-
-  get productQuantityMin() {
-    return Number(this.dataset.min);
-  }
-
-  setInputValues() {
-    this.input.value = this.productQuantity;
-    this.input.max = this.productQuantityMax;
-    this.input.min = this.productQuantityMin;
-  }
-
-  handleDecrementValue() {
-    this.input.value <= this.input.min
-      ? ''
-      : (this.productQuantity = --this.input.value);
-  }
-
-  handleIncrementValue() {
-    this.input.value >= this.input.max
+  handleIncrementValue(value, maxValue) {
+    value >= maxValue
       ? this.renderErrorMsg('add more')
-      : (this.productQuantity = ++this.input.value);
+      : this.setInputQuantityValue(++value);
   }
 
   handleCalculation() {
-    this.btn.getAttribute('name') === 'increment'
-      ? this.handleIncrementValue()
-      : this.handleDecrementValue();
+    const { max, min, value } = this.inputQuantity;
+
+    this.btn.getAttribute('name') === 'decrement'
+      ? this.handleDecrementValue(Number(value), Number(min))
+      : this.handleIncrementValue(Number(value), Number(max));
   }
 
   onBtnClick(e) {
@@ -75,6 +60,11 @@ export class QuantityInput extends HTMLElement {
 
     this.removeErrorMsg();
     this.handleCalculation();
+    this.updateCart();
+  }
+
+  updateCart() {
+    // cart-quantity-input
   }
 
   renderErrorIcon() {
@@ -100,7 +90,7 @@ export class QuantityInput extends HTMLElement {
     switch (true) {
       case !this.isProductAvailable:
         return `${this.productName} is not available`;
-      case this.isProductAvailable && this.productQuantityMax === 0:
+      case this.isProductAvailable && Number(this.inputQuantity.max) === 0:
         return `All ${this.productName} is in your cart.`;
       default:
         return `You can't ${action} ${this.productName}`;

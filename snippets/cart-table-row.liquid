@@ -68,9 +68,6 @@
     <div class="input-container__cart">
       <cart-quantity-input
         class="quantity-input"
-        data-value="{{ item.quantity }}"
-        data-min="1"
-        data-max="{{ item.variant.inventory_quantity}}"
         data-name="{{ item.product.title }}"
         data-size="{{ item.variant.title }}"
         data-available="{{ item.variant.available }}"
@@ -82,6 +79,9 @@
           class="input_number"
           type="number"
           name="quantity"
+          value="{{ item.quantity }}"
+          min="1"
+          max="{{ item.variant.inventory_quantity}}"
           readonly
         >
         <button name="increment">
