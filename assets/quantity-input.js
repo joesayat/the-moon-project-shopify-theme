@@ -1,18 +1,20 @@
-class QuantityInput extends HTMLElement {
-  static observedAttributes = ['data-value'];
-
+export class QuantityInput extends HTMLElement {
   constructor() {
     super();
 
-    this.input = this.querySelector('input[name="quantity"]');
-    this.setInputValues();
     this.addEventListener('click', this.onBtnClick);
   }
 
-  attributeChangedCallback(name, oldVal, newVal) {
-    if (name === 'data-value') {
-      this.fetchJSON();
-    }
+  connectedCallback() {
+    this.container = this.closest('.cta-container__product');
+  }
+
+  get inputQuantity() {
+    return this.querySelector('input[name="quantity"]');
+  }
+
+  get errorMsg() {
+    return document.querySelector('.error-message');
   }
 
   get isProductAvailable() {
@@ -20,49 +22,33 @@ class QuantityInput extends HTMLElement {
   }
 
   get productName() {
-    return `${this.dataset.name} - ${this.dataset.size}`;
+    const size = this.dataset.size.toLocaleLowerCase().includes('default')
+      ? ''
+      : ` - ${this.dataset.size}`;
+
+    return `${this.dataset.name}${size}`;
   }
 
-  get productQuantity() {
-    return Number(this.dataset.value);
+  setInputQuantityValue(newValue) {
+    this.inputQuantity.value = newValue;
   }
 
-  set productQuantity(value) {
-    this.dataset.value = value;
-
-    return value;
+  handleDecrementValue(value, minValue) {
+    value <= minValue ? '' : this.setInputQuantityValue(--value);
   }
 
-  get productQuantityMax() {
-    return Number(this.dataset.max);
-  }
-
-  get productQuantityMin() {
-    return Number(this.dataset.min);
-  }
-
-  setInputValues() {
-    this.input.value = this.productQuantity;
-    this.input.max = this.productQuantityMax;
-    this.input.min = this.productQuantityMin;
-  }
-
-  handleDecrementValue() {
-    this.input.value <= this.input.min
-      ? this.renderErrorMsg('remove')
-      : (this.productQuantity = --this.input.value);
-  }
-
-  handleIncrementValue() {
-    this.input.value >= this.input.max
+  handleIncrementValue(value, maxValue) {
+    value >= maxValue
       ? this.renderErrorMsg('add more')
-      : (this.productQuantity = ++this.input.value);
+      : this.setInputQuantityValue(++value);
   }
 
   handleCalculation() {
-    this.btn.getAttribute('name') === 'increment'
-      ? this.handleIncrementValue()
-      : this.handleDecrementValue();
+    const { max, min, value } = this.inputQuantity;
+
+    this.btn.getAttribute('name') === 'decrement'
+      ? this.handleDecrementValue(Number(value), Number(min))
+      : this.handleIncrementValue(Number(value), Number(max));
   }
 
   onBtnClick(e) {
@@ -74,6 +60,11 @@ class QuantityInput extends HTMLElement {
 
     this.removeErrorMsg();
     this.handleCalculation();
+    this.updateCart();
+  }
+
+  updateCart() {
+    // this is called in cart-quantity-input
   }
 
   renderErrorIcon() {
@@ -99,7 +90,7 @@ class QuantityInput extends HTMLElement {
     switch (true) {
       case !this.isProductAvailable:
         return `${this.productName} is not available`;
-      case this.isProductAvailable && this.productQuantityMax === 0:
+      case this.isProductAvailable && Number(this.inputQuantity.max) === 0:
         return `All ${this.productName} is in your cart.`;
       default:
         return `You can't ${action} ${this.productName}`;
@@ -108,78 +99,16 @@ class QuantityInput extends HTMLElement {
 
   renderErrorMsg(action) {
     const content = this.getContent(action);
+    const icon = this.renderErrorIcon();
     const html = `<div class="error-message">
-      ${this.renderErrorIcon()} ${content}
+      ${icon} ${content}
     </div>`;
 
-    this.parentElement.insertAdjacentHTML('beforeend', html);
+    this.container.insertAdjacentHTML('beforeend', html);
   }
 
   removeErrorMsg() {
-    document.querySelector('.error-message')?.remove();
-  }
-
-  // USED IN CART
-  async fetchJSON() {
-    const id = this.closest('.product-cart-item')?.dataset.key;
-    const quantity = this.productQuantity;
-
-    if (!id) return;
-
-    const formData = {
-      id,
-      quantity,
-    };
-
-    // console.log(formData);
-
-    const res = await fetch(`/cart/change.js`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
-    const data = await res.json();
-
-    const format = document
-      .querySelector('[data-money-format')
-      .getAttribute('data-money-format');
-    const subTotal = formatMoney(data.total_price, format);
-    const item = data.items.find((item) => item.key === id);
-    const itemPrice = formatMoney(item.final_line_price, format);
-    const subTotalEl = document.querySelector('.price__cart');
-    const itemPriceEl = document.querySelector(
-      `[data-key="${id}"] .product-total__cart`
-    );
-
-    subTotalEl.textContent = subTotal;
-    itemPriceEl.textContent = itemPrice;
-  }
-
-  // NOT USING AT THE MOMENT
-  async fetchHTML() {
-    const sectionId = document
-      .querySelector('[data-section')
-      .getAttribute('data-section');
-
-    // console.log(sectionId);
-    const res = await fetch(`/cart?section_id=${sectionId}`);
-    const data = await res.text();
-    const html = new DOMParser().parseFromString(data, 'text/html');
-    const cartNew = html.querySelector('#cart_form');
-    const cartOld = document.querySelector('#cart_form');
-
-    const newArr = [...cartNew.getElementsByTagName('*')];
-    const oldArr = [...cartOld.getElementsByTagName('*')];
-
-    oldArr.forEach((el, i) => {
-      if (el.childNodes.length === 1) {
-        if (el.isEqualNode(newArr[i])) return;
-
-        el.innerHTML = newArr[i].innerHTML;
-      }
-    });
+    this.errorMsg?.remove();
   }
 }
 
