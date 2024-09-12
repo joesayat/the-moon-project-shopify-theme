@@ -1,6 +1,4 @@
 export class QuantityInput extends HTMLElement {
-  static observedAttributes = ['data-value'];
-
   constructor() {
     super();
 

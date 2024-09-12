@@ -1,6 +1,8 @@
 import { QuantityInput } from './quantity-input.js';
 
 class CartQuantityInput extends QuantityInput {
+  static observedAttributes = ['data-value'];
+  
   constructor() {
     super();
 
