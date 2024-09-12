@@ -91,7 +91,7 @@ export class QuantityInput extends HTMLElement {
       case !this.isProductAvailable:
         return `${this.productName} is not available`;
       case this.isProductAvailable && Number(this.inputQuantity.max) === 0:
-        return `All ${this.productName} are in your cart.`;
+        return `All ${this.productName} is in your cart.`;
       default:
         return `You can't ${action} ${this.productName}`;
     }
