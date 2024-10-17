@@ -28,7 +28,21 @@
         "product_count": 3,
         "column_count": 3
       }
+    },
+    "featured_collection_gC6dwf": {
+      "type": "featured-collection",
+      "settings": {
+        "title": "Crew Socks",
+        "subtitle": "Featured Collection",
+        "featured_collection": "crew-socks",
+        "product_count": 6,
+        "column_count": 3
+      }
     }
   },
-  "order": ["main", "featured-collection"]
+  "order": [
+    "main",
+    "featured-collection",
+    "featured_collection_gC6dwf"
+  ]
 }
