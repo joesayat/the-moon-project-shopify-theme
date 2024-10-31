@@ -22,13 +22,18 @@
   gap: 2.4rem;
 }
 
-.footer-copyright { 
+.footer-copyright {
   padding: 8rem 0 4rem;
   text-align: center;
 }
 
 .footer-logo-text {
   color: var(--main);
+}
+
+.footer-logo-img {
+  height: 12rem;
+  width: 12rem;
 }
 
 /*******************************/

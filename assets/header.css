@@ -30,6 +30,11 @@
   display: none;
 }
 
+.header-logo-img {
+  height: 2.4rem;
+  width: auto;
+}
+
 /***********************************/
 /* BELOW 1024px (Laptops/ Tablets) */
 /***********************************/
