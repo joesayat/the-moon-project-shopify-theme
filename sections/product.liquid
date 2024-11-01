@@ -156,13 +156,16 @@
 
       <div class="product-content__product">{{ product.content }}</div>
       <div class="product-accordion">
-        {% render 'accordion' %}
+        {% render 'accordion', product_tag: product.tags %}
       </div>
     </div>
   </div>
 </div>
 
 <!-- SCRIPTS -->
+<script type="application/ld+json">
+  {{ product | structured_data }}
+</script>
 <script>
   class CartForm extends HTMLElement {
     constructor() {

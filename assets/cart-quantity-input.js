@@ -8,12 +8,16 @@ class CartQuantityInput extends QuantityInput {
 
   connectedCallback() {
     this.container = this.closest('.form-container__cart');
+    this.format = this.getFormat();
     this.id = this.getProductId();
     this.subTotalEl = document.querySelector('.price__cart');
     this.itemPriceEl = document.querySelector(
       `[data-key="${this.id}"] .product-total__cart`
     );
-    this.format = document
+  }
+
+  getFormat() {
+    return document
       .querySelector('[data-money-format]')
       .getAttribute('data-money-format');
   }

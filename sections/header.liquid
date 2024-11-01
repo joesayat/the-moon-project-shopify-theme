@@ -10,7 +10,17 @@
 <header-nav>
   <header class="header tmp-header bold relative">
     <!-- LOGO -->
-    <div class="header-logo">The Moon Project</div>
+    <div class="header-logo">
+      <a href="{{ routes.root_url }}">
+        <img
+          class="header-logo-img"
+          src="{{ images['header-logo.gif'] | image_url }}"
+          alt="The Moon Project logo"
+          width="auto"
+          height="auto"
+        >
+      </a>
+    </div>
 
     <!-- DESKTOP NAV -->
     <nav class="header-nav">
