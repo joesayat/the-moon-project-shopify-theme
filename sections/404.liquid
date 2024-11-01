@@ -1,13 +1,13 @@
 <!-- SECTION ERROR 404 -->
 <section class="section-error">
   <div class="error-img-container">
-    {% render 'icon-error', size: '24rem' %}
+    {% render 'tmp-icon-not-found', size: '24rem' %}
   </div>
   <h1 class="heading-error">{{ 'error.404.title' | t }}</h1>
   <p class="error-description">{{ 'error.404.description' | t }}</p>
   <div class="error-btn-container">
-    <a 
-      class="tmp-btn tmp-btn_main tmp-btn_error bold" 
+    <a
+      class="tmp-btn tmp-btn_main tmp-btn_error bold"
       href="{{ routes.root_url  }}"
     >
       {{ 'error.404.btn_text' | t }}
