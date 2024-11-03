@@ -10,7 +10,6 @@
 @media (max-width: 64em) {
   /* UTILITY STYLES */
   .container {
-    max-width: 120rem;
     padding: 0 4rem;
   }
 
