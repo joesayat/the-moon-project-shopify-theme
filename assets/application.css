@@ -91,6 +91,7 @@ summary::-webkit-details-marker {
 
 /* UTILITY STYLES */
 .container {
+  max-width: 120rem;
   margin: 0 auto;
   padding: 0 4.8rem;
 }
