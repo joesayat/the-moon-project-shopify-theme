@@ -1,34 +1,34 @@
 <li class="product-description__collection relative">
-  {% if product.type == 'Socks' %}
+  {% if product.category == 'Socks' or product.category == 'Coasters' or product.category == 'Door Mats' %}
     <div class="img-container__collection overflow-hidden">
-      <img 
-        class="product-img__collection" 
-        name="img-featured" 
-        src="{{ product.featured_image | image_url }}" 
+      <img
+        class="product-img__collection"
+        name="img-featured"
+        src="{{ product.featured_image | image_url }}"
         width="120"
-        height="150" 
-        alt="{{ product.featured_image.alt}}" 
-      />
+        height="150"
+        alt="{{ product.featured_image.alt}}"
+      >
     </div>
   {% else %}
     <div class="img-container__collection">
-      <img 
-        class="product-img__collection" 
-        name="img-back" 
-        src="{{ product.images[1] | image_url }}" 
-        width="120" 
-        height="150" 
-        alt="{{ product.images[1].alt}}" 
-      />
+      <img
+        class="product-img__collection"
+        name="img-back"
+        src="{{ product.images[1] | image_url }}"
+        width="120"
+        height="150"
+        alt="{{ product.images[1].alt}}"
+      >
     </div>
-    <img 
-      class="product-img__collection" 
-      name="img-front" 
-      src="{{ product.images[0] | image_url }}" 
+    <img
+      class="product-img__collection"
+      name="img-front"
+      src="{{ product.images[0] | image_url }}"
       width="120"
-      height="150" 
-      alt="{{ product.images[0].alt}}" 
-    />
+      height="150"
+      alt="{{ product.images[0].alt}}"
+    >
   {% endif %}
   <h3 class="product-name__collection bold">{{ product.title }}</h3>
   <p class="product-price__collection">{{ product.price | money }}</p>
