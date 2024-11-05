@@ -58,6 +58,12 @@
   display: inline-block;
 }
 
+.variant-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
 .cta-container__product {
   margin: 2.8rem 0 1.4rem;
   display: grid;
