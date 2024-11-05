@@ -72,7 +72,7 @@
               data-url="{{ product.url }}"
               data-section="{{ section.id }}"
             >
-              <h3 class="label">Size</h3>
+              <h3 class="label">{{ product.options }}</h3>
               <!-- RADIO GROUP -->
               <div class="variant-container">
                 {% for variant in product.variants %}
@@ -91,20 +91,22 @@
               </div>
             </variant-selector>
           {% else %}
-            <variant-selector class="variant-selector">
-              <h3 class="label">Size</h3>
-              <div>
-                <input
-                  class="input_radio"
-                  type="radio"
-                  name="option[Size]"
-                  id="Free size"
-                  value="{{ product_item.id }}"
-                  checked
-                >
-                <label class="input-label_radio input-label_radio--free" for="Free size">Free size</label>
-              </div>
-            </variant-selector>
+            {% comment %}
+              <variant-selector class="variant-selector">
+                <h3 class="label">Size</h3>
+                <div>
+                  <input
+                    class="input_radio"
+                    type="radio"
+                    name="option[Size]"
+                    id="Free size"
+                    value="{{ product_item.id }}"
+                    checked
+                  >
+                  <label class="input-label_radio input-label_radio--free" for="Free size">Free size</label>
+                </div>
+              </variant-selector>
+            {% endcomment %}
           {% endunless %}
 
           <div class="cta-container__product">
