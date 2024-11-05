@@ -458,7 +458,7 @@ summary::-webkit-details-marker {
   font-size: 1.4rem;
   font-weight: 600;
   border: 1px solid var(--gray-dark);
-  padding: 1.2rem 2.4rem;
+  padding: 1.2rem 0;
   cursor: pointer;
 }
 
