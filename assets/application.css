@@ -462,6 +462,10 @@ summary::-webkit-details-marker {
   cursor: pointer;
 }
 
+.input-label_radio--free {
+  padding: 1.2rem 2.4rem;
+}
+
 .quantity-input {
   padding: 0 1.2rem;
   display: flex;
