@@ -32,10 +32,10 @@
     "featured_collection_gC6dwf": {
       "type": "featured-collection",
       "settings": {
-        "title": "Crew Socks",
-        "subtitle": "Featured Collection",
+        "title": "Feature Finds",
+        "subtitle": "",
         "featured_collection": "feature-finds",
-        "product_count": 6,
+        "product_count": 3,
         "column_count": 3
       }
     }
