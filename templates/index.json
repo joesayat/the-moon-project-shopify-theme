@@ -22,9 +22,9 @@
     "featured-collection": {
       "type": "featured-collection",
       "settings": {
-        "title": "Unknown Collection",
+        "title": "Half-Zip",
         "subtitle": "New Collection",
-        "featured_collection": "unknown-collection",
+        "featured_collection": "half-zip",
         "product_count": 3,
         "column_count": 3
       }
