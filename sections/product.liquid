@@ -91,22 +91,20 @@
               </div>
             </variant-selector>
           {% else %}
-            {% comment %}
-              <variant-selector class="variant-selector">
-                <h3 class="label">Size</h3>
-                <div>
-                  <input
-                    class="input_radio"
-                    type="radio"
-                    name="option[Size]"
-                    id="Free size"
-                    value="{{ product_item.id }}"
-                    checked
-                  >
-                  <label class="input-label_radio input-label_radio--free" for="Free size">Free size</label>
-                </div>
-              </variant-selector>
-            {% endcomment %}
+            <variant-selector class="variant-selector" style="display: none;">
+              <h3 class="label">Size</h3>
+              <div>
+                <input
+                  class="input_radio"
+                  type="radio"
+                  name="option[Size]"
+                  id="Free size"
+                  value="{{ product_item.id }}"
+                  checked
+                >
+                <label class="input-label_radio input-label_radio--free" for="Free size">Free size</label>
+              </div>
+            </variant-selector>
           {% endunless %}
 
           <div class="cta-container__product">
