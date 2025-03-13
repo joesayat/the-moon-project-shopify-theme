@@ -80,30 +80,11 @@
   gap: 0.4rem;
 }
 
-.product-accordion {
-  margin-top: 4rem;
-}
-
 .product-content__product {
-  margin: 2rem 0;
-  font-size: 1.4rem;
+  display: none;
 }
 
-.product-content__product > p:not(:last-of-type) {
-  margin-bottom: 1.6rem;
-}
-
-.product-content__product > ul {
-  list-style-type: disc;
-  padding-left: 2rem;
-  margin-bottom: 1.6rem;
-}
-
-.product-content__product li:not(:last-of-type) {
-  margin-bottom: 1rem;
-}
-
-.product-content__product strong {
+#product-accordion strong {
   font-style: italic;
   letter-spacing: 0.1rem;
   text-transform: uppercase;
