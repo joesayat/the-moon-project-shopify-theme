@@ -154,10 +154,12 @@
         {% endform %}
       </cart-form>
 
-      <div class="product-content__product">{{ product.content }}</div>
-      <div class="product-accordion">
-        {% render 'accordion', product_tag: product.tags %}
-      </div>
+      <product-accordion id="product-accordion">
+        <div class="product-content__product">{{ product.content }}</div>
+        <div class="product-accordion">
+          {% render 'accordion', product_tag: product.tags %}
+        </div>
+      </product-accordion>
     </div>
   </div>
 </div>
@@ -167,6 +169,65 @@
   {{ product | structured_data }}
 </script>
 <script>
+  class ProductAccordion extends HTMLElement {
+    constructor() {
+      super();
+
+      this.content = document.querySelector('.product-content__product');
+      this.content2 = document.querySelector('.product-accordion');
+      this.contentArr = [...this.content.children];
+      this.mappedContent = [];
+
+      console.log('accordion');
+    }
+
+    connectedCallback() {
+      this.mapContent();
+      this.renderAccordion();
+    }
+
+    mapContent() {
+      let arr = [];
+
+      this.contentArr.forEach((el, i) => {
+        if (el.localName === 'h4' && i !== 0) {
+          this.mappedContent.push(arr);
+          arr = [];
+        }
+
+        arr.push(el);
+
+        if (i === this.contentArr.length - 1) {
+          this.mappedContent.push(arr);
+        }
+      });
+    }
+
+    renderAccordion() {
+      const html = `<div class="accordion">
+        ${this.mappedContent
+          .map((e) => {
+            const [heading, ...rest] = e;
+            console.log(heading, rest);
+            return `<div class="accordion-item">
+            <details name="faq" open>
+              <summary>
+                <h3 class="accordion-heading">${heading.textContent}</h3>
+              </summary>
+              <div class="accordion-content">${rest.map((e) => e.innerHTML).join('')}</div>
+            </details>
+          </div>`;
+          })
+          .join('')}
+      </div>`;
+      console.log(html);
+
+      this.content2.insertAdjacentHTML('beforebegin', html);
+    }
+  }
+
+  customElements.define('product-accordion', ProductAccordion);
+
   class CartForm extends HTMLElement {
     constructor() {
       super();

@@ -15,6 +15,10 @@
   border-bottom: 1px solid var(--gray-darkest);
 }
 
+#product-accordion .accordion-item:last-child details {
+  border-bottom: none;
+}
+
 .accordion-item summary {
   padding: 2rem;
   cursor: pointer;
