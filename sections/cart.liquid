@@ -45,14 +45,23 @@
 
             <!-- CART BUTTONS -->
             <div class="cta-container__cart">
-              <div class="helper-text__cart">*Taxes and shipping calculated at checkout</div>
-              <button
-                class="btn btn_main"
-                type="submit"
-                name="checkout"
-              >
-                Checkout
-              </button>
+              <checkout-button>
+                <div class="helper-text__cart">*Taxes and shipping calculated at checkout</div>
+                <div class="helper-text__term">
+                  <input type="checkbox" name="agree" id="agree" class="checkbox__term">
+                  <label for="agree" class="label__term"
+                    >I have read and agree with the
+                    <a href="{{ pages['privacy-policy'].url }}" target="_blank" class="">Privacy Policy</a></label
+                  >
+                </div>
+                <button
+                  class="btn btn_main btn--checkout"
+                  type="submit"
+                  name="checkout"
+                >
+                  Checkout
+                </button>
+              </checkout-button>
             </div>
           </div>
         {% endform %}
@@ -63,4 +72,25 @@
   {% render 'error-empty-cart' %}
 {% endif %}
 
-<script></script>
+<script>
+  class CheckoutButton extends HTMLElement {
+    constructor() {
+      super();
+
+      this.btn = this.querySelector('.btn--checkout');
+      this.checkbox = this.querySelector('.checkbox__term');
+      this.addEventListener('change', this.onCheckboxChange);
+    }
+
+    connectedCallback() {
+      this.btn.disabled = true;
+      this.checkbox.checked = false;
+    }
+
+    onCheckboxChange(e) {
+      this.btn.disabled = !e.target.checked;
+    }
+  }
+
+  customElements.define('checkout-button', CheckoutButton);
+</script>

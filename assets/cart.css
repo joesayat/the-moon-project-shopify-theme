@@ -107,6 +107,30 @@
   margin-bottom: 0.4rem;
 }
 
+.helper-text__term {
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+}
+
+.helper-text__term label {
+  display: inline-block;
+  transform: translateY(-2px);
+  margin-left: 4px;
+}
+
+.helper-text__term a:link,
+.helper-text__term a:visited {
+  color: var(--main);
+  text-decoration: underline;
+  padding: 1rem 0;
+  transition: all 0.3s ease;
+}
+
+.helper-text__term a:hover,
+.helper-text__term a:active {
+  color: var(--main-dark);
+}
+
 .error-message {
   font-size: 1.2rem;
   display: flex;
