@@ -174,11 +174,9 @@
       super();
 
       this.content = document.querySelector('.product-content__product');
-      this.content2 = document.querySelector('.product-accordion');
+      this.productAccordion = document.querySelector('.product-accordion');
       this.contentArr = [...this.content.children];
       this.mappedContent = [];
-
-      console.log('accordion');
     }
 
     connectedCallback() {
@@ -208,7 +206,7 @@
         ${this.mappedContent
           .map((e) => {
             const [heading, ...rest] = e;
-            console.log(heading, rest);
+            
             return `<div class="accordion-item">
             <details name="faq" open>
               <summary>
@@ -220,9 +218,8 @@
           })
           .join('')}
       </div>`;
-      console.log(html);
 
-      this.content2.insertAdjacentHTML('beforebegin', html);
+      this.productAccordion.insertAdjacentHTML('afterbegin', html);
     }
   }
 
