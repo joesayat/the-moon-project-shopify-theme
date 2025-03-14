@@ -586,6 +586,7 @@ a.heading-2:hover > .heading-2-icon {
 }
 
 .announcement-banner__content {
+  min-width: 150rem;
   display: inline-block;
   padding: 0 20rem;
   color: var(--white);
