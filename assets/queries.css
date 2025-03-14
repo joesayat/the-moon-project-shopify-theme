@@ -60,13 +60,6 @@
     padding: 0 3.2rem;
   }
 
-  /* CSSGRID */
-  .grid-3-col,
-  .grid-4-col,
-  .grid-5-col {
-    grid-template-columns: repeat(1, 1fr);
-  }
-
   .grid-footer {
     justify-items: start;
   }

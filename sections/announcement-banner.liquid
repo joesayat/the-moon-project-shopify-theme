@@ -1,0 +1,32 @@
+<div class="announcement-banner">
+  <div class="announcement-banner__animation">
+    <div class="announcement-banner__content">
+      {% if section.settings.announcement_content != blank %}
+        {{ section.settings.announcement_content }}
+      {% else %}
+        Announcement Banner
+      {% endif %}
+    </div>
+    <div class="announcement-banner__content">
+      {% if section.settings.announcement_content != blank %}
+        {{ section.settings.announcement_content }}
+      {% else %}
+        Announcement Banner
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<!-- SCHEMA -->
+{% schema %}
+{
+  "name": "Announcement Banner",
+  "settings": [
+    {
+      "type": "text",
+      "id": "announcement_content",
+      "label": "Content"
+    }
+  ]
+}
+{% endschema %}
