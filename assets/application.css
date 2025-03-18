@@ -570,7 +570,41 @@ a.heading-2:hover > .heading-2-icon {
   color: var(--white);
 }
 
+/* POLICY CONTAINER */
 .policy-container {
   max-width: 80rem;
   margin: 0 auto;
+}
+
+/* ANNOUNCEMENT BANNER */
+.announcement-banner {
+  height: 4rem;
+  display: flex;
+  align-items: center;
+  background-color: var(--black);
+  white-space: nowrap;
+}
+
+.announcement-banner__content {
+  min-width: 150rem;
+  display: inline-block;
+  padding: 0 20rem;
+  color: var(--white);
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.announcement-banner__animation {
+  display: flex;
+  animation: scrollToLeft 20s linear infinite;
+}
+
+@keyframes scrollToLeft {
+  0% {
+    transform: translate(0);
+  }
+
+  100% {
+    transform: translate(-50%);
+  }
 }
