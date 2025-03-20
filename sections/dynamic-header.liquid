@@ -1,0 +1,39 @@
+{% if section.settings.header_img == blank %}
+  <!-- TODO: update when assets are available -->
+  {% assign background_img = images['Cosmic-v2.webp'] | image_url %}
+{% else %}
+  {% assign background_img = section.settings.header_img | image_url %}
+{% endif %}
+
+<style>
+  .section-dynamic-header {
+    height: calc(90vh - 16rem);
+  }
+
+  .dynamic-header__background-img {
+    height: 100%;
+    background-image: url({{'https:'|append:background_img}});
+    background-position: top;
+    background-size: cover;
+  }
+
+  /***********************************/
+  /* BELOW 1024px (Laptops/ Tablets) */
+  /***********************************/
+  @media (max-width: 64em) {
+    .section-dynamic-header {
+      height: calc(90vh - 11rem);
+    }
+  }
+</style>
+
+<section class="section-dynamic-header">
+  <div class="dynamic-header__background-img">&nbsp;</div>
+</section>
+
+{% schema %}
+{
+  "name": "Dynamic Header",
+  "settings": [{ "type": "image_picker", "id": "header_img", "label": "Header Image" }]
+}
+{% endschema %}
