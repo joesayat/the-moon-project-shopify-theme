@@ -9,6 +9,7 @@
  */
 {
   "sections": {
+    "dynamic-header": { "type": "dynamic-header" },
     "main": {
       "type": "hero",
       "settings": {
@@ -41,6 +42,7 @@
     }
   },
   "order": [
+    "dynamic-header",
     "main",
     "featured-collection",
     "featured_collection_gC6dwf"
