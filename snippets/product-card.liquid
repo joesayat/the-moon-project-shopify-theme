@@ -30,6 +30,21 @@
       alt="{{ product.images[0].alt}}"
     >
   {% endif %}
+  <div class="product-card__tag-container">
+    {% for tag in product.tags %}
+      {% assign tag_downcase = tag | downcase %}
+      {% case tag_downcase %}
+        {% when 'sale' %}
+          <p class="product-card__tag product-card__tag--sale">{{ tag_downcase }}</p>
+        {% when 'limited stocks' %}
+          <p class="product-card__tag product-card__tag--limited-stocks">{{ tag_downcase }}</p>
+        {% when 'new release' %}
+          <p class="product-card__tag product-card__tag--new-release">{{ tag_downcase }}</p>
+        {% else %}
+
+      {% endcase %}
+    {% endfor %}
+  </div>
   <h3 class="product-name__collection bold">{{ product.title }}</h3>
   <p class="product-price__collection">{{ product.price | money }}</p>
   <a class="product-link__collection" href="{{ product.url }}"></a>

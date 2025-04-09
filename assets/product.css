@@ -23,6 +23,33 @@
   top: 2rem;
 }
 
+.product-description__heading {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.product__tag {
+  display: inline-block;
+  padding: 1rem 2rem;
+  color: var(--white);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.product__tag--sale {
+  background-color: var(--main-dark);
+  background-color: var(--black);
+}
+
+.product__tag--limited-stocks {
+  background-color: var(--gray-darkest);
+}
+
+.product__tag--new-release {
+  background-color: var(--main);
+}
+
 .form__product {
   display: flex;
   flex-direction: column;

@@ -1,5 +1,6 @@
 <!-- CART STYLES -->
 {{ 'product.css' | asset_url | stylesheet_tag }}
+{{ 'accordion.css' | asset_url | stylesheet_tag }}
 
 <!-- SCRIPT -->
 <script src="{{ 'mobile-carousel.js' | asset_url }}" defer></script>
@@ -53,14 +54,31 @@
       </div>
     </div>
     <div class="product-description__product">
-      <h1 class="heading-product-item">{{ product.title }}</h1>
-      <div class="product-price-container__product">
-        {% if product_item.price < product_item.compare_at_price %}
-          <p class="product-price__product--sale">{{ product_item.compare_at_price | money }}</p>
-          <p class="product-price__product">{{ product_item.price | money }}</p>
-        {% else %}
-          <p class="product-price__product">{{ product_item.price | money }}</p>
-        {% endif %}
+      <div class="product-description__heading">
+        <h1 class="heading-product-item">{{ product.title }}</h1>
+        <div class="product__tags">
+          {% for tag in product.tags %}
+            {% assign tag_downcase = tag | downcase %}
+            {% case tag_downcase %}
+              {% when 'sale' %}
+                <p class="product__tag product__tag--sale">{{ tag_downcase }}</p>
+              {% when 'limited stocks' %}
+                <p class="product__tag product__tag--limited-stocks">{{ tag_downcase }}</p>
+              {% when 'new release' %}
+                <p class="product__tag product__tag--new-release">{{ tag_downcase }}</p>
+              {% else %}
+
+            {% endcase %}
+          {% endfor %}
+        </div>
+        <div class="product-price-container__product">
+          {% if product_item.price < product_item.compare_at_price %}
+            <p class="product-price__product--sale">{{ product_item.compare_at_price | money }}</p>
+            <p class="product-price__product">{{ product_item.price | money }}</p>
+          {% else %}
+            <p class="product-price__product">{{ product_item.price | money }}</p>
+          {% endif %}
+        </div>
       </div>
 
       <!-- SIZE SELECTOR -->
@@ -155,8 +173,72 @@
       </cart-form>
 
       <div class="product-content__product">{{ product.content }}</div>
-      <div class="product-accordion">
-        {% render 'accordion', product_tag: product.tags %}
+      <div class="accordion">
+        <!-- ARTICLES -->
+        {% assign featured_articles = blogs.products.articles | reverse %}
+
+        {% for article in featured_articles %}
+          {% assign article_title_downcase = article.title | downcase %}
+
+          {% case article_title_downcase %}
+            {% when 'size chart' %}
+              <!-- TAG IMAGE -->
+              {% for tag in product.tags %}
+                {% assign tag_downcase = tag | downcase %}
+
+                {% case tag_downcase %}
+                  {% when 'sweater', 'hoodie', 'tie_dye', 'orbital_crew', 'turtleneck', 'cropped', 'boxy' %}
+                    {% assign img_url = tag | append: '.png' %}
+                  {% else %}
+                    {% assign img_url = '' %}
+                {% endcase %}
+              {% endfor %}
+
+              {% if img_url != blank %}
+                <div class="accordion-item">
+                  <details name="products">
+                    <summary>
+                      <h3 class="accordion-heading">{{ article.title }}</h3>
+                    </summary>
+                    <div class="accordion-content">
+                      <img
+                        class="accordion-img"
+                        src="{{ images[img_url] | image_url }}"
+                        alt="size chart"
+                        width="auto"
+                        height="auto"
+                      >
+                    </div>
+                  </details>
+                </div>
+              {% endif %}
+            {% else %}
+              <div class="accordion-item">
+                <details name="products">
+                  <summary>
+                    <h3 class="accordion-heading">{{ article.title }}</h3>
+                  </summary>
+                  <div class="accordion-content">
+                    <!-- ARTICLE CONTENT -->
+                    {% if article.content != blank %}
+                      {{ article.content }}
+                    {% endif %}
+
+                    <!-- ARTICLE IMAGE -->
+                    {% if article.image != blank %}
+                      <img
+                        class="accordion-img"
+                        src="{{ article.image.src | image_url }}"
+                        alt="size chart"
+                        width="auto"
+                        height="auto"
+                      >
+                    {% endif %}
+                  </div>
+                </details>
+              </div>
+          {% endcase %}
+        {% endfor %}
       </div>
     </div>
   </div>
