@@ -172,75 +172,60 @@
         {% endform %}
       </cart-form>
 
-      <div class="product-content__product">{{ product.content }}</div>
-      <div class="accordion">
-        <!-- ARTICLES -->
-        {% assign featured_articles = blogs.products.articles | reverse %}
+      <!-- PRODUCT TABS -->
+      {% assign featured_articles = blogs.products.articles | reverse %}
+      {% for tag in product.tags %}
+        {% assign tag_downcase = tag | downcase %}
 
+        {% case tag_downcase %}
+          {% when 'sweater', 'hoodie', 'tie_dye', 'orbital_crew', 'turtleneck', 'cropped', 'boxy' %}
+            {% assign img_url = tag | append: '.png' %}
+          {% else %}
+            {% assign img_url = '' %}
+        {% endcase %}
+      {% endfor %}
+      
+      <product-tabs>
+         <!-- TAB BUTTONS -->
+        <div class="tab__btns">
+          <button class="tab__btn active" data-id="_{{ product.id }}">Description</button>
+          <!-- ARTICLES -->
+          {% for article in featured_articles %}
+            {% if article.content != blank or img_url != blank %}
+              <button class="tab__btn" data-id="_{{ article.id }}">{{ article.title }}</button>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        <!-- TAB CONTENTS -->
+        <div id="_{{ product.id }}" class="tab__content active">{{ product.content }}</div>
         {% for article in featured_articles %}
-          {% assign article_title_downcase = article.title | downcase %}
-
-          {% case article_title_downcase %}
-            {% when 'size chart' %}
-              <!-- TAG IMAGE -->
-              {% for tag in product.tags %}
-                {% assign tag_downcase = tag | downcase %}
-
-                {% case tag_downcase %}
-                  {% when 'sweater', 'hoodie', 'tie_dye', 'orbital_crew', 'turtleneck', 'cropped', 'boxy' %}
-                    {% assign img_url = tag | append: '.png' %}
-                  {% else %}
-                    {% assign img_url = '' %}
-                {% endcase %}
-              {% endfor %}
-
-              {% if img_url != blank %}
-                <div class="accordion-item">
-                  <details name="products">
-                    <summary>
-                      <h3 class="accordion-heading">{{ article.title }}</h3>
-                    </summary>
-                    <div class="accordion-content">
-                      <img
-                        class="accordion-img"
-                        src="{{ images[img_url] | image_url }}"
-                        alt="size chart"
-                        width="auto"
-                        height="auto"
-                      >
-                    </div>
-                  </details>
+            {% if article.content != blank or img_url != blank %}
+              
+              <!-- ARTICLE CONTENT-->
+              {% if article.content != blank %}
+                <div id="_{{ article.id }}" class="tab__content">
+                  {{  article.content }}
                 </div>
               {% endif %}
-            {% else %}
-              <div class="accordion-item">
-                <details name="products">
-                  <summary>
-                    <h3 class="accordion-heading">{{ article.title }}</h3>
-                  </summary>
-                  <div class="accordion-content">
-                    <!-- ARTICLE CONTENT -->
-                    {% if article.content != blank %}
-                      {{ article.content }}
-                    {% endif %}
 
-                    <!-- ARTICLE IMAGE -->
-                    {% if article.image != blank %}
-                      <img
-                        class="accordion-img"
-                        src="{{ article.image.src | image_url }}"
-                        alt="size chart"
-                        width="auto"
-                        height="auto"
-                      >
-                    {% endif %}
-                  </div>
-                </details>
-              </div>
-          {% endcase %}
+              <!-- IMAGE CONTENT-->
+              {% if img_url != blank %}
+                <div id="_{{ article.id }}" class="tab__content">
+                  <img
+                    class="tab__img"
+                    src="{{ images[img_url] | image_url }}"
+                    alt="size chart"
+                    width="auto"
+                    height="auto"
+                  >
+                </div>
+              {% endif %}
+            {% endif %}
+    
         {% endfor %}
-      </div>
-    </div>
+
+      </product-tabs>
   </div>
 </div>
 
@@ -248,7 +233,54 @@
 <script type="application/ld+json">
   {{ product | structured_data }}
 </script>
+
 <script>
+  class ProductTabs extends HTMLElement {
+    constructor() {
+      super();
+
+      this.addEventListener('click', this._onClick);
+    }
+    
+    connectedCallback() {
+      this._contentList = this.querySelectorAll('.tab__content');
+      this._btnList = this.querySelectorAll('.tab__btn');
+    }
+
+    _getId(e) {
+      this._btnEl = e.target.closest('.tab__btn');
+
+      if (!this._btnEl) return;
+
+      this._id = this._btnEl.dataset.id;
+    }
+
+    _removeActive(elArr) {
+      elArr.forEach(el => el.classList.remove('active'));
+    }
+
+    _setActive(elArr) {
+      elArr.forEach(el => el.classList.add('active'));
+    }
+
+    _handleActive(e) {
+      this._contentEl = this.querySelector(`#${this._id}`);
+
+      if (this._contentEl === null || this._contentEl.classList.contains('active')) return;
+
+      this._removeActive([...this._btnList, ...this._contentList]);
+      this._setActive([this._btnEl, this._contentEl]);
+
+    }
+
+    _onClick(e){
+      this._getId(e);
+      this._handleActive();
+    }
+  }
+
+  customElements.define('product-tabs', ProductTabs)
+
   class CartForm extends HTMLElement {
     constructor() {
       super();
