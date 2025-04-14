@@ -27,6 +27,7 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .product__tag {
@@ -60,7 +61,6 @@
   gap: 1.2rem;
   align-items: center;
   letter-spacing: 0.1rem;
-  margin-bottom: 2rem;
 }
 
 .product-price__product {
@@ -173,12 +173,6 @@
 .tab__img {
   max-width: 100%;
   height: auto;
-}
-
-#product-accordion strong {
-  font-style: italic;
-  letter-spacing: 0.1rem;
-  text-transform: uppercase;
 }
 
 /*******************************/
