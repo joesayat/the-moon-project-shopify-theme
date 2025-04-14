@@ -32,107 +32,9 @@
   {% assign spotify_url = section.settings.spotify_url %}
 {% endif %}
 
-<style>
-  .footer .heading-2 {
-    color: var(--white);
-  }
-
-  .footer__newsletter {
-    margin: 4rem 0 12rem;
-  }
-
-  .form {
-    width: 100%;
-    text-align: center;
-  }
-
-  .form__group {
-    display: inline-block;
-  }
-
-  /* TODO: use grid on parent for responsive sizing*/
-  .form__input {
-    font-size: 1.6rem;
-    font-family: 'Roboto Condensed', sans-serif;
-    font-weight: 600;
-    letter-spacing: 1px;
-    width: 52rem;
-    padding: 1.2rem;
-    border: none;
-    outline: 1px solid transparent;
-  }
-
-  .form__input::placeholder {
-    color: var(--gray-darkest);
-  }
-
-  .form__btn {
-    font-family: 'Roboto Condensed', sans-serif;
-    font-size: 1.6rem;
-    font-weight: 600;
-    letter-spacing: 0.16rem;
-    text-transform: uppercase;
-    padding: 1.2rem 4rem;
-    background-color: var(--main);
-    color: var(--white);
-    transition: all 0.3s ease-out;
-  }
-
-  .form__btn:hover {
-    background-color: var(--main-dark);
-  }
-
-  .form__input:not(:placeholder-shown):valid {
-    outline-color: var(--green);
-  }
-
-  .form__input:not(:placeholder-shown):invalid {
-    outline-color: var(--red);
-  }
-
-  .form__input:focus:invalid {
-    outline-color: var(--yellow);
-  }
-
-  /* TODO: testing margin height of form notification */
-  .form__notification {
-    margin-top: 1.2rem;
-  }
-
-  /*******************************/
-  /* BELOW 768px (Small Tablets) */
-  /*******************************/
-  @media (max-width: 48em) {
-    .form {
-      width: 100%;
-    }
-
-    .form__input {
-      width: 40rem;
-    }
-  }
-
-  /************************/
-  /* BELOW 656px (Phones) */
-  /************************/
-  @media (max-width: 41em) {
-    .form__group {
-      display: block;
-    }
-
-    .form__input {
-      width: 100%;
-    }
-
-    .form__btn {
-      width: 100%;
-      margin-top: 0.4rem;
-    }
-  }
-</style>
-
 <!-- FOOTER -->
 <footer class="footer tmp-footer">
+  <!-- FOOTER NEWSLETTER -->
   <div class="container">
     <p class="subheading">Newsletter</p>
     <h2 class="heading-2">Want to know what we're up to?</h2>
@@ -168,6 +70,7 @@
       {% endform %}
     </div>
   </div>
+
   <div class="container grid grid-4-col grid-footer">
     <!-- FOOTER LOGO ICON -->
     <div class="footer-col">
