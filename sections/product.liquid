@@ -53,14 +53,31 @@
       </div>
     </div>
     <div class="product-description__product">
-      <h1 class="heading-product-item">{{ product.title }}</h1>
-      <div class="product-price-container__product">
-        {% if product_item.price < product_item.compare_at_price %}
-          <p class="product-price__product--sale">{{ product_item.compare_at_price | money }}</p>
-          <p class="product-price__product">{{ product_item.price | money }}</p>
-        {% else %}
-          <p class="product-price__product">{{ product_item.price | money }}</p>
-        {% endif %}
+      <div class="product-description__heading">
+        <h1 class="heading-product-item">{{ product.title }}</h1>
+        <div class="product__tags">
+          {% for tag in product.tags %}
+            {% assign tag_downcase = tag | downcase %}
+            {% case tag_downcase %}
+              {% when 'sale' %}
+                <p class="product__tag product__tag--sale">{{ tag_downcase }}</p>
+              {% when 'limited stocks' %}
+                <p class="product__tag product__tag--limited-stocks">{{ tag_downcase }}</p>
+              {% when 'new release' %}
+                <p class="product__tag product__tag--new-release">{{ tag_downcase }}</p>
+              {% else %}
+
+            {% endcase %}
+          {% endfor %}
+        </div>
+        <div class="product-price-container__product">
+          {% if product_item.price < product_item.compare_at_price %}
+            <p class="product-price__product--sale">{{ product_item.compare_at_price | money }}</p>
+            <p class="product-price__product">{{ product_item.price | money }}</p>
+          {% else %}
+            <p class="product-price__product">{{ product_item.price | money }}</p>
+          {% endif %}
+        </div>
       </div>
 
       <!-- SIZE SELECTOR -->
