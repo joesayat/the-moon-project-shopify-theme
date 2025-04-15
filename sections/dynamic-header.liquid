@@ -1,7 +1,5 @@
-{% if section.settings.header_img == blank %}
-  <!-- TODO: update when assets are available -->
-  {% assign background_img = images['Cosmic-v2.webp'] | image_url %}
-{% else %}
+
+{% if section.settings.header_img != blank %}
   {% assign background_img = section.settings.header_img | image_url %}
 {% endif %}
 
@@ -17,6 +15,12 @@
     background-size: cover;
   }
 
+  .dynamic-header__svg {
+    height: 100%;
+    display: block;
+    margin: 0 auto;
+  }
+
   /***********************************/
   /* BELOW 1024px (Laptops/ Tablets) */
   /***********************************/
@@ -25,15 +29,34 @@
       height: calc(90vh - 11rem);
     }
   }
+
+  /************************/
+  /* BELOW 656px (Phones) */
+  /************************/
+  @media (max-width: 41em) {
+    .dynamic-header__svg {
+      width: 100%;
+    }
+  }
 </style>
 
 <section class="section-dynamic-header">
-  <div class="dynamic-header__background-img">&nbsp;</div>
+  {% if section.settings.header_img != blank %}
+    <div class="dynamic-header__background-img">&nbsp;</div>
+  {% else %}
+    {{ 'image' | placeholder_svg_tag: 'dynamic-header__svg' }}
+  {% endif %}
 </section>
 
+<!-- SCHEMA -->
 {% schema %}
 {
   "name": "Dynamic Header",
-  "settings": [{ "type": "image_picker", "id": "header_img", "label": "Header Image" }]
+  "settings": [{ "type": "image_picker", "id": "header_img", "label": "Header Image" }],
+  "presets": [
+    {
+      "name": "Dynamic Header"
+    }
+  ]
 }
 {% endschema %}
