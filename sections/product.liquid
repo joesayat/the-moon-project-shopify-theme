@@ -175,15 +175,14 @@
         {% assign tag_downcase = tag | downcase %}
 
         {% case tag_downcase %}
-          {% when 'sweater-size-chart', 
-                  'hoodie-size-chart', 
-                  'tie-dye-size-chart', 
-                  'orbital-crew-size-chart', 
-                  'turtleneck-size-chart', 
-                  'cropped-size-chart', 
-                  'boxy-size-chart', 
-                  'cropped-boxy-tee-size-chart', 
-                  'relaxed-tee-size-chart', 
+          {% when 'sweater-size-chart',
+                  'hoodie-size-chart',
+                  'cropped-tiedye-size-chart',
+                  'cropped-boxy-tee-size-chart',
+                  'turtleneck-size-chart',
+                  'cropped-voyager-size-chart',
+                  'boxy-tee-size-chart',
+                  'relaxed-tee-size-chart',
                   'relaxed-shorts-size-chart' %}
             {% assign img_url = tag | append: '.png' %}
         {% endcase %}
