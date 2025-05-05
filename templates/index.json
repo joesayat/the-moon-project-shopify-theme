@@ -12,9 +12,9 @@
     "main": {
       "type": "hero",
       "settings": {
-        "collection_1": "cosmic-collection-vol-2",
+        "collection_1": "gravity-core",
         "collection_2": "cosmo-cloud",
-        "collection_3": "gravity-core",
+        "collection_3": "cosmic-collection-vol-2",
         "collection_4": "half-zip",
         "slider_timer": 8
       }
