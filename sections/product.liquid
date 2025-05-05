@@ -65,8 +65,6 @@
                 <p class="product__tag product__tag--limited-stocks">{{ tag_downcase }}</p>
               {% when 'new release' %}
                 <p class="product__tag product__tag--new-release">{{ tag_downcase }}</p>
-              {% else %}
-
             {% endcase %}
           {% endfor %}
         </div>
@@ -179,8 +177,6 @@
         {% case tag_downcase %}
           {% when 'sweater', 'hoodie', 'tie_dye', 'orbital_crew', 'turtleneck', 'cropped', 'boxy', 'cropped_boxy_tee' %}
             {% assign img_url = tag | append: '.png' %}
-          {% else %}
-            {% assign img_url = '' %}
         {% endcase %}
       {% endfor %}
       
