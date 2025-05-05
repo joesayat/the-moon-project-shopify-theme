@@ -175,7 +175,16 @@
         {% assign tag_downcase = tag | downcase %}
 
         {% case tag_downcase %}
-          {% when 'sweater', 'hoodie', 'tie_dye', 'orbital_crew', 'turtleneck', 'cropped', 'boxy', 'cropped_boxy_tee' %}
+          {% when 'sweater-size-chart', 
+                  'hoodie-size-chart', 
+                  'tie-dye-size-chart', 
+                  'orbital-crew-size-chart', 
+                  'turtleneck-size-chart', 
+                  'cropped-size-chart', 
+                  'boxy-size-chart', 
+                  'cropped-boxy-tee-size-chart', 
+                  'relaxed-tee-size-chart', 
+                  'relaxed-shorts-size-chart' %}
             {% assign img_url = tag | append: '.png' %}
         {% endcase %}
       {% endfor %}
