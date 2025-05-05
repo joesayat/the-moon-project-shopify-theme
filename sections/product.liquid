@@ -177,7 +177,7 @@
         {% assign tag_downcase = tag | downcase %}
 
         {% case tag_downcase %}
-          {% when 'sweater', 'hoodie', 'tie_dye', 'orbital_crew', 'turtleneck', 'cropped', 'boxy' %}
+          {% when 'sweater', 'hoodie', 'tie_dye', 'orbital_crew', 'turtleneck', 'cropped', 'boxy', 'cropped_boxy_tee' %}
             {% assign img_url = tag | append: '.png' %}
           {% else %}
             {% assign img_url = '' %}
