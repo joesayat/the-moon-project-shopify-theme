@@ -24,7 +24,7 @@
       "settings": {
         "title": "Gravity Core",
         "subtitle": "New Collection",
-        "featured_collection": "gravity-core",
+        "featured_collection": "voyager-series",
         "product_count": 4,
         "column_count": 3
       }
@@ -34,7 +34,7 @@
       "settings": {
         "title": "Featured Finds",
         "subtitle": "",
-        "featured_collection": "feature-finds",
+        "featured_collection": "gravity-core",
         "product_count": 4,
         "column_count": 4
       }
