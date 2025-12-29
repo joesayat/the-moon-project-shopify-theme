@@ -22,9 +22,9 @@
     "featured-collection": {
       "type": "featured-collection",
       "settings": {
-        "title": "Voyager Series",
+        "title": "OFF-DAYS ENERGY",
         "subtitle": "New Collection",
-        "featured_collection": "voyager-series",
+        "featured_collection": "off-days",
         "product_count": 4,
         "column_count": 3
       }
