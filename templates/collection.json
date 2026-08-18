@@ -15,9 +15,33 @@
         "product_count": 8,
         "column_count": 4
       }
+    },
+    "featured_collection_cATQCd": {
+      "type": "featured-collection",
+      "name": "Featured Collection",
+      "settings": {
+        "title": "Unknown Collection",
+        "subtitle": "Featured Collection",
+        "featured_collection": "exploration-division",
+        "product_count": 4,
+        "column_count": 4
+      }
+    },
+    "featured_collection_76zYCr": {
+      "type": "featured-collection",
+      "name": "Featured Collection",
+      "settings": {
+        "title": "Unknown Collection",
+        "subtitle": "Featured Collection",
+        "featured_collection": "voyager-series",
+        "product_count": 6,
+        "column_count": 3
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "featured_collection_cATQCd",
+    "featured_collection_76zYCr"
   ]
 }

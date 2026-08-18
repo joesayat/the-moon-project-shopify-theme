@@ -53,14 +53,29 @@
       </div>
     </div>
     <div class="product-description__product">
-      <h1 class="heading-product-item">{{ product.title }}</h1>
-      <div class="product-price-container__product">
-        {% if product_item.price < product_item.compare_at_price %}
-          <p class="product-price__product--sale">{{ product_item.compare_at_price | money }}</p>
-          <p class="product-price__product">{{ product_item.price | money }}</p>
-        {% else %}
-          <p class="product-price__product">{{ product_item.price | money }}</p>
-        {% endif %}
+      <div class="product-description__heading">
+        <h1 class="heading-product-item">{{ product.title }}</h1>
+        <div class="product__tags">
+          {% for tag in product.tags %}
+            {% assign tag_downcase = tag | downcase %}
+            {% case tag_downcase %}
+              {% when 'sale' %}
+                <p class="product__tag product__tag--sale">{{ tag_downcase }}</p>
+              {% when 'limited stocks' %}
+                <p class="product__tag product__tag--limited-stocks">{{ tag_downcase }}</p>
+              {% when 'new release' %}
+                <p class="product__tag product__tag--new-release">{{ tag_downcase }}</p>
+            {% endcase %}
+          {% endfor %}
+        </div>
+        <div class="product-price-container__product">
+          {% if product_item.price < product_item.compare_at_price %}
+            <p class="product-price__product--sale">{{ product_item.compare_at_price | money }}</p>
+            <p class="product-price__product">{{ product_item.price | money }}</p>
+          {% else %}
+            <p class="product-price__product">{{ product_item.price | money }}</p>
+          {% endif %}
+        </div>
       </div>
 
       <!-- SIZE SELECTOR -->
@@ -154,11 +169,67 @@
         {% endform %}
       </cart-form>
 
-      <div class="product-content__product">{{ product.content }}</div>
-      <div class="product-accordion">
-        {% render 'accordion', product_tag: product.tags %}
-      </div>
-    </div>
+      <!-- PRODUCT TABS -->
+      {% assign featured_articles = blogs.products.articles | reverse %}
+      {% for tag in product.tags %}
+        {% assign tag_downcase = tag | downcase %}
+
+        {% case tag_downcase %}
+          {% when 'sweater-size-chart',
+                  'hoodie-size-chart',
+                  'cropped-tiedye-size-chart',
+                  'cropped-boxy-tee-size-chart',
+                  'turtleneck-size-chart',
+                  'cropped-voyager-size-chart',
+                  'regular-tee-size-chart',
+                  'boxy-tee-size-chart',
+                  'relaxed-tee-size-chart',
+                  'relaxed-shorts-size-chart' %}
+            {% assign img_url = tag | append: '.png' %}
+        {% endcase %}
+      {% endfor %}
+      
+      <product-tabs>
+         <!-- TAB BUTTONS -->
+        <div class="tab__btns">
+          <button class="tab__btn active" data-id="_{{ product.id }}">Description</button>
+          <!-- ARTICLES -->
+          {% for article in featured_articles %}
+            {% if article.content != blank or img_url != blank %}
+              <button class="tab__btn" data-id="_{{ article.id }}">{{ article.title }}</button>
+            {% endif %}
+          {% endfor %}
+        </div>
+
+        <!-- TAB CONTENTS -->
+        <div id="_{{ product.id }}" class="tab__content active">{{ product.content }}</div>
+        {% for article in featured_articles %}
+            {% if article.content != blank or img_url != blank %}
+              
+              <!-- ARTICLE CONTENT-->
+              {% if article.content != blank %}
+                <div id="_{{ article.id }}" class="tab__content">
+                  {{  article.content }}
+                </div>
+              {% endif %}
+
+              <!-- IMAGE CONTENT-->
+              {% if img_url != blank %}
+                <div id="_{{ article.id }}" class="tab__content">
+                  <img
+                    class="tab__img"
+                    src="{{ images[img_url] | image_url }}"
+                    alt="size chart"
+                    width="auto"
+                    height="auto"
+                  >
+                </div>
+              {% endif %}
+            {% endif %}
+    
+        {% endfor %}
+
+      </product-tabs>
   </div>
 </div>
 
@@ -166,7 +237,54 @@
 <script type="application/ld+json">
   {{ product | structured_data }}
 </script>
+
 <script>
+  class ProductTabs extends HTMLElement {
+    constructor() {
+      super();
+
+      this.addEventListener('click', this._onClick);
+    }
+    
+    connectedCallback() {
+      this._contentList = this.querySelectorAll('.tab__content');
+      this._btnList = this.querySelectorAll('.tab__btn');
+    }
+
+    _getId(e) {
+      this._btnEl = e.target.closest('.tab__btn');
+
+      if (!this._btnEl) return;
+
+      this._id = this._btnEl.dataset.id;
+    }
+
+    _removeActive(elArr) {
+      elArr.forEach(el => el.classList.remove('active'));
+    }
+
+    _setActive(elArr) {
+      elArr.forEach(el => el.classList.add('active'));
+    }
+
+    _handleActive(e) {
+      this._contentEl = this.querySelector(`#${this._id}`);
+
+      if (this._contentEl === null || this._contentEl.classList.contains('active')) return;
+
+      this._removeActive([...this._btnList, ...this._contentList]);
+      this._setActive([this._btnEl, this._contentEl]);
+
+    }
+
+    _onClick(e){
+      this._getId(e);
+      this._handleActive();
+    }
+  }
+
+  customElements.define('product-tabs', ProductTabs)
+
   class CartForm extends HTMLElement {
     constructor() {
       super();

@@ -2,50 +2,33 @@
 {{ 'accordion.css' | asset_url | stylesheet_tag }}
 
 <!-- VARIABLES -->
-{% if page.handle != blank %}
-  {% assign page_handle = page.handle %}
-{% else %}
-  {% assign page_handle = 'products' %}
-{% endif %}
+{% assign page_handle = page.handle %}
 {% assign featured_articles = blogs[page_handle].articles | reverse %}
 
 <!-- ACCORDION -->
 <div class="accordion">
   {% for article in featured_articles %}
     <div class="accordion-item">
-      {% if article.content != blank or product_tag != blank or article.image != blank %}
-        <details name="faq">
-          <summary>
-            <h3 class="accordion-heading">{{ article.title }}</h3>
-          </summary>
-          <div class="accordion-content">
-            {% if article.content != blank %}
-              {{ article.content }}
-            {% endif %}
+      <details name="{{ page_handle }}">
+        <summary>
+          <h3 class="accordion-heading">{{ article.title }}</h3>
+        </summary>
+        <div class="accordion-content">
+          {% if article.content != blank %}
+            {{ article.content }}
+          {% endif %}
 
-            {% if article.image != blank %}
-              <img
-                class="accordion-img"
-                src="{{ article.image.src | image_url }}"
-                alt="size chart"
-                width="auto"
-                height="auto"
-              >
-            {% endif %}
-
-            {% if product_tag != blank and article.title == 'Size Chart' %}
-              {% assign img_url = product_tag | first | append: '.png' %}
-              <img
-                class="accordion-img"
-                src="{{ images[img_url] | image_url }}"
-                alt="size chart"
-                width="auto"
-                height="auto"
-              >
-            {% endif %}
-          </div>
-        </details>
-      {% endif %}
+          {% if article.image != blank %}
+            <img
+              class="accordion-img"
+              src="{{ article.image.src | image_url }}"
+              alt="size chart"
+              width="auto"
+              height="auto"
+            >
+          {% endif %}
+        </div>
+      </details>
     </div>
   {% endfor %}
 </div>

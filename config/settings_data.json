@@ -20,16 +20,22 @@
         "type": "footer",
         "settings": {
           "footer_shopping_list": "footer-shopping-menu",
-          "footer_company_list": "footer-company-menu"
+          "footer_company_list": "footer-company-menu",
+          "instagram_url": "",
+          "facebook_url": "",
+          "spotify_url": ""
+        }
+      },
+      "announcement-banner": {
+        "type": "announcement-banner",
+        "settings": {
+          "announcement_content": "Worldwide Shipping Now Available Free Metro Manila delivery for orders ₱2,000 and up. ₱100 off on provincial shipping. | Same day delivery availalable from Monday to Saturday in Metro Manila and near provinces"
         }
       }
     },
-    "content_for_index": [
-
-    ]
+    "content_for_index": []
   },
   "presets": {
-    "Default": {
-    }
+    "Default": {}
   }
 }

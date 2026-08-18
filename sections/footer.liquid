@@ -34,6 +34,43 @@
 
 <!-- FOOTER -->
 <footer class="footer tmp-footer">
+  <!-- FOOTER NEWSLETTER -->
+  <div class="container">
+    <p class="subheading">Newsletter</p>
+    <h2 class="heading-2">Want to know what we're up to?</h2>
+    <div class="footer__newsletter">
+      {% form 'customer', class: 'form' %}
+        {% if form.errors %}
+          {% for error in form.errors %}
+            <div class="form__notification">
+              {% render 'icon-error-alert' %}
+              <span>
+                {{ error | capitalize }}
+                {{ form.errors.messages[error] }}
+              </span>
+            </div>
+          {% endfor %}
+        {% elsif form.posted_successfully? %}
+          <div class="form__notification">{% render 'icon-success-alert' %} Sent successfully</div>
+        {% endif %}
+
+        <div class="form__group">
+          <input
+            type="email"
+            name="contact[email]"
+            placeholder="Your email"
+            class="form__input"
+            pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$"
+          >
+        </div>
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="form__group">
+          <button type="submit" class="form__btn">Subscribe</button>
+        </div>
+      {% endform %}
+    </div>
+  </div>
+
   <div class="container grid grid-4-col grid-footer">
     <!-- FOOTER LOGO ICON -->
     <div class="footer-col">
