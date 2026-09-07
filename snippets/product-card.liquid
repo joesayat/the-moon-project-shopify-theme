@@ -46,6 +46,15 @@
     {% endfor %}
   </div>
   <h3 class="product-name__collection bold">{{ product.title }}</h3>
-  <p class="product-price__collection">{{ product.price | money }}</p>
+ {% if product.compare_at_price > product.price %}
+  <p class="product-price__collection">
+    <s>{{ product.compare_at_price | money }}</s>
+    {{ product.price | money }}
+  </p>
+{% else %}
+  <p class="product-price__collection">
+    {{ product.price | money }}
+  </p>
+{% endif %}
   <a class="product-link__collection" href="{{ product.url }}"></a>
 </li>
