@@ -151,13 +151,12 @@
   </div>
 
   <!-- FOOTER COPYRIGHT -->
-  <div class="footer-container container">
-    <p class="footer-copyright">
-      &copy; {{ 'now' | date: '%Y' }},
-      <span class="footer-logo-text">The Moon Project Ph</span>
-      Powered by Shopify
-    </p>
-  </div>
+<div class="footer-container container">
+  <p class="footer-copyright">
+    &copy; {{ 'now' | date: '%Y' }},
+    <a href="{{ routes.root_url }}" class="footer-logo-text">The Moon Project</a>
+  </p>
+</div>
 </footer>
 
 {% schema %}
