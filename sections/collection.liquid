@@ -10,6 +10,24 @@
 
 {% assign products_size = featured_collection.products | size %}
 
+<!-- DOOM SCROLL SETTINGS -->
+{% assign doom_scroll = false %}
+
+{% if collection.handle == 'tees'
+  or collection.handle == 'hoodies'
+  or collection.handle == 'hats'
+  or collection.handle == 'accessories'
+  or collection.handle == 'cosmic-essentials'
+%}
+  {% assign doom_scroll = true %}
+{% endif %}
+
+{% if doom_scroll %}
+  {% assign products_per_page = 250 %}
+{% else %}
+  {% assign products_per_page = section.settings.product_count %}
+{% endif %}
+
 <!-- SECTION SHOP -->
 {% if products_size > 0 %}
 
@@ -49,7 +67,7 @@
     <div class="container">
 
       <!-- PRODUCT GRID -->
-      {% paginate collection.products by section.settings.product_count %}
+      {% paginate collection.products by products_per_page %}
 
         <div class="product-grid">
           <ul class="product-list__collection grid grid-{{ section.settings.column_count }}-col">
@@ -63,7 +81,9 @@
         </div>
 
         <!-- PAGINATION -->
-        {% render 'pagination', pagination: paginate %}
+        {% unless doom_scroll %}
+          {% render 'pagination', pagination: paginate %}
+        {% endunless %}
 
       {% endpaginate %}
 
