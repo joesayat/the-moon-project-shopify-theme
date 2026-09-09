@@ -41,16 +41,16 @@
           {% endif %}
 
         {% when 'Pullovers' %}
-          {% assign type_url = collections['pullover'].url %}
+          {% assign type_url = collections['hoodies'].url %}
 
-          {% if collection.handle == 'pullover' %}
+          {% if collection.handle == 'hoodies' %}
             {% assign is_active = true %}
           {% endif %}
 
         {% when 'Socks' %}
-          {% assign type_url = collections['socks'].url %}
+          {% assign type_url = collections['accessories'].url %}
 
-          {% if collection.handle == 'socks' %}
+          {% if collection.handle == 'accessories' %}
             {% assign is_active = true %}
           {% endif %}
 
