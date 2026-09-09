@@ -36,11 +36,13 @@
             {% endfor %}
           </ul>
         </div>
+
         <!-- PAGINATION -->
         {% render 'pagination', pagination: paginate %}
       {% endpaginate %}
     </div>
   </section>
+
 {% else %}
   {% render 'error-no-products' %}
 {% endif %}
