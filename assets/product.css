@@ -277,3 +277,29 @@
     padding: 0 1rem;
   }
 }
+/* PRODUCT SIZE BUTTON HOVER */
+.variant-container .input-label_radio {
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* Lavender hover for unselected sizes */
+.variant-container .input_radio:not(:checked) + .input-label_radio:hover {
+  background-color: var(--main);
+  border-color: var(--main);
+  color: var(--white);
+}
+
+/* Keep selected size black */
+.variant-container .input_radio:checked + .input-label_radio {
+  background-color: var(--black);
+  border-color: var(--black);
+  color: var(--white);
+}
+
+/* Selected size stays black even when hovered */
+.variant-container .input_radio:checked + .input-label_radio:hover {
+  background-color: var(--black);
+  border-color: var(--black);
+  color: var(--white);
+}
