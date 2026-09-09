@@ -11,9 +11,11 @@
           {% endif %}
         "
         href="{{ collections.all.url }}"
-        >All</a
       >
+        All
+      </a>
     </li>
+
     {% for item in featured_collection.all_types %}
       <li class="type-item">
         <a
@@ -22,7 +24,7 @@
               active
             {% endif %}
           "
-        href="{{ item | url_for_type }}"
+          href="{{ item | url_for_type }}"
         >
           {{ item }}
         </a>
