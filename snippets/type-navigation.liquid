@@ -14,23 +14,13 @@
       </a>
     </li>
 
-    <!-- COSMIC ESSENTIALS -->
+    <!-- TEES -->
     <li class="type-item">
       <a
-        class="type-link {% if collection.handle == 'cosmic-essentials' %}active{% endif %}"
-        href="{{ collections['cosmic-essentials'].url }}"
+        class="type-link {% if collection.handle == 'tees' %}active{% endif %}"
+        href="{{ collections['tees'].url }}"
       >
-        Cosmic Essentials
-      </a>
-    </li>
-
-    <!-- HATS -->
-    <li class="type-item">
-      <a
-        class="type-link {% if collection.handle == 'hats' %}active{% endif %}"
-        href="{{ collections['hats'].url }}"
-      >
-        Hats
+        Tees
       </a>
     </li>
 
@@ -44,6 +34,16 @@
       </a>
     </li>
 
+    <!-- HATS -->
+    <li class="type-item">
+      <a
+        class="type-link {% if collection.handle == 'hats' %}active{% endif %}"
+        href="{{ collections['hats'].url }}"
+      >
+        Hats
+      </a>
+    </li>
+
     <!-- SOCKS -->
     <li class="type-item">
       <a
@@ -54,23 +54,13 @@
       </a>
     </li>
 
-    <!-- SHORTS -->
+    <!-- COSMIC ESSENTIALS -->
     <li class="type-item">
       <a
-        class="type-link {% if collection.current_type == 'Shorts' %}active{% endif %}"
-        href="{{ 'Shorts' | url_for_type }}"
+        class="type-link {% if collection.handle == 'cosmic-essentials' %}active{% endif %}"
+        href="{{ collections['cosmic-essentials'].url }}"
       >
-        Shorts
-      </a>
-    </li>
-
-    <!-- TEES -->
-    <li class="type-item">
-      <a
-        class="type-link {% if collection.handle == 'tees' %}active{% endif %}"
-        href="{{ collections['tees'].url }}"
-      >
-        Tees
+        Cosmic Essentials
       </a>
     </li>
 
