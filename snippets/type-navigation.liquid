@@ -26,6 +26,13 @@
 
       {% case item %}
 
+        {% when 'Cosmic Essentials' %}
+          {% assign type_url = collections['cosmic-essentials'].url %}
+
+          {% if collection.handle == 'cosmic-essentials' %}
+            {% assign is_active = true %}
+          {% endif %}
+
         {% when 'Hats' %}
           {% assign type_url = collections['hats'].url %}
 
@@ -37,6 +44,13 @@
           {% assign type_url = collections['pullover'].url %}
 
           {% if collection.handle == 'pullover' %}
+            {% assign is_active = true %}
+          {% endif %}
+
+        {% when 'Socks' %}
+          {% assign type_url = collections['socks'].url %}
+
+          {% if collection.handle == 'socks' %}
             {% assign is_active = true %}
           {% endif %}
 
