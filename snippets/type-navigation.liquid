@@ -14,65 +14,65 @@
       </a>
     </li>
 
-    <!-- PRODUCT TYPES -->
-    {% for item in featured_collection.all_types %}
+    <!-- COSMIC ESSENTIALS -->
+    <li class="type-item">
+      <a
+        class="type-link {% if collection.handle == 'cosmic-essentials' %}active{% endif %}"
+        href="{{ collections['cosmic-essentials'].url }}"
+      >
+        Cosmic Essentials
+      </a>
+    </li>
 
-      {% assign type_url = item | url_for_type %}
-      {% assign is_active = false %}
+    <!-- HATS -->
+    <li class="type-item">
+      <a
+        class="type-link {% if collection.handle == 'hats' %}active{% endif %}"
+        href="{{ collections['hats'].url }}"
+      >
+        Hats
+      </a>
+    </li>
 
-      {% if collection.current_type == item %}
-        {% assign is_active = true %}
-      {% endif %}
+    <!-- PULLOVERS -->
+    <li class="type-item">
+      <a
+        class="type-link {% if collection.handle == 'hoodies' %}active{% endif %}"
+        href="{{ collections['hoodies'].url }}"
+      >
+        Pullovers
+      </a>
+    </li>
 
-      {% case item %}
+    <!-- SOCKS -->
+    <li class="type-item">
+      <a
+        class="type-link {% if collection.handle == 'accessories' %}active{% endif %}"
+        href="{{ collections['accessories'].url }}"
+      >
+        Socks
+      </a>
+    </li>
 
-        {% when 'Cosmic Essentials' %}
-          {% assign type_url = collections['cosmic-essentials'].url %}
+    <!-- SHORTS -->
+    <li class="type-item">
+      <a
+        class="type-link {% if collection.current_type == 'Shorts' %}active{% endif %}"
+        href="{{ 'Shorts' | url_for_type }}"
+      >
+        Shorts
+      </a>
+    </li>
 
-          {% if collection.handle == 'cosmic-essentials' %}
-            {% assign is_active = true %}
-          {% endif %}
-
-        {% when 'Hats' %}
-          {% assign type_url = collections['hats'].url %}
-
-          {% if collection.handle == 'hats' %}
-            {% assign is_active = true %}
-          {% endif %}
-
-        {% when 'Pullovers' %}
-          {% assign type_url = collections['hoodies'].url %}
-
-          {% if collection.handle == 'hoodies' %}
-            {% assign is_active = true %}
-          {% endif %}
-
-        {% when 'Socks' %}
-          {% assign type_url = collections['accessories'].url %}
-
-          {% if collection.handle == 'accessories' %}
-            {% assign is_active = true %}
-          {% endif %}
-
-        {% when 'Tees' %}
-          {% assign type_url = collections['tees'].url %}
-
-          {% if collection.handle == 'tees' %}
-            {% assign is_active = true %}
-          {% endif %}
-
-      {% endcase %}
-
-      <li class="type-item">
-        <a
-          class="type-link {% if is_active %}active{% endif %}"
-          href="{{ type_url }}"
-        >
-          {{ item }}
-        </a>
-      </li>
-
-    {% endfor %}
+    <!-- TEES -->
+    <li class="type-item">
+      <a
+        class="type-link {% if collection.handle == 'tees' %}active{% endif %}"
+        href="{{ collections['tees'].url }}"
+      >
+        Tees
+      </a>
+    </li>
 
   </ul>
 </nav>
