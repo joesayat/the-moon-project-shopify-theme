@@ -3,32 +3,62 @@
 
 <nav class="type-nav">
   <ul class="type-list">
+
+    <!-- ALL -->
     <li class="type-item">
       <a
-        class="
-          type-link {% if collection.handle == 'all' %}
-            active
-          {% endif %}
-        "
+        class="type-link {% if collection.handle == 'all' %}active{% endif %}"
         href="{{ collections.all.url }}"
       >
         All
       </a>
     </li>
 
+    <!-- PRODUCT TYPES -->
     {% for item in featured_collection.all_types %}
+
+      {% assign type_url = item | url_for_type %}
+      {% assign is_active = false %}
+
+      {% if collection.current_type == item %}
+        {% assign is_active = true %}
+      {% endif %}
+
+      {% case item %}
+
+        {% when 'Hats' %}
+          {% assign type_url = collections['hats'].url %}
+
+          {% if collection.handle == 'hats' %}
+            {% assign is_active = true %}
+          {% endif %}
+
+        {% when 'Pullovers' %}
+          {% assign type_url = collections['pullover'].url %}
+
+          {% if collection.handle == 'pullover' %}
+            {% assign is_active = true %}
+          {% endif %}
+
+        {% when 'Tees' %}
+          {% assign type_url = collections['tees'].url %}
+
+          {% if collection.handle == 'tees' %}
+            {% assign is_active = true %}
+          {% endif %}
+
+      {% endcase %}
+
       <li class="type-item">
         <a
-          class="
-            type-link {% if collection.current_type == item %}
-              active
-            {% endif %}
-          "
-          href="{{ item | url_for_type }}"
+          class="type-link {% if is_active %}active{% endif %}"
+          href="{{ type_url }}"
         >
           {{ item }}
         </a>
       </li>
+
     {% endfor %}
+
   </ul>
 </nav>
