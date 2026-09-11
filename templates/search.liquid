@@ -1,22 +1,123 @@
-{% paginate search.results by 10 %}
-  <form action="/search" method="get" role="search">
-    <input type="search" name="q" value="{{ search.terms | escape }}">
-    <button type="submit">search</button>
-  </form>
+<!-- SEARCH STYLES -->
+{{ 'collection.css' | asset_url | stylesheet_tag }}
+{{ 'search.css' | asset_url | stylesheet_tag }}
 
-  {% if search.performed %}
-    {% for item in search.results %}
-      {% if item.featured_image %}
-        <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
-          {{ item.featured_image.src | img_url: 'medium' | img_tag: item.featured_image.alt }}
-        </a>
+<section class="section__search">
+  <div class="container">
+
+    <!-- SEARCH HEADER -->
+    <div class="search-page__header">
+      <p class="subheading">Search</p>
+
+      {% if search.performed %}
+        <h1 class="heading-2">
+          Results for “{{ search.terms | escape }}”
+        </h1>
+      {% else %}
+        <h1 class="heading-2">
+          What are you looking for?
+        </h1>
       {% endif %}
-      <h5>{{ item.title | link_to: item.url }}</h5>
-      <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
-    {% else %}
-      no results
-    {% endfor %}
-  {% endif %}
 
-  {% if paginate.pages > 1 %}{{ paginate | default_pagination }}{% endif %}
-{% endpaginate %}
+      <!-- SEARCH FORM -->
+      <form
+        class="search-page__form"
+        action="{{ routes.search_url }}"
+        method="get"
+        role="search"
+      >
+        <div class="search-page__field">
+
+          <!-- MAGNIFYING GLASS -->
+          <span class="search-page__icon" aria-hidden="true">
+            <svg
+              viewBox="0 0 24 24"
+              width="18"
+              height="18"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="11" cy="11" r="7"></circle>
+              <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
+            </svg>
+          </span>
+
+          <input
+            class="search-page__input"
+            type="search"
+            name="q"
+            value="{{ search.terms | escape }}"
+            placeholder="Search products..."
+            aria-label="Search products"
+          >
+
+          <!-- PRODUCT RESULTS ONLY -->
+          <input
+            type="hidden"
+            name="type"
+            value="product"
+          >
+
+        </div>
+
+        <button
+          class="search-page__button"
+          type="submit"
+        >
+          Search
+        </button>
+      </form>
+    </div>
+
+    {% if search.performed %}
+
+      {% paginate search.results by 24 %}
+
+        {% if search.results_count > 0 %}
+
+          <!-- PRODUCT GRID -->
+          <div class="product-grid search-page__results">
+            <ul class="product-list__collection grid grid-4-col">
+
+              {% for item in search.results %}
+                {% if item.object_type == 'product' %}
+                  {% render 'product-card', product: item %}
+                {% endif %}
+              {% endfor %}
+
+            </ul>
+          </div>
+
+          <!-- PAGINATION -->
+          {% if paginate.pages > 1 %}
+            {% render 'pagination', pagination: paginate %}
+          {% endif %}
+
+        {% else %}
+
+          <!-- NO RESULTS -->
+          <div class="search-page__empty">
+            <h2 class="heading-2">No products found.</h2>
+            <p>
+              Try another keyword or browse our shop.
+            </p>
+
+            <a
+              class="search-page__shop-link"
+              href="{{ collections.all.url }}"
+            >
+              Explore the shop
+            </a>
+          </div>
+
+        {% endif %}
+
+      {% endpaginate %}
+
+    {% endif %}
+
+  </div>
+</section>
