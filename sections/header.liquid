@@ -1,5 +1,6 @@
 <!-- HEADER STYLES -->
 {{ 'header.css' | asset_url | stylesheet_tag }}
+
 <!-- HEADER SCRIPT -->
 <script src="{{ 'header.js' | asset_url }}" defer="defer"></script>
 
@@ -9,6 +10,7 @@
 <!-- HEADER -->
 <header-nav>
   <header class="header tmp-header bold relative">
+
     <!-- LOGO -->
     <div class="header-logo">
       <a href="{{ routes.root_url }}">
@@ -27,7 +29,10 @@
       <ul class="header-list">
         {% for link in nav_linklists.links %}
           <li class="header-item">
-            <a class="header-link tmp-link__header {% if link.active %} active {% endif %}" href="{{ link.url }}">
+            <a
+              class="header-link tmp-link__header {% if link.active %} active {% endif %}"
+              href="{{ link.url }}"
+            >
               {{ link.title }}
             </a>
           </li>
@@ -53,6 +58,41 @@
 
     <!-- ICONS -->
     <div class="header-icons">
+
+      <!-- SEARCH -->
+      <form
+        class="header-search"
+        action="{{ routes.search_url }}"
+        method="get"
+        role="search"
+      >
+        <span class="header-search__icon" aria-hidden="true">
+          <svg
+            viewBox="0 0 24 24"
+            width="18"
+            height="18"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <circle cx="11" cy="11" r="7"></circle>
+            <line x1="16.65" y1="16.65" x2="21" y2="21"></line>
+          </svg>
+        </span>
+
+        <input
+          class="header-search__input"
+          type="search"
+          name="q"
+          value="{{ search.terms | escape }}"
+          placeholder="Search products..."
+          aria-label="Search products"
+        >
+      </form>
+
+      <!-- CART -->
       <div class="header-icon">
         <a
           class="tmp-icon__header {% if canonical_url contains routes.cart_url %} active {% endif %}"
@@ -61,13 +101,20 @@
           {% render 'icon-shopping-bag' %}
         </a>
       </div>
+
+      <!-- MOBILE MENU -->
       <div class="header-icon">
-        <button class="tmp-icon__header" name="header-menu">
+        <button
+          class="tmp-icon__header"
+          name="header-menu"
+        >
           {% render 'icon-menu' %}
           {% render 'icon-close' %}
         </button>
       </div>
+
     </div>
+
   </header>
 
   <!-- OVERLAY -->
