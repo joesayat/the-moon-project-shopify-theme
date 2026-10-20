@@ -16,6 +16,7 @@
 {% if collection.handle == 'tees'
   or collection.handle == 'hoodies'
   or collection.handle == 'hats'
+  or collection.handle == 'bottoms'
   or collection.handle == 'accessories'
   or collection.handle == 'cosmic-essentials'
 %}
@@ -47,6 +48,9 @@
       {% render 'type-navigation', featured_collection: collections.all %}
 
     {% when 'hoodies' %}
+      {% render 'type-navigation', featured_collection: collections.all %}
+
+    {% when 'bottoms' %}
       {% render 'type-navigation', featured_collection: collections.all %}
 
     {% when 'accessories' %}
