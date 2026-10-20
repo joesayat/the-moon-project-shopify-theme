@@ -14,7 +14,105 @@
 
 .header-list {
   display: flex;
+  align-items: center;
   gap: 3.2rem;
+  height: 100%;
+}
+
+.header-item {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+/* SHOP DROPDOWN */
+.header-item--dropdown {
+  position: relative;
+}
+
+.header-shop-dropdown {
+  position: absolute;
+  top: 100%;
+  left: -1.6rem;
+  width: 24rem;
+  padding-top: 1.2rem;
+
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+
+  transform: translateY(-0.8rem);
+  transform-origin: top center;
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0.2s ease;
+
+  z-index: 1200;
+}
+
+.header-item--dropdown:hover .header-shop-dropdown,
+.header-item--dropdown:focus-within .header-shop-dropdown {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.header-shop-dropdown__list {
+  padding: 1rem 0;
+  background-color: var(--black);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 0.8rem;
+  overflow: hidden;
+  box-shadow: 0 1.2rem 3rem rgba(0, 0, 0, 0.18);
+}
+
+.header-shop-dropdown__item {
+  width: 100%;
+}
+
+.header-shop-dropdown__link {
+  display: block;
+  width: 100%;
+  padding: 1.2rem 1.8rem;
+
+  color: var(--white);
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
+
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease,
+    padding-left 0.18s ease;
+}
+
+.header-shop-dropdown__link:hover,
+.header-shop-dropdown__link:focus {
+  padding-left: 2.2rem;
+  color: var(--black);
+  background-color: var(--main);
+}
+
+.header-shop-dropdown__divider {
+  height: 1px;
+  margin: 0.8rem 1.8rem;
+  background-color: var(--gray-darkest);
+}
+
+.header-shop-dropdown__heading {
+  padding: 1rem 1.8rem 0.8rem;
+
+  color: var(--gray);
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.08rem;
+  text-transform: uppercase;
 }
 
 .header-nav__md {
@@ -117,6 +215,11 @@
 
   /* DESKTOP NAV OFF */
   .header-nav {
+    display: none;
+  }
+
+  /* DESKTOP SHOP DROPDOWN OFF */
+  .header-shop-dropdown {
     display: none;
   }
 

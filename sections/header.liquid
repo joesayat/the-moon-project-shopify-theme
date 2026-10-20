@@ -27,16 +27,127 @@
     <!-- DESKTOP NAV -->
     <nav class="header-nav">
       <ul class="header-list">
+
         {% for link in nav_linklists.links %}
-          <li class="header-item">
-            <a
-              class="header-link tmp-link__header {% if link.active %} active {% endif %}"
-              href="{{ link.url }}"
-            >
-              {{ link.title }}
-            </a>
-          </li>
+          {% assign link_title_downcase = link.title | downcase %}
+
+          {% if link_title_downcase == 'shop' %}
+
+            <!-- SHOP DROPDOWN -->
+            <li class="header-item header-item--dropdown">
+
+              <a
+                class="header-link tmp-link__header {% if link.active %} active {% endif %}"
+                href="{{ link.url }}"
+                aria-haspopup="true"
+              >
+                {{ link.title }}
+              </a>
+
+              <div class="header-shop-dropdown">
+                <ul class="header-shop-dropdown__list">
+
+                  <!-- ALL -->
+                  <li class="header-shop-dropdown__item">
+                    <a
+                      class="header-shop-dropdown__link"
+                      href="{{ collections.all.url }}"
+                    >
+                      All
+                    </a>
+                  </li>
+
+                  <!-- TEES -->
+                  <li class="header-shop-dropdown__item">
+                    <a
+                      class="header-shop-dropdown__link"
+                      href="{{ collections['tees'].url }}"
+                    >
+                      Tees
+                    </a>
+                  </li>
+
+                  <!-- PULLOVERS -->
+                  <li class="header-shop-dropdown__item">
+                    <a
+                      class="header-shop-dropdown__link"
+                      href="{{ collections['hoodies'].url }}"
+                    >
+                      Pullovers
+                    </a>
+                  </li>
+
+                  <!-- HATS -->
+                  <li class="header-shop-dropdown__item">
+                    <a
+                      class="header-shop-dropdown__link"
+                      href="{{ collections['hats'].url }}"
+                    >
+                      Hats
+                    </a>
+                  </li>
+
+                  <!-- BOTTOMS -->
+                  <li class="header-shop-dropdown__item">
+                    <a
+                      class="header-shop-dropdown__link"
+                      href="{{ collections['bottoms'].url }}"
+                    >
+                      Bottoms
+                    </a>
+                  </li>
+
+                  <!-- SOCKS -->
+                  <li class="header-shop-dropdown__item">
+                    <a
+                      class="header-shop-dropdown__link"
+                      href="{{ collections['accessories'].url }}"
+                    >
+                      Socks
+                    </a>
+                  </li>
+
+                  <!-- COSMIC ESSENTIALS -->
+                  <li class="header-shop-dropdown__item">
+                    <a
+                      class="header-shop-dropdown__link"
+                      href="{{ collections['cosmic-essentials'].url }}"
+                    >
+                      Cosmic Essentials
+                    </a>
+                  </li>
+
+                  <!-- DIVIDER -->
+                  <li
+                    class="header-shop-dropdown__divider"
+                    aria-hidden="true"
+                  ></li>
+
+                  <!-- FUTURE COLLECTION SECTION -->
+                  <li class="header-shop-dropdown__heading">
+                    Browse by Collection:
+                  </li>
+
+                </ul>
+              </div>
+
+            </li>
+
+          {% else %}
+
+            <!-- NORMAL DESKTOP NAV ITEM -->
+            <li class="header-item">
+              <a
+                class="header-link tmp-link__header {% if link.active %} active {% endif %}"
+                href="{{ link.url }}"
+              >
+                {{ link.title }}
+              </a>
+            </li>
+
+          {% endif %}
         {% endfor %}
+
       </ul>
     </nav>
 
