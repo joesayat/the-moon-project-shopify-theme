@@ -1,40 +1,54 @@
-/* STOCKISTS / STORES */
+/* STOCKISTS */
 
-/* MAIN LAYOUT */
+/* MAIN STOCKISTS AREA */
 .stores-grid {
   width: 100%;
   max-width: 110rem;
   margin: 0 auto;
+  overflow: hidden;
 }
 
-/*
-  Masonry-style columns prevent long entries such as
-  Sole Academy from creating large empty spaces.
-*/
+/* HORIZONTAL STOCKIST RAIL */
 .stores-list {
+  display: flex;
+  align-items: flex-start;
+
   width: 100%;
-  column-count: 2;
-  column-gap: 3.2rem;
+  gap: 2.4rem;
 
   margin: 0;
-  padding: 0;
+  padding: 0 0 2rem;
+
   list-style: none;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: 0;
+
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+
+  scrollbar-width: none;
+}
+
+/* HIDE CHROME / SAFARI SCROLLBAR */
+.stores-list::-webkit-scrollbar {
+  display: none;
 }
 
 /* STOCKIST CARD */
 .stores-item {
-  display: inline-block;
-  width: 100%;
+  flex: 0 0 40%;
+  min-width: 0;
 
-  margin: 0 0 4.8rem;
-
-  break-inside: avoid;
-  page-break-inside: avoid;
-
-  vertical-align: top;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
 }
 
-/* STANDARDIZED IMAGE CONTAINER */
+/* IMAGE FRAME */
 .stores-item > div:first-child {
   width: 100%;
   aspect-ratio: 4 / 3;
@@ -45,7 +59,7 @@
   background-color: var(--gray);
 }
 
-/* STANDARDIZED STOCKIST IMAGE */
+/* STOCKIST IMAGE */
 .stores-img {
   display: block;
 
@@ -55,12 +69,14 @@
   object-fit: cover;
   object-position: center;
 
-  transition: transform 0.35s ease;
+  transition:
+    transform 0.35s ease,
+    opacity 0.35s ease;
 }
 
-/* SUBTLE TMP IMAGE INTERACTION */
+/* SUBTLE IMAGE MOTION */
 .stores-item:hover .stores-img {
-  transform: scale(1.015);
+  transform: scale(1.02);
 }
 
 /* STOCKIST NAME */
@@ -79,8 +95,9 @@
   text-transform: uppercase;
 }
 
-/* STOCKIST BODY COPY */
-.stores-item > p {
+/* STOCKIST DETAILS */
+.stores-item > p,
+.stores-item p {
   margin: 0.4rem 0;
 
   color: var(--black);
@@ -89,26 +106,30 @@
   line-height: 1.55;
 }
 
-/* RICH TEXT CONTENT */
-.stores-item p {
-  font-size: 1.2rem;
-  line-height: 1.55;
-}
-
-/* BRANCH HEADINGS INSIDE LONG STOCKIST CARDS */
+/* BRANCH NAMES */
 .stores-item strong {
+  display: inline-block;
+
+  margin-top: 1.2rem;
+
   font-weight: 600;
+  letter-spacing: 0.04rem;
 }
 
-/* GIVE PARAGRAPHS AFTER A BREAK A LITTLE SPACE */
+/* FIRST BRANCH DOESN'T NEED EXTRA TOP SPACE */
+.stores-item h3 + p strong:first-child {
+  margin-top: 0;
+}
+
+/* PARAGRAPH SPACING */
 .stores-item p + p {
-  margin-top: 1rem;
+  margin-top: 0.8rem;
 }
 
-/* LISTS, IF USED INSIDE BLOG CONTENT */
+/* LIST SUPPORT */
 .stores-item ul,
 .stores-item ol {
-  margin: 1rem 0 0 1.8rem;
+  margin: 0.8rem 0 0 1.8rem;
 
   font-size: 1.2rem;
   line-height: 1.55;
@@ -124,11 +145,11 @@
   }
 
   .stores-list {
-    column-gap: 2.4rem;
+    gap: 2rem;
   }
 
   .stores-item {
-    margin-bottom: 4rem;
+    flex-basis: 48%;
   }
 }
 
@@ -137,27 +158,16 @@
 /************************/
 @media (max-width: 48em) {
 
-  .stores-grid {
-    max-width: 64rem;
-  }
-
   .stores-list {
-    column-count: 1;
+    gap: 1.6rem;
   }
 
   .stores-item {
-    margin-bottom: 4.8rem;
+    flex-basis: 68%;
   }
 
   .stores-item > h3 {
     font-size: 1.5rem;
-  }
-
-  .stores-item > p,
-  .stores-item p,
-  .stores-item ul,
-  .stores-item ol {
-    font-size: 1.2rem;
   }
 }
 
@@ -168,14 +178,17 @@
 
   .stores-grid {
     width: 100%;
+    overflow: visible;
   }
 
   .stores-list {
-    column-count: 1;
+    gap: 1.4rem;
+    padding-right: 3.2rem;
+    scroll-padding-left: 0;
   }
 
   .stores-item {
-    margin-bottom: 4rem;
+    flex: 0 0 86%;
   }
 
   .stores-item > div:first-child {
@@ -194,6 +207,10 @@
     font-size: 1.2rem;
     line-height: 1.6;
   }
+
+  .stores-item:hover .stores-img {
+    transform: none;
+  }
 }
 
 /**************************/
@@ -201,8 +218,13 @@
 /**************************/
 @media (max-width: 27em) {
 
+  .stores-list {
+    gap: 1.2rem;
+    padding-right: 2rem;
+  }
+
   .stores-item {
-    margin-bottom: 3.6rem;
+    flex-basis: 88%;
   }
 
   .stores-item > h3 {
