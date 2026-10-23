@@ -1,31 +1,46 @@
 <!-- STYLES -->
 {{ 'stores.css' | asset_url | stylesheet_tag }}
 
-<!-- SECTION STORES -->
+<!-- SECTION STOCKISTS -->
 <section class="section-container bg-gray">
   <div class="container">
+
+    <!-- STOCKISTS HEADING -->
     <div class="heading-container">
-      <p class="subheading">{{ blogs.stores.title }}</p>
-      <h2 class="heading-2">Explore with us</h2>
+      <p class="subheading">Stockists</p>
+      <h2 class="heading-2">Explore With Us</h2>
     </div>
+
+    <!-- STOCKISTS GRID -->
     <div class="stores-grid">
       <ul class="stores-list">
+
         {% for article in blogs.stores.articles %}
           <li class="stores-item">
+
+            <!-- STOCKIST IMAGE -->
             <div>
               <img
                 class="stores-img"
                 src="{{ article.image | image_url }}"
-                alt="sample"
+                alt="{{ article.title | escape }}"
                 width="auto"
                 height="auto"
+                loading="lazy"
               >
             </div>
+
+            <!-- STOCKIST NAME -->
             <h3>{{ article.title }}</h3>
+
+            <!-- STOCKIST DETAILS -->
             {{ article.content }}
+
           </li>
         {% endfor %}
+
       </ul>
     </div>
+
   </div>
 </section>
