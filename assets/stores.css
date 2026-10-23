@@ -5,7 +5,6 @@
   width: 100%;
   max-width: 110rem;
   margin: 0 auto;
-  overflow: hidden;
 }
 
 /* HORIZONTAL STOCKIST RAIL */
@@ -31,18 +30,31 @@
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
 
-  scrollbar-width: none;
+  /* DESKTOP SCROLL CUE */
+  scrollbar-width: thin;
+  scrollbar-color: var(--main) transparent;
 }
 
-/* HIDE CHROME / SAFARI SCROLLBAR */
+/* CHROME / SAFARI DESKTOP SCROLLBAR */
 .stores-list::-webkit-scrollbar {
-  display: none;
+  height: 0.6rem;
 }
 
-/* STOCKIST CARD */
+.stores-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.stores-list::-webkit-scrollbar-thumb {
+  background-color: var(--main);
+  border-radius: 10rem;
+}
+
+/* STOCKIST CARD - 3 FULL CARDS ON DESKTOP */
 .stores-item {
-  flex: 0 0 40%;
+  flex: 0 0 calc((100% - 4.8rem) / 3);
   min-width: 0;
+
+  align-self: flex-start;
 
   scroll-snap-align: start;
   scroll-snap-stop: always;
@@ -56,6 +68,7 @@
   margin-bottom: 1.6rem;
 
   overflow: hidden;
+
   background-color: var(--gray);
 }
 
@@ -74,7 +87,7 @@
     opacity 0.35s ease;
 }
 
-/* SUBTLE IMAGE MOTION */
+/* SUBTLE DESKTOP IMAGE MOTION */
 .stores-item:hover .stores-img {
   transform: scale(1.02);
 }
@@ -116,7 +129,7 @@
   letter-spacing: 0.04rem;
 }
 
-/* FIRST BRANCH DOESN'T NEED EXTRA TOP SPACE */
+/* FIRST BRANCH */
 .stores-item h3 + p strong:first-child {
   margin-top: 0;
 }
@@ -136,7 +149,7 @@
 }
 
 /***********************************/
-/* BELOW 1024px — TABLET / LAPTOP */
+/* BELOW 1024px - TABLET / LAPTOP */
 /***********************************/
 @media (max-width: 64em) {
 
@@ -148,8 +161,9 @@
     gap: 2rem;
   }
 
+  /* 2 FULL CARDS */
   .stores-item {
-    flex-basis: 48%;
+    flex-basis: calc((100% - 2rem) / 2);
   }
 }
 
@@ -160,8 +174,16 @@
 
   .stores-list {
     gap: 1.6rem;
+
+    /* TOUCH DEVICES DON'T NEED VISIBLE SCROLLBAR */
+    scrollbar-width: none;
   }
 
+  .stores-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* CARD + NEXT CARD PEEK */
   .stores-item {
     flex-basis: 68%;
   }
@@ -178,15 +200,17 @@
 
   .stores-grid {
     width: 100%;
-    overflow: visible;
   }
 
   .stores-list {
     gap: 1.4rem;
+
     padding-right: 3.2rem;
+
     scroll-padding-left: 0;
   }
 
+  /* ONE MAIN CARD + NEXT CARD PREVIEW */
   .stores-item {
     flex: 0 0 86%;
   }
@@ -208,6 +232,7 @@
     line-height: 1.6;
   }
 
+  /* DISABLE HOVER ZOOM ON TOUCH */
   .stores-item:hover .stores-img {
     transform: none;
   }
