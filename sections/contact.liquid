@@ -42,7 +42,7 @@
           </ul>
         </nav>
       </div>
-      {% form 'contact', return_to: `/pages/contact` %}
+      {% form 'contact', return_to: pages.contact %}
         {% if form.errors %}
           {% for error in form.errors %}
             <div class="contact-notification">
@@ -111,3 +111,13 @@
     </div>
   </div>
 </section>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{% form 'contact', return_to: `/pages/contact` %}"
+  to: "{% form 'contact', return_to: pages.contact %}"
+  position: 1466..1512
+{% endcomment %}
